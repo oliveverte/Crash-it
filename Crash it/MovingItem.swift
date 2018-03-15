@@ -10,24 +10,26 @@ import Foundation
 import SpriteKit
 
 class MovingItem: SKSpriteNode {
-    /** determine the speed of this item (sprite) */
-    internal var movingSpeed:Float
+    private let MOVING_SPEED:Float = 0.3
+    
+    /** determine the factor of the speed of this item (sprite) */
+    internal var speed_factor:Float
     /** determine the direction that this sprite are heading towards */
     internal var direction:CGVector
     
     
     init(texture: SKTexture?, color: UIColor, size: CGSize,
-         _ movingSpeed:Float = 1.0,
-         _ direction: CGVector = CGVector(dx: 0, dy: -1)) {
+         speedFactor:Float = 1.0,
+         direction: CGVector = CGVector(dx: 0, dy: -1)) {
         
-        self.movingSpeed = movingSpeed
+        self.speed_factor = speedFactor
         self.direction = direction
         super.init(texture: texture, color: color, size: size)
     }
     
     
     required init?(coder aDecoder: NSCoder) {
-        self.movingSpeed = 1.0
+        self.speed_factor = 1.0
         self.direction = CGVector(dx: 0, dy: -1)
         
         super.init(coder: aDecoder)
@@ -41,6 +43,34 @@ class MovingItem: SKSpriteNode {
      Call this function within the frames update.
     */
     func move() {
+        let realSpeed = CGFloat(self.MOVING_SPEED * self.speed_factor)
+        let realDirection = CGVector(dx: direction.dx * realSpeed,
+                                     dy: direction.dy * realSpeed)
         
+        self.position = CGPoint(x: self.position.x + realDirection.dx,
+                                y: self.position.y + realDirection.dy)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

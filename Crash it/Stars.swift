@@ -36,5 +36,11 @@ class Stars {
         }
     }
     
+    func move() {
+        for star in list_of_stars {
+            star.move()
+        }
+    }
+    
     
 }
