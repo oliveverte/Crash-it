@@ -9,6 +9,25 @@
 import Foundation
 import SpriteKit
 
-class Player {
+class Player : SKSpriteNode{
+
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+    }
+    
+    convenience init(image: UIImage, collisionableItem: [Collisionable]) {
+        self.init(texture: SKTexture(image: image), color: UIColor.white,
+                  size: CGSize(width: 0, height: 0))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    
+    func collisionDetection(collisionableItems: inout [Collisionable]) {
+        
+    }
+    
     
 }

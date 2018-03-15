@@ -9,6 +9,10 @@
 import Foundation
 
 protocol Collisionable {
+    var enableCollision: Bool {get}
+    var already_in_collision: Bool {get}
+    
     func collisionEnter(player: Player)
     func collisionLeave(player: Player)
+    func initCollider()
 }

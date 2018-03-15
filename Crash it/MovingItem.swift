@@ -15,6 +15,7 @@ class MovingItem: SKSpriteNode {
     /** determine the direction that this sprite are heading towards */
     internal var direction:CGVector
     
+    
     init(texture: SKTexture?, color: UIColor, size: CGSize,
          _ movingSpeed:Float = 1.0,
          _ direction: CGVector = CGVector(dx: 0, dy: -1)) {
