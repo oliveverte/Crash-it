@@ -14,7 +14,7 @@ class GameScene: SKScene {
     var scrollingSpeed:CGFloat = 0.5
     var player = Player()
     var score = SKLabelNode()
-    var stars: [MovingItem]?
+    var stars:Stars?
     
     override func didMove(to view: SKView) {
         player = Player(texture: SKTexture(image: #imageLiteral(resourceName: "shuttle_1")), size: CGSize(width: 86, height: 55))
@@ -23,19 +23,8 @@ class GameScene: SKScene {
         score = self.childNode(withName: "Score") as! SKLabelNode
         score.position = self.convertToSceneSpace(CGPoint.init(x: 0.5, y: 0.8))
         
-        // Crée aléatoirement des étoiles sur l'écran
-        // Pour ne pas commencer le jeu avec un écran vide
-        for _ in 0...30 {
-            let randHeight = arc4random_uniform(UInt32(self.size.height))
-            let randWidth = arc4random_uniform(UInt32(self.size.width))
-            let star = MovingItem(texture: nil,
-                                  color: UIColor.white,
-                                  size: CGSize(width: 2, height: 2))
-            star.position = CGPoint(x: Int(randWidth), y: Int(randHeight))
-            
-            self.addChild(star)
-            self.stars?.append(star)
-        }
+        stars = Stars(scene: self, screenSize: self.size, percentageOfStars: 30)
+       
     }
     
     /**

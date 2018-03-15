@@ -25,6 +25,7 @@
 		81802DF92055507600B83EE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81802DF72055507500B83EE5 /* Main.storyboard */; };
 		81802DFB2055507600B83EE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81802DFA2055507600B83EE5 /* Assets.xcassets */; };
 		81802DFE2055507600B83EE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81802DFC2055507600B83EE5 /* LaunchScreen.storyboard */; };
+		81FB7CE5205ABEC40072D2E7 /* Stars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FB7CE4205ABEC40072D2E7 /* Stars.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		81802DFA2055507600B83EE5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		81802DFD2055507600B83EE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81802DFF2055507600B83EE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81FB7CE4205ABEC40072D2E7 /* Stars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stars.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				810370042057249800F907E6 /* Enemy.swift */,
 				81037006205724BF00F907E6 /* LaserShot.swift */,
 				81037008205724D000F907E6 /* Asteroid.swift */,
+				81FB7CE4205ABEC40072D2E7 /* Stars.swift */,
 			);
 			path = "Crash it";
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				810370132057263F00F907E6 /* HeadupDisplay.swift in Sources */,
 				8103700D2057254F00F907E6 /* Player.swift in Sources */,
 				8103700F2057255D00F907E6 /* PlayerStatistic.swift in Sources */,
+				81FB7CE5205ABEC40072D2E7 /* Stars.swift in Sources */,
 				810370112057258000F907E6 /* Collisionable.swift in Sources */,
 				81802DEE2055507500B83EE5 /* AppDelegate.swift in Sources */,
 			);
