@@ -11,6 +11,8 @@ import GameplayKit
 
 class GameScene: SKScene {
     
+    var scrollingSpeed:CGFloat = 0.5
+    
     var shuttle = SKSpriteNode()
     var score = SKLabelNode()
     
@@ -20,7 +22,6 @@ class GameScene: SKScene {
         
         shuttle.position = self.convertToSceneSpace(CGPoint.init(x: 0.5, y: 0.2))
         score.position = self.convertToSceneSpace(CGPoint.init(x: 0.5, y: 0.8))
-        
     }
     
     /**
@@ -36,6 +37,8 @@ class GameScene: SKScene {
         return CGPoint.init(x: self.size.width * pos.x,
                             y: self.size.height * pos.y)
     }
+    
+    
     
     func touchDown(atPoint pos : CGPoint) {
         // When finger is down
