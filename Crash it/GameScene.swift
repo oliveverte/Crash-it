@@ -10,7 +10,6 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-    
     var player = Player()
     var score = SKLabelNode()
     var stars:Stars?
@@ -23,7 +22,7 @@ class GameScene: SKScene {
         score.position = self.convertToSceneSpace(CGPoint.init(x: 0.5, y: 0.8))
         
         stars = Stars(scene: self, screenSize: self.size)
-       
+        
     }
     
     /**
@@ -71,6 +70,7 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         stars?.update()
+        
     }
 }
 

@@ -12,10 +12,23 @@ import SpriteKit
 class MovingItem: SKSpriteNode {
     private let MOVING_SPEED:Float = 1
     
+    /** détermine les marges en dehors de l'écran à partir
+     desquels on peut suprimer un élément
+     
+    - Note:
+     Des items(ex : étoiles) peuvent être générer hors de l'écran proche du bord.
+     Avant de supprimer un item on vérfie qu'il soit très éloignés du bord de l'écran
+     pour éviter la confusion avec les item récent et ceux en fin de vie d'où l'utiliter de définir
+     cette variable pour avoir une marge fixe et connu
+     */
+    private let MARGIN_OUT_OF_SCREEN_TO_DELETE:CGFloat = 30
+    
     /** determine the factor of the speed of this item (sprite) */
     static internal var speed_factor:Float = 1
     /** determine the direction that this sprite are heading towards */
     internal var direction:CGVector
+    
+    
     
     
     init(texture: SKTexture?, color: UIColor, size: CGSize,
@@ -41,11 +54,9 @@ class MovingItem: SKSpriteNode {
     }
     
     /**
-     Allow the object to move following some rules.
-     Define the comportment of the item.
-     
+     Autorise l'item à se déplacer suivant la vitesse et la direction.
      - Important:
-     Call this function within the frames update.
+     il parait judicieux d'appeler cette fonction à chaque update de la scène
     */
     func move() {
         let realSpeed = CGFloat(self.MOVING_SPEED * MovingItem.speed_factor)
@@ -54,13 +65,25 @@ class MovingItem: SKSpriteNode {
         
         self.position = CGPoint(x: self.position.x + realDirection.dx,
                                 y: self.position.y + realDirection.dy)
-        
-        if(isOutOfScreen()) {
-            
-        }
     }
     
-    func isOutOfScreen() -> Bool{
+    /**
+     Détermine si l'item est hors de l'écran (n'est plus visible)
+     - parameters:
+        - screenSize : représente la taille de l'écran
+     - returns:
+     Retourne "true" si l'item est hors de l'écran sinon retourne "false"
+     */
+    func isOutOfScreen(screenSize: CGSize) -> Bool{
+        // Anchor point 0.5 par défaut donc on divise la taille par 2
+        if(self.position.y + self.size.height/2 < -MARGIN_OUT_OF_SCREEN_TO_DELETE
+            || self.position.y - self.size.height/2 > screenSize.height + MARGIN_OUT_OF_SCREEN_TO_DELETE
+            || self.position.x - self.size.width/2 > screenSize.width + MARGIN_OUT_OF_SCREEN_TO_DELETE
+            || self.position.x + self.size.width/2 < -MARGIN_OUT_OF_SCREEN_TO_DELETE) {
+            
+            return true
+        }
+        
         return false
     }
 }
