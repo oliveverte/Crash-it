@@ -10,26 +10,31 @@ import Foundation
 import SpriteKit
 
 class MovingItem: SKSpriteNode {
-    private let MOVING_SPEED:Float = 0.3
+    private let MOVING_SPEED:Float = 1
     
     /** determine the factor of the speed of this item (sprite) */
-    internal var speed_factor:Float
+    static internal var speed_factor:Float = 1
     /** determine the direction that this sprite are heading towards */
     internal var direction:CGVector
     
     
     init(texture: SKTexture?, color: UIColor, size: CGSize,
-         speedFactor:Float = 1.0,
+         speedFactor:Float = 2.5,
          direction: CGVector = CGVector(dx: 0, dy: -1)) {
         
-        self.speed_factor = speedFactor
+        MovingItem.speed_factor = speedFactor
         self.direction = direction
         super.init(texture: texture, color: color, size: size)
     }
     
     
+    convenience init(texture: SKTexture?, size: CGSize) {
+        self.init(texture: texture, color: UIColor.white, size: size)
+    }
+    
+    
     required init?(coder aDecoder: NSCoder) {
-        self.speed_factor = 1.0
+        MovingItem.speed_factor = 1
         self.direction = CGVector(dx: 0, dy: -1)
         
         super.init(coder: aDecoder)
@@ -43,12 +48,20 @@ class MovingItem: SKSpriteNode {
      Call this function within the frames update.
     */
     func move() {
-        let realSpeed = CGFloat(self.MOVING_SPEED * self.speed_factor)
+        let realSpeed = CGFloat(self.MOVING_SPEED * MovingItem.speed_factor)
         let realDirection = CGVector(dx: direction.dx * realSpeed,
                                      dy: direction.dy * realSpeed)
         
         self.position = CGPoint(x: self.position.x + realDirection.dx,
                                 y: self.position.y + realDirection.dy)
+        
+        if(isOutOfScreen()) {
+            
+        }
+    }
+    
+    func isOutOfScreen() -> Bool{
+        return false
     }
 }
 

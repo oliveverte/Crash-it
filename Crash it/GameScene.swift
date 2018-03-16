@@ -11,7 +11,6 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    var scrollingSpeed:CGFloat = 0.5
     var player = Player()
     var score = SKLabelNode()
     var stars:Stars?
@@ -23,7 +22,7 @@ class GameScene: SKScene {
         score = self.childNode(withName: "Score") as! SKLabelNode
         score.position = self.convertToSceneSpace(CGPoint.init(x: 0.5, y: 0.8))
         
-        stars = Stars(scene: self, screenSize: self.size, percentageOfStars: 30)
+        stars = Stars(scene: self, screenSize: self.size)
        
     }
     
@@ -71,7 +70,7 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
-        stars?.move()
+        stars?.update()
     }
 }
 
