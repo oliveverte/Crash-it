@@ -83,8 +83,10 @@ class Stars {
         
         let star = MovingItem(texture: nil, size: STAR_SIZE)
         star.position = CGPoint(x: xPos, y: yPos)
-        star.color = UIColor.init(red: 1, green: 1, blue: 1,
-                                  alpha: CGFloat(arc4random_uniform(80 - 30) + 30) / 100)
+        star.color = UIColor.white
+//            UIColor.init(red: 1, green: 1, blue: 1,
+//                                  alpha: CGFloat(arc4random_uniform(80 - 30) + 30) / 100)
+        star.alpha = CGFloat(arc4random_uniform(80 - 30) + 30) / 100
         
 //        self.list_of_stars.append(star)
         self.current_scene.addChild(star)

@@ -14,6 +14,7 @@ class LaserShot: MovingItem {
     private override init(texture: SKTexture?, color: UIColor, size: CGSize, speedFactor: Float, direction: CGVector) {
         super.init(texture: texture, color: color, size: size,
                    speedFactor: speedFactor, direction: direction)
+        self.alpha = 0.6
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -23,8 +24,8 @@ class LaserShot: MovingItem {
     convenience init(color: UIColor, direction: CGVector) {
         self.init(texture: nil,
                   color: color,
-                  size: CGSize(width: 10, height: 80),
-                  speedFactor: 2.0,
+                  size: CGSize(width: 3, height: 20),
+                  speedFactor: 8.0,
                   direction: direction)
     }
     

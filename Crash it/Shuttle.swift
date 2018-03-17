@@ -18,7 +18,7 @@ class Shuttle : MovingItem {
         
         self.list_of_laser_shoot = []
         super.init(texture: texture,
-                   color: UIColor.red,
+                   color: color,
                    size: size,
                    speedFactor: speedFactor,
                    direction: direction)
@@ -26,7 +26,7 @@ class Shuttle : MovingItem {
     
     convenience init(image: UIImage, size: CGSize, color: UIColor) {
         self.init(texture: SKTexture.init(image: image),
-                  color: UIColor.white,
+                  color: UIColor.red,
                   size: size,
                   speedFactor: 1.0,
                   direction: CGVector(dx: 0, dy: 1))
@@ -40,6 +40,7 @@ class Shuttle : MovingItem {
     
     func shoot() {
         let laser = LaserShot(color: self.color, direction: self.direction)
+        laser.position = self.position
         self.list_of_laser_shoot.append(laser)
         self.scene!.addChild(laser)
     }
