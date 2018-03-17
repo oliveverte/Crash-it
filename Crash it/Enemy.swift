@@ -9,11 +9,6 @@
 import Foundation
 import SpriteKit
 
-class Ennemy: MovingItem {
-    var target:Player?
-    
-    override func move(){
-        
-    }
+class Ennemy: Shuttle {
     
 }

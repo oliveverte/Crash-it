@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class MovingItem: SKSpriteNode {
-    private let MOVING_SPEED:Float = 1
+    static internal var base_moving_speed:Float = 1
     
     /** détermine les marges en dehors de l'écran à partir
      desquels on peut suprimer un élément
@@ -24,18 +24,16 @@ class MovingItem: SKSpriteNode {
     private let MARGIN_OUT_OF_SCREEN_TO_DELETE:CGFloat = 30
     
     /** determine the factor of the speed of this item (sprite) */
-    static internal var speed_factor:Float = 1
+    internal var speed_factor: Float = 1
     /** determine the direction that this sprite are heading towards */
-    internal var direction:CGVector
+    internal var direction: CGVector
     
+ 
     
-    
-    
-    init(texture: SKTexture?, color: UIColor, size: CGSize,
-         speedFactor:Float = 2.5,
-         direction: CGVector = CGVector(dx: 0, dy: -1)) {
+    init( texture: SKTexture?, color: UIColor, size: CGSize, speedFactor:Float = 2.5,
+          direction: CGVector = CGVector(dx: 0, dy: -1)) {
         
-        MovingItem.speed_factor = speedFactor
+        self.speed_factor = speedFactor
         self.direction = direction
         super.init(texture: texture, color: color, size: size)
     }
@@ -47,9 +45,8 @@ class MovingItem: SKSpriteNode {
     
     
     required init?(coder aDecoder: NSCoder) {
-        MovingItem.speed_factor = 1
+        self.speed_factor = 1
         self.direction = CGVector(dx: 0, dy: -1)
-        
         super.init(coder: aDecoder)
     }
     
@@ -58,8 +55,8 @@ class MovingItem: SKSpriteNode {
      - Important:
      il parait judicieux d'appeler cette fonction à chaque update de la scène
     */
-    func move() {
-        let realSpeed = CGFloat(self.MOVING_SPEED * MovingItem.speed_factor)
+    func update() {
+        let realSpeed = CGFloat(MovingItem.base_moving_speed * self.speed_factor)
         let realDirection = CGVector(dx: direction.dx * realSpeed,
                                      dy: direction.dy * realSpeed)
         
@@ -86,6 +83,10 @@ class MovingItem: SKSpriteNode {
         
         return false
     }
+    
+    
+    
+    
 }
 
 

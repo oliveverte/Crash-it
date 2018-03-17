@@ -10,47 +10,32 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-    var player = Player()
+    var player: Shuttle?
     var score = SKLabelNode()
     var stars:Stars?
     
     override func didMove(to view: SKView) {
-        player = Player(texture: SKTexture(image: #imageLiteral(resourceName: "shuttle_1")),
-                        size: self.convertSizeFromSceneSpaceToReal(sceneSpaceSize: CGSize(width: 0.1, height: 0.05)))
+        player = Shuttle(image: #imageLiteral(resourceName: "shuttle_1"),
+                         size: Tools.fromSceneToWorldSize(sceneSpaceSize: CGSize(width: 0.1, height: 0.05),
+                                                          sceneSize: self.size),
+                         color: UIColor.red)
 
-        player.position = self.convertPointFromSceneSpaceToReal(CGPoint(x: 0.5, y: 0.2))
-        self.addChild(player)
+        player!.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.2),
+                                                          sceneSize: self.size)
+        self.addChild(player!)
         
         score = self.childNode(withName: "Score") as! SKLabelNode
-        score.position = self.convertPointFromSceneSpaceToReal(CGPoint(x: 0.5, y: 0.8))
+        score.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.8),
+                                                        sceneSize: self.size)
         
         stars = Stars(scene: self, screenSize: self.size)
         
     }
     
-    /**
-     Convert a percentage of the current scene to a real point on screen (physic pixel coordinate).
-     
-     - returns:
-     CGPoint represent coordinate of a point on screen (pixel).
-
-     - parameters:
-        - pos: CGpoint: between [0,1] on the scene (percentage of the scene).
-     */
-    func convertPointFromSceneSpaceToReal(_ pos: CGPoint) -> CGPoint {
-        return CGPoint(x: self.size.width * pos.x,
-                       y: self.size.height * pos.y)
-    }
-    
-    func convertSizeFromSceneSpaceToReal(sceneSpaceSize size: CGSize) -> CGSize {
-        return CGSize(width: self.size.width * size.width,
-                      height: self.size.height * size.height)
-    }
-    
     
     
     func touchDown(atPoint pos : CGPoint) {
-        // When finger is down
+        player?.shoot()
     }
     
     func touchMoved(toPoint pos : CGPoint) {
@@ -77,8 +62,18 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
-        stars?.update()
+        stars!.generate()
+        var itemsToDelete:[SKNode] = []
+        for item in self.children {
+            if let movingItem = item as? MovingItem {
+                movingItem.update()
+                if(movingItem.isOutOfScreen(screenSize: self.size)) {
+                    itemsToDelete.append(item)
+                }
+            }
+        }
         
+        self.removeChildren(in: itemsToDelete)
     }
 }
 

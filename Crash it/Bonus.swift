@@ -9,10 +9,5 @@
 import Foundation
 
 class Bonus: MovingItem {
-    
-    override func move(){
-        
-    }
-    
-    
+
 }
