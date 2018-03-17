@@ -11,13 +11,13 @@ import SpriteKit
 
 class Player : SKSpriteNode{
 
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+    private override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
     }
     
-    convenience init(image: UIImage, collisionableItem: [Collisionable]) {
+    convenience init(image: UIImage, size : CGSize) {
         self.init(texture: SKTexture(image: image), color: UIColor.white,
-                  size: CGSize(width: 0, height: 0))
+                  size: size)
     }
     
     required init?(coder aDecoder: NSCoder) {

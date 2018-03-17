@@ -15,11 +15,14 @@ class GameScene: SKScene {
     var stars:Stars?
     
     override func didMove(to view: SKView) {
-        player = Player(texture: SKTexture(image: #imageLiteral(resourceName: "shuttle_1")), size: CGSize(width: 86, height: 55))
-        player.position = self.convertToSceneSpace(CGPoint.init(x: 0.5, y: 0.2))
+        player = Player(texture: SKTexture(image: #imageLiteral(resourceName: "shuttle_1")),
+                        size: self.convertSizeFromSceneSpaceToReal(sceneSpaceSize: CGSize(width: 0.1, height: 0.05)))
+
+        player.position = self.convertPointFromSceneSpaceToReal(CGPoint(x: 0.5, y: 0.2))
+        self.addChild(player)
         
         score = self.childNode(withName: "Score") as! SKLabelNode
-        score.position = self.convertToSceneSpace(CGPoint.init(x: 0.5, y: 0.8))
+        score.position = self.convertPointFromSceneSpaceToReal(CGPoint(x: 0.5, y: 0.8))
         
         stars = Stars(scene: self, screenSize: self.size)
         
@@ -34,9 +37,14 @@ class GameScene: SKScene {
      - parameters:
         - pos: CGpoint: between [0,1] on the scene (percentage of the scene).
      */
-    func convertToSceneSpace(_ pos: CGPoint) -> CGPoint {
-        return CGPoint.init(x: self.size.width * pos.x,
-                            y: self.size.height * pos.y)
+    func convertPointFromSceneSpaceToReal(_ pos: CGPoint) -> CGPoint {
+        return CGPoint(x: self.size.width * pos.x,
+                       y: self.size.height * pos.y)
+    }
+    
+    func convertSizeFromSceneSpaceToReal(sceneSpaceSize size: CGSize) -> CGSize {
+        return CGSize(width: self.size.width * size.width,
+                      height: self.size.height * size.height)
     }
     
     

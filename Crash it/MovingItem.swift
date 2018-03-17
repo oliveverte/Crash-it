@@ -17,7 +17,7 @@ class MovingItem: SKSpriteNode {
      
     - Note:
      Des items(ex : étoiles) peuvent être générer hors de l'écran proche du bord.
-     Avant de supprimer un item on vérfie qu'il soit très éloignés du bord de l'écran
+     Avant de dire qu'un item est hors de l'écran on vérfie qu'il soit très éloignés du bord de l'écran
      pour éviter la confusion avec les item récent et ceux en fin de vie d'où l'utiliter de définir
      cette variable pour avoir une marge fixe et connu
      */
