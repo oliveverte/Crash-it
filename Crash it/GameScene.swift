@@ -10,15 +10,14 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-    var player: Shuttle?
+    var player: ShuttlePlayer?
     var score = SKLabelNode()
     var stars:Stars?
     
     override func didMove(to view: SKView) {
-        player = Shuttle(image: #imageLiteral(resourceName: "shuttle_1"),
-                         size: Tools.fromSceneToWorldSize(sceneSpaceSize: CGSize(width: 0.1, height: 0.05),
-                                                          sceneSize: self.size),
-                         color: UIColor.red)
+        player = ShuttlePlayer(image: #imageLiteral(resourceName: "shuttle_1"),
+                               size: Tools.fromSceneToWorldSize(sceneSpaceSize: CGSize(width: 0.1, height: 0.05),
+                                                                sceneSize: self.size))
 
         player!.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.2),
                                                           sceneSize: self.size)

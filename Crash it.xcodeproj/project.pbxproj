@@ -26,6 +26,7 @@
 		81802DFE2055507600B83EE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81802DFC2055507600B83EE5 /* LaunchScreen.storyboard */; };
 		81D193F3205DB60600F459BF /* Collisionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D193F2205DB60600F459BF /* Collisionable.swift */; };
 		81D193F5205DCF0700F459BF /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D193F4205DCF0600F459BF /* Tools.swift */; };
+		81D193F8205DE2FC00F459BF /* ShuttlePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D193F7205DE2FC00F459BF /* ShuttlePlayer.swift */; };
 		81FB7CE5205ABEC40072D2E7 /* Stars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FB7CE4205ABEC40072D2E7 /* Stars.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		81802DFF2055507600B83EE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81D193F2205DB60600F459BF /* Collisionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collisionable.swift; sourceTree = "<group>"; };
 		81D193F4205DCF0600F459BF /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		81D193F7205DE2FC00F459BF /* ShuttlePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuttlePlayer.swift; sourceTree = "<group>"; };
 		81FB7CE4205ABEC40072D2E7 /* Stars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stars.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,9 +95,9 @@
 				81802DFA2055507600B83EE5 /* Assets.xcassets */,
 				81802DFC2055507600B83EE5 /* LaunchScreen.storyboard */,
 				81802DFF2055507600B83EE5 /* Info.plist */,
+				81D193F6205DE28700F459BF /* Shuttle */,
 				810370002057245300F907E6 /* MovingItem.swift */,
 				8103700A2057251900F907E6 /* AnimatedItem.swift */,
-				8103700C2057254F00F907E6 /* Shuttle.swift */,
 				8103700E2057255D00F907E6 /* PlayerStatistic.swift */,
 				810370122057263F00F907E6 /* HeadupDisplay.swift */,
 				810370022057247000F907E6 /* Bonus.swift */,
@@ -107,6 +109,15 @@
 				81D193F4205DCF0600F459BF /* Tools.swift */,
 			);
 			path = "Crash it";
+			sourceTree = "<group>";
+		};
+		81D193F6205DE28700F459BF /* Shuttle */ = {
+			isa = PBXGroup;
+			children = (
+				8103700C2057254F00F907E6 /* Shuttle.swift */,
+				81D193F7205DE2FC00F459BF /* ShuttlePlayer.swift */,
+			);
+			path = Shuttle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +198,7 @@
 				81802DF42055507500B83EE5 /* GameScene.swift in Sources */,
 				810370032057247000F907E6 /* Bonus.swift in Sources */,
 				810370052057249800F907E6 /* Enemy.swift in Sources */,
+				81D193F8205DE2FC00F459BF /* ShuttlePlayer.swift in Sources */,
 				81037009205724D000F907E6 /* Asteroid.swift in Sources */,
 				8103700B2057251900F907E6 /* AnimatedItem.swift in Sources */,
 				81802DF62055507500B83EE5 /* GameViewController.swift in Sources */,
