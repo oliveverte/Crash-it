@@ -55,7 +55,7 @@ class MovingItem: SKSpriteNode {
      - Important:
      il parait judicieux d'appeler cette fonction à chaque update de la scène
     */
-    func update() {
+    func update(_ currentTime: TimeInterval) {
         let realSpeed = CGFloat(MovingItem.base_moving_speed * self.speed_factor)
         let realDirection = CGVector(dx: direction.dx * realSpeed,
                                      dy: direction.dy * realSpeed)

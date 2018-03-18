@@ -10,28 +10,36 @@ import Foundation
 import SpriteKit
 
 class Shuttle : MovingItem {
-    struct ShuttleStat {
-        var life = 100
+    struct Stats {
+        let defense: Int
+        let attack: Int
+        let linked_bonus: [Bonus]
+        
+        init(defense: Int, attack: Int) {
+            self.defense = defense
+            self.attack = attack
+            self.linked_bonus = []
+        }
+        
+        init(state: Shuttle.Stats) {
+            self.init(defense: state.defense, attack: state.attack)
+        }
     }
-
-//    private override init(texture: SKTexture?, color: UIColor,
-//                          size: CGSize, speedFactor: Float, direction: CGVector) {
-//        super.init(texture: texture,
-//                   color: color,
-//                   size: size,
-//                   speedFactor: speedFactor,
-//                   direction: direction)
-//    }
     
-    init(image: UIImage, size: CGSize, color: UIColor) {
+    let stats: Shuttle.Stats
+    
+    
+    init(image: UIImage, color: UIColor, stats: Shuttle.Stats) {
+        self.stats = stats
         super.init(texture: SKTexture.init(image: image),
                   color: UIColor.red,
-                  size: size,
-                  speedFactor: 1.0,
-                  direction: CGVector(dx: 0, dy: 1))
+                  size: Tools.fromSceneToWorldSize(sceneSpaceSize: CGSize(width: 0.1, height: 0.05)),
+                  speedFactor: 1.5,
+                  direction: CGVector(dx: 0, dy: -1))
     }
     
     required init?(coder aDecoder: NSCoder) {
+        self.stats = Shuttle.Stats(defense: 0, attack: 0)
         super.init(coder: aDecoder)
     }
 
@@ -42,7 +50,6 @@ class Shuttle : MovingItem {
         self.scene!.addChild(laser)
     }
     
-    override func update() {}
     
     
 }
