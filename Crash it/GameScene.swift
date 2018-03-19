@@ -47,7 +47,13 @@ class GameScene: SKScene {
     
     
     func touchDown(atPoint pos : CGPoint) {
-        player.shoot()
+        if(pos.x < self.size.width/3){
+            player.direction.dx = -3
+        } else if(pos.x > (self.size.width/3) * 2) {
+            player.direction.dx = 3
+        } else {
+            player.shoot()
+        }
     }
     
     func touchMoved(toPoint pos : CGPoint) {
@@ -55,7 +61,7 @@ class GameScene: SKScene {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        
+        player.direction.dx = 0
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

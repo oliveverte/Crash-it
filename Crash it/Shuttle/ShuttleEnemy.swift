@@ -12,6 +12,7 @@ import SpriteKit
 class ShuttleEnemy: Shuttle {
     let target: ShuttlePlayer
     
+    
     init(image: UIImage, color: UIColor, stats: Shuttle.Stats, target: ShuttlePlayer) {
         self.target = target
         super.init(image: image, color: color, stats: stats)
@@ -27,5 +28,7 @@ class ShuttleEnemy: Shuttle {
         super.update(currentTime)
         if self.stats.shoot_stats.canShoot(currentTime) { super.shoot() }
     }
+    
+    
     
 }

@@ -16,15 +16,17 @@ class ShuttlePlayer: Shuttle {
                    color: UIColor.red,
                    stats: Shuttle.Stats.init(defense: 200, attack: 30,
                                              shootStats: Shuttle.Stats.ShootStats()))
-        super.direction = CGVector(dx: 0, dy: 1)
+        super.direction = CGVector(dx: 0, dy: 0)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    override func update(_ currentTime: TimeInterval) {
-
+ 
+    override func shoot() {
+        let laser = LaserShot(color: self.color, direction: CGVector(dx: 0, dy: 1))
+        laser.position = self.position
+        self.scene!.addChild(laser)
     }
     
 }
