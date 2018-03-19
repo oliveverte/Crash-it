@@ -23,5 +23,9 @@ class ShuttleEnemy: Shuttle {
         super.init(coder: aDecoder)
     }
     
+    override func update(_ currentTime: TimeInterval) {
+        super.update(currentTime)
+        if self.stats.shoot_stats.canShoot(currentTime) { super.shoot() }
+    }
     
 }

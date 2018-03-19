@@ -51,9 +51,11 @@ class MovingItem: SKSpriteNode {
     }
     
     /**
-     Autorise l'item à se déplacer suivant la vitesse et la direction.
+     Autorise l'item à se déplacer par rapport à la vitesse et la direction.
+     - Note:
+     cette fonction est automatiquement appelé par la scène (GameScene) à chaque update
      - Important:
-     il parait judicieux d'appeler cette fonction à chaque update de la scène
+     Ne pas appelé directement cette fonction
     */
     func update(_ currentTime: TimeInterval) {
         let realSpeed = CGFloat(MovingItem.base_moving_speed * self.speed_factor)

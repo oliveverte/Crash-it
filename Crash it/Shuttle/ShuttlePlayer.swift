@@ -14,7 +14,8 @@ class ShuttlePlayer: Shuttle {
     init() {
         super.init(image: #imageLiteral(resourceName: "shuttle_1"),
                    color: UIColor.red,
-                   stats: Shuttle.Stats.init(defense: 200, attack: 30))
+                   stats: Shuttle.Stats.init(defense: 200, attack: 30,
+                                             shootStats: Shuttle.Stats.ShootStats()))
         super.direction = CGVector(dx: 0, dy: 1)
     }
     
