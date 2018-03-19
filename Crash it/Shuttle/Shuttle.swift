@@ -98,8 +98,8 @@ class Shuttle : MovingItem {
 
     
     /** Crée un rayon laser, à l'emplacement du vaisseau, et l'ajoute à la scene */
-    func shoot() {
-        let laser = LaserShot(color: self.color, direction: self.direction)
+    func shoot(direction: CGVector) {
+        let laser = LaserShot(color: self.color, direction: direction)
         laser.position = self.position
         self.scene!.addChild(laser)
     }

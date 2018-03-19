@@ -22,11 +22,7 @@ class ShuttlePlayer: Shuttle {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
- 
-    override func shoot() {
-        let laser = LaserShot(color: self.color, direction: CGVector(dx: 0, dy: 1))
-        laser.position = self.position
-        self.scene!.addChild(laser)
-    }
+    
+    
     
 }

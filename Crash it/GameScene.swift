@@ -52,7 +52,7 @@ class GameScene: SKScene {
         } else if(pos.x > (self.size.width/3) * 2) {
             player.direction.dx = 3
         } else {
-            player.shoot()
+            player.shoot(direction: CGVector(dx: 0, dy: 1))
         }
     }
     
