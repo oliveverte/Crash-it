@@ -12,7 +12,8 @@ import GameplayKit
 class GameScene: SKScene {
     var player: ShuttlePlayer!
     var score = SKLabelNode()
-    var stars:Stars!
+    var starsGenerator_topLayer:StarsGenerator!
+    var starsGenerator_bottomLayer:StarsGenerator!
     var shuttle_enemy_generator: ShuttleEnemyGenerator!
     
     
@@ -28,8 +29,19 @@ class GameScene: SKScene {
         score = self.childNode(withName: "Score") as! SKLabelNode
         score.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.8))
         
-        stars = Stars(scene: self, screenSize: self.size)
+        starsGenerator_topLayer = StarsGenerator(scene: self,
+                                                    screenSize: self.size,
+                                                    starsPercent: 8,
+                                                    opacityRange: Tools.Interval(min: 40, max: 70),
+                                                    starSize: CGSize(width: 1, height: 2),
+                                                    speedFactor: 1.0)
         
+        starsGenerator_bottomLayer = StarsGenerator(scene: self,
+                                                    screenSize: self.size,
+                                                    starsPercent: 13,
+                                                    opacityRange: Tools.Interval(min: 30, max: 50),
+                                                    starSize: CGSize(width: 1, height: 1),
+                                                    speedFactor: 0.4)
     }
     
     
@@ -61,7 +73,8 @@ class GameScene: SKScene {
     
     
     override func update(_ currentTime: TimeInterval) {
-        stars.generate()
+        starsGenerator_topLayer.generate()
+        starsGenerator_bottomLayer.generate()
         shuttle_enemy_generator.generate(currentTime)
         
         var itemsToDelete:[SKNode] = []
@@ -73,7 +86,6 @@ class GameScene: SKScene {
                 }
             }
         }
-        
         self.removeChildren(in: itemsToDelete)
     }
 }

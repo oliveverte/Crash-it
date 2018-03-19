@@ -10,6 +10,20 @@ import Foundation
 import SpriteKit
 
 class Tools {
+    struct Interval {
+        let min: UInt32
+        let max: UInt32
+        
+        init(min: UInt32, max: UInt32) {
+            self.min = min
+            self.max = max
+        }
+        
+        func random() -> Int {
+            return Int(arc4random_uniform(max - min + 1) + min)
+        }
+    }
+    
     static var scene_size: CGSize?
     
     

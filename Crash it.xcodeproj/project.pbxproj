@@ -28,7 +28,7 @@
 		81D193F3205DB60600F459BF /* Collisionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D193F2205DB60600F459BF /* Collisionable.swift */; };
 		81D193F5205DCF0700F459BF /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D193F4205DCF0600F459BF /* Tools.swift */; };
 		81D193F8205DE2FC00F459BF /* ShuttlePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D193F7205DE2FC00F459BF /* ShuttlePlayer.swift */; };
-		81FB7CE5205ABEC40072D2E7 /* Stars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FB7CE4205ABEC40072D2E7 /* Stars.swift */; };
+		81FB7CE5205ABEC40072D2E7 /* StarsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FB7CE4205ABEC40072D2E7 /* StarsGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,7 +55,7 @@
 		81D193F2205DB60600F459BF /* Collisionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collisionable.swift; sourceTree = "<group>"; };
 		81D193F4205DCF0600F459BF /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		81D193F7205DE2FC00F459BF /* ShuttlePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuttlePlayer.swift; sourceTree = "<group>"; };
-		81FB7CE4205ABEC40072D2E7 /* Stars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stars.swift; sourceTree = "<group>"; };
+		81FB7CE4205ABEC40072D2E7 /* StarsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +105,7 @@
 				810370022057247000F907E6 /* Bonus.swift */,
 				81037006205724BF00F907E6 /* LaserShot.swift */,
 				81037008205724D000F907E6 /* Asteroid.swift */,
-				81FB7CE4205ABEC40072D2E7 /* Stars.swift */,
+				81FB7CE4205ABEC40072D2E7 /* StarsGenerator.swift */,
 				81D193F2205DB60600F459BF /* Collisionable.swift */,
 				81D193F4205DCF0600F459BF /* Tools.swift */,
 			);
@@ -211,7 +211,7 @@
 				81D193F5205DCF0700F459BF /* Tools.swift in Sources */,
 				8103700D2057254F00F907E6 /* Shuttle.swift in Sources */,
 				8103700F2057255D00F907E6 /* PlayerStatistic.swift in Sources */,
-				81FB7CE5205ABEC40072D2E7 /* Stars.swift in Sources */,
+				81FB7CE5205ABEC40072D2E7 /* StarsGenerator.swift in Sources */,
 				81802DEE2055507500B83EE5 /* AppDelegate.swift in Sources */,
 				81D193F3205DB60600F459BF /* Collisionable.swift in Sources */,
 			);

@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class MovingItem: SKSpriteNode {
-    static internal var base_moving_speed:Float = 1
+    static internal var base_moving_speed:Float = 1.2
     
     /** détermine les marges en dehors de l'écran à partir
      desquels on peut suprimer un élément
