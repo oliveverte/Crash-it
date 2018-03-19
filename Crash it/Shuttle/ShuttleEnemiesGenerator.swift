@@ -68,17 +68,17 @@ class ShuttleEnemyGenerator {
             stats = Shuttle.Stats(defense: 80, attack: 10,
                                   shootStats: Shuttle.Stats.ShootStats(deltaTimeToShoot: 1/3,
                                                                        probSuccessFire: 40))
-            color = UIColor.blue
+            color = UIColor.cyan
         case #imageLiteral(resourceName: "ennemy_3"):
             stats = Shuttle.Stats(defense: 120, attack: 10,
                                   shootStats: Shuttle.Stats.ShootStats(deltaTimeToShoot: 1/3,
                                                                        probSuccessFire: 30))
-            color = UIColor.blue
+            color = UIColor.cyan
         case #imageLiteral(resourceName: "ennemy_4"):
             stats = Shuttle.Stats(defense: 230, attack: 10,
                                   shootStats: Shuttle.Stats.ShootStats(deltaTimeToShoot: 1/3,
                                                                        probSuccessFire: 40))
-            color = UIColor.blue
+            color = UIColor.cyan
         case #imageLiteral(resourceName: "ennemy_5"):
             stats = Shuttle.Stats(defense: 70, attack: 20,
                                   shootStats: Shuttle.Stats.ShootStats(deltaTimeToShoot: 1/6,

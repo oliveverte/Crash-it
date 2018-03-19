@@ -85,7 +85,7 @@ class Shuttle : MovingItem {
     init(image: UIImage, color: UIColor, stats: Shuttle.Stats) {
         self.stats = stats
         super.init(texture: SKTexture.init(image: image),
-                  color: UIColor.red,
+                  color: color,
                   size: Tools.fromSceneToWorldSize(sceneSpaceSize: CGSize(width: 0.1, height: 0.05)),
                   speedFactor: 1.5,
                   direction: CGVector(dx: 0, dy: -1))
