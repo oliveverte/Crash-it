@@ -20,7 +20,7 @@ class ShuttleEnemy: Shuttle {
         self.deltaTime_check_targetPosition = 2
         self.previous_time_updatedDirection = 0
         super.init(image: image, color: color, stats: stats)
-        super.speed_factor = 2.0
+        super.speed_factor = 2.5
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -33,10 +33,11 @@ class ShuttleEnemy: Shuttle {
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
         if self.stats.shoot_stats.canShoot(currentTime) { super.shoot(direction: CGVector(dx: 0, dy: -1)) }
-        updateDirectionToTarget()
-        if(currentTime - self.previous_time_updatedDirection >= self.deltaTime_check_targetPosition) {
+        
+        if(currentTime - self.previous_time_updatedDirection >= self.deltaTime_check_targetPosition
+            && self.position.y - target.position.y > 20) {
             self.previous_time_updatedDirection = currentTime
-            
+            updateDirectionToTarget()
         }
     }
     
@@ -46,9 +47,9 @@ class ShuttleEnemy: Shuttle {
         let len_CA = target.position.x - self.position.x
         
         let angleRadian = atan(len_CA/len_BA)
-        let angleDegree = angleRadian * 180 / .pi
         self.zRotation = angleRadian
-        self.direction = CGVector(dx: cos(angleDegree), dy: sin(angleDegree))
+        self.direction = CGVector(dx: sin(angleRadian), dy: -cos(angleRadian))
+        
     }
 
     
