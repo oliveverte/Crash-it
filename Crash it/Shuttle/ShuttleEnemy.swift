@@ -33,20 +33,30 @@ class ShuttleEnemy: Shuttle {
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
         if self.stats.shoot_stats.canShoot(currentTime) { super.shoot(direction: CGVector(dx: 0, dy: -1)) }
-        setDirectionToTarget()
-//        if(currentTime - self.previous_time_updatedDirection >= self.deltaTime_check_targetPosition) {
-//            self.previous_time_updatedDirection = currentTime
-//
-//        }
+        updateDirectionToTarget()
+        if(currentTime - self.previous_time_updatedDirection >= self.deltaTime_check_targetPosition) {
+            self.previous_time_updatedDirection = currentTime
+            
+        }
     }
     
-    func setDirectionToTarget() {
+    func updateDirectionToTarget() {
         // Soit un triangle rectangle en A, B est self et C la target
-        let len_AB = self.position.y - target.position.y
-        let len_AC = target.position.x - self.position.x
+        let len_BA = self.position.y - target.position.y
+        let len_CA = target.position.x - self.position.x
         
-        let angleRadian = atan(len_AC/len_AB)
+        let angleRadian = atan(len_CA/len_BA)
+        let angleDegree = angleRadian * 180 / .pi
         self.zRotation = angleRadian
+        self.direction = CGVector(dx: cos(angleDegree), dy: sin(angleDegree))
     }
+
     
 }
+
+
+
+
+
+
+
