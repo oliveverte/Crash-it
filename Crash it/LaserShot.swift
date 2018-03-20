@@ -21,12 +21,13 @@ class LaserShot: MovingItem {
         super.init(coder: aDecoder)
     }
     
-    convenience init(color: UIColor, direction: CGVector) {
+    convenience init(color: UIColor, direction: CGVector, rotation: CGFloat) {
         self.init(texture: nil,
                   color: color,
                   size: CGSize(width: 3, height: 20),
                   speedFactor: 8.0,
                   direction: direction)
+        self.zRotation = rotation
     }
     
 }
