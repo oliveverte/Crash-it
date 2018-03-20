@@ -47,12 +47,10 @@ class GameScene: SKScene {
     
     
     func touchDown(atPoint pos : CGPoint) {
-        if(pos.x < self.size.width/3){
+        if(pos.x < self.size.width/2){
             player.direction.dx = -3
-        } else if(pos.x > (self.size.width/3) * 2) {
+        } else if(pos.x > self.size.width/2) {
             player.direction.dx = 3
-        } else {
-            player.shoot(direction: CGVector(dx: 0, dy: 1), rotation: player.zRotation)
         }
     }
     

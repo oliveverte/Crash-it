@@ -33,10 +33,8 @@ class ShuttleEnemy: Shuttle {
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
         if self.stats.shoot_stats.canShoot(currentTime) {
-            super.shoot(direction: self.direction, rotation: self.zRotation)
-            
+            shoot(direction: self.direction, rotation: self.zRotation)
         }
-        
         if(currentTime - self.previous_time_updatedDirection >= self.deltaTime_check_targetPosition
             && self.position.y - target.position.y > 20) {
             self.previous_time_updatedDirection = currentTime
