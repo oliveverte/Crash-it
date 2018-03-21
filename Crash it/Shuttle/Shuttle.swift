@@ -80,6 +80,7 @@ class Shuttle : MovingItem {
     
     
     var stats: Shuttle.Stats
+    var lifeBar: ProgressBar!
     
     
     init(image: UIImage, color: UIColor, stats: Shuttle.Stats) {
@@ -89,10 +90,15 @@ class Shuttle : MovingItem {
                   size: Tools.fromSceneToWorldSize(sceneSpaceSize: CGSize(width: 0.1, height: 0.05)),
                   speedFactor: 1.5,
                   direction: CGVector(dx: 0, dy: -1))
+        
+        self.lifeBar = ProgressBar(maxValue: self.stats.defense,
+                                   size: CGSize(width: self.size.width + self.size.width/3, height: 5))
+        self.addChild(self.lifeBar)
     }
     
     required init?(coder aDecoder: NSCoder) {
         self.stats = Shuttle.Stats(defense: 0, attack: 0, shootStats: Shuttle.Stats.ShootStats())
+        self.lifeBar = ProgressBar()
         super.init(coder: aDecoder)
     }
 

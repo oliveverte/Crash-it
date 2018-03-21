@@ -21,10 +21,12 @@ class ShuttleEnemy: Shuttle {
         self.previous_time_updatedDirection = 0
         super.init(image: image, color: color, stats: stats)
         super.speed_factor = 2.0
+        super.lifeBar.position = CGPoint(x: self.position.x,
+                                         y: self.position.y + self.size.height/2 + super.lifeBar.size.height/2 + 8)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.target = ShuttlePlayer()
+        self.target = ShuttlePlayer(coder: aDecoder)!
         self.previous_time_updatedDirection = 0
         self.deltaTime_check_targetPosition = 2
         super.init(coder: aDecoder)

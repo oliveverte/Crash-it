@@ -18,6 +18,11 @@ class ShuttlePlayer: Shuttle {
                                          shootStats: Shuttle.Stats.ShootStats(deltaTimeToShoot: 1/4,
                                                                               probSuccessFire: 40)))
         super.direction = CGVector(dx: 0, dy: 0)
+        super.lifeBar.position = CGPoint(x: self.position.x,
+                                         y: self.position.y - self.size.height/2 - super.lifeBar.size.height/2 - 8)
+        super.lifeBar.value = 100
+//        super.lifeBar.value = 50
+//        super.lifeBar.value = 40
     }
     
     required init?(coder aDecoder: NSCoder) {
