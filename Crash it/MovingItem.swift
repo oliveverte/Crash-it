@@ -95,12 +95,11 @@ class MovingItem: SKSpriteNode {
      sinon retourne "false"
      */
     func isOverlaps(_ item: Collisionable) -> Bool {
-        if !item.enable_collision { return false }
-        if self.position.y - self.size.height/2 < item.position.y + item.size.height/2
-            || self.position.y + self.size.height/2 > item.position.y - item.size.height/2
-            || self.position.x - self.size.width/2 < item.position.x + item.size.width/2
-            || self.position.x + self.size.width/2 > item.position.x - item.size.width/2 {
-            
+        if item.enable_collision
+            && self.position.x - self.size.width/2 < item.position.x + item.size.width/2
+            && self.position.x + self.size.width/2 > item.position.x - item.size.width/2
+            && self.position.y + self.size.height/2 > item.position.y - item.size.height/2
+            && self.position.y - self.size.height/2 > item.position.y + item.size.height/2 {
             return true
         }
         return false
