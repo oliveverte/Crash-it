@@ -23,6 +23,7 @@ class ShuttleEnemy: Shuttle {
         super.speed_factor = 2.0
         super.lifeBar.position = CGPoint(x: self.position.x,
                                          y: self.position.y + self.size.height/2 + super.lifeBar.size.height/2 + 8)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -55,6 +56,15 @@ class ShuttleEnemy: Shuttle {
         
     }
 
+    override func inCollisionWith(item: Collisionable) {
+        if let laser = item as? LaserShot {
+            if laser.shooter == self
+                || type(of: laser.shooter) == ShuttleEnemy.self { return }
+            self.lifeBar.value -= laser.shooter.stats.attack
+        } else if let enemy = item as? ShuttlePlayer {
+            self.lifeBar.value = 0
+        }
+    }
     
 }
 

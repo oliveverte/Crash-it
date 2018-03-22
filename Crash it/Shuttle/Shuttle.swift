@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class Shuttle : MovingItem {
+class Shuttle : MovingItem, Collisionable {    
     struct Stats {
         struct ShootStats {
             /** Probabilité que la tentative de tire réussie, utile pour configurer l'IA.
@@ -55,10 +55,10 @@ class Shuttle : MovingItem {
             }
         }
         
-        let defense: Int
         let attack: Int
-        var shoot_stats: ShootStats
-        let linked_bonus: [Bonus]
+        internal let defense: Int
+        internal var shoot_stats: ShootStats
+        internal let linked_bonus: [Bonus]
         
         init(defense: Int, attack: Int, shootStats: ShootStats) {
             self.defense = defense
@@ -86,9 +86,13 @@ class Shuttle : MovingItem {
     var stats: Shuttle.Stats
     var lifeBar: ProgressBar!
     
+    var enable_collision: Bool
+    
     
     init(image: UIImage, color: UIColor, stats: Shuttle.Stats) {
         self.stats = stats
+        self.enable_collision = true
+        
         super.init(texture: SKTexture.init(image: image),
                   color: color,
                   size: Tools.fromSceneToWorldSize(sceneSpaceSize: CGSize(width: 0.1, height: 0.05)),
@@ -103,6 +107,7 @@ class Shuttle : MovingItem {
     required init?(coder aDecoder: NSCoder) {
         self.stats = Shuttle.Stats()
         self.lifeBar = ProgressBar()
+        self.enable_collision = true
         super.init(coder: aDecoder)
     }
 
@@ -115,5 +120,6 @@ class Shuttle : MovingItem {
     }
     
     
+    func inCollisionWith(item: Collisionable) {}
     
 }

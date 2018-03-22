@@ -86,8 +86,25 @@ class MovingItem: SKSpriteNode {
         return false
     }
     
-    
-    
+    /**
+     Détermine si cet objet(MovingItem) chevauche l'objet donnée en paramètre
+     - parameters:
+        - item: item à tester pour lequel il y aurait un éventuel chevauchement
+     - returns:
+     Retourne "true" si cet objet ce chevauche avec celui donné en paramètre
+     sinon retourne "false"
+     */
+    func isOverlaps(_ item: Collisionable) -> Bool {
+        if !item.enable_collision { return false }
+        if self.position.y - self.size.height/2 < item.position.y + item.size.height/2
+            || self.position.y + self.size.height/2 > item.position.y - item.size.height/2
+            || self.position.x - self.size.width/2 < item.position.x + item.size.width/2
+            || self.position.x + self.size.width/2 > item.position.x - item.size.width/2 {
+            
+            return true
+        }
+        return false
+    }
     
 }
 

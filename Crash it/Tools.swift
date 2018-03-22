@@ -46,4 +46,28 @@ class Tools {
         return CGSize(width: (Tools.scene_size?.width)! * size.width,
                       height: (Tools.scene_size?.height)! * size.height)
     }
+    
+//    static func contains(_ arr:[SKNode], _ elem:SKNode ) -> Bool{
+//        for e in arr {
+//            if(e == elem) { return true }
+//        }
+//        return false
+//    }
+
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

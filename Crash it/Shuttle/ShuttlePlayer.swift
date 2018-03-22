@@ -20,9 +20,7 @@ class ShuttlePlayer: Shuttle {
         super.direction = CGVector(dx: 0, dy: 0)
         super.lifeBar.position = CGPoint(x: self.position.x,
                                          y: self.position.y - self.size.height/2 - super.lifeBar.size.height/2 - 8)
-        super.lifeBar.value = 100
-//        super.lifeBar.value = 50
-//        super.lifeBar.value = 40
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,6 +35,14 @@ class ShuttlePlayer: Shuttle {
         }
     }
     
+    override func inCollisionWith(item: Collisionable) {
+        if let laser = item as? LaserShot {
+            if(laser.shooter == self) { return }
+             self.lifeBar.value -= laser.shooter.stats.attack
+        } else if let enemy = item as? ShuttleEnemy {
+            self.lifeBar.value = 0
+        }
+    }
     
     
 }

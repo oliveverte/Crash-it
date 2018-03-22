@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import SpriteKit
 
 protocol Collisionable {
-    var enableCollision: Bool {get}
-    var already_in_collision: Bool {get}
+    var enable_collision: Bool {get set}
+    var size: CGSize {get set}
+    var position: CGPoint {get set}
     
-    func collisionEnter(item: MovingItem)
-    func collisionLeave(item: MovingItem)
-    func initCollider()
+    func inCollisionWith(item: Collisionable)
+    func isOverlaps(_ item: Collisionable) -> Bool
 }

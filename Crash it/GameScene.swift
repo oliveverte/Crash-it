@@ -88,9 +88,27 @@ class GameScene: SKScene {
                 if(movingItem.isOutOfScreen(screenSize: self.size)) {
                     itemsToDelete.append(item)
                 }
+                else if let collisionableItem = item as? Collisionable {
+                    let overlapsedItems = overlapsListItems(collisionableItem)
+                    for ovItem in overlapsedItems {
+                        collisionableItem.inCollisionWith(item: ovItem)
+                        ovItem.inCollisionWith(item: collisionableItem)
+                    }
+                }
             }
         }
         self.removeChildren(in: itemsToDelete)
+    }
+    
+    
+    func overlapsListItems(_ item: Collisionable) -> [Collisionable] {
+        var list: [Collisionable] = []
+        for i in self.children {
+            if let child = i as? Collisionable {
+                if item.isOverlaps(child) { list.append(child) }
+            }
+        }
+        return list
     }
 }
 
