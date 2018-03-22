@@ -14,24 +14,27 @@ class ProgressBar: SKSpriteNode {
     var maxValue: Int
     private var _nonEditedPosition: CGPoint
     private var _value: Int
-    
-    var value: Int {
-        get { return self._value }
-        set {
-            self._value = newValue
-            updateView()
-        }
-    }
-    
     // On surcharge l'attibut position pour qu'on puisse
     // sauvegarder l'emplacement de la barre lorsqu'elle
     // est modifié depuis l'extérieur de la classe
     // (Et ainsi la replacé correctement après l'updateView)
     override var position: CGPoint {
-        didSet {
-            self._nonEditedPosition = position
+        get { return super.position }
+        set(newVal) {
+            super.position = newVal
+            self._nonEditedPosition = newVal
         }
     }
+    
+    var value: Int {
+        get { return self._value }
+        set {
+            if(newValue >= 0) { self._value = newValue }
+            else { self._value = 0 }
+            updateView()
+        }
+    }
+    
     
     
     
@@ -67,10 +70,10 @@ class ProgressBar: SKSpriteNode {
         // remet le fond en position initial
         self.background.position.x = 0
         // remet la barre de progression en position par default
-        self.position.x = self._nonEditedPosition.x
+        // On utilise super et pas self, pour modifier la position de la barre
+        // sans mettre à jour la position initial (comme la version self.position est surchargé)
+        super.position.x = self._nonEditedPosition.x
         
-        // Sauvegarde la position avant les modification, pour replacer le fond
-        let savedPosition = self.position
         // Centre le point pivot (0.5, 0.5) sur le coté gauche du fond
         let centerOnLeftSide = self.position.x - self.background.size.width/2
         // Aligne le côté gauche de la barre de progression sur le côté gauche du fond
@@ -81,13 +84,13 @@ class ProgressBar: SKSpriteNode {
         // Il faut donc le recentré par rapport à sa position initial
         
         // Distance entre la position (point pivot: 0.5, 0.5) actuel du fond et la position initial
-        let distanceToCorrectBackgroundPosition = savedPosition.x - alignedTotheLeft
+        let distanceToCorrectBackgroundPosition = self._nonEditedPosition.x - alignedTotheLeft
         // On translate le fond de la distance calculé pour quel se soit à sa position initial
         // sans que la barre de progression ne bouge
         let centeredBackground = self.background.position.x + distanceToCorrectBackgroundPosition
         
         // On applique les valeurs calculé
-        self.position.x = alignedTotheLeft
+        super.position.x = alignedTotheLeft
         self.background.position.x = centeredBackground
     }
     
