@@ -10,19 +10,26 @@ import Foundation
 import SpriteKit
 
 class LaserShot: MovingItem {
+    let shooter: Shuttle
     
-    private override init(texture: SKTexture?, color: UIColor, size: CGSize, speedFactor: Float, direction: CGVector) {
+    private init(shooter: Shuttle, texture: SKTexture?, color: UIColor,
+                 size: CGSize,
+                 speedFactor: Float,
+                 direction: CGVector) {
+        self.shooter = shooter
         super.init(texture: texture, color: color, size: size,
                    speedFactor: speedFactor, direction: direction)
         self.alpha = 0.6
     }
 
     required init?(coder aDecoder: NSCoder) {
+        self.shooter = Shuttle(image: #imageLiteral(resourceName: "shuttle_1"), color: UIColor.white, stats: Shuttle.Stats())
         super.init(coder: aDecoder)
     }
     
-    convenience init(color: UIColor, direction: CGVector, rotation: CGFloat) {
-        self.init(texture: nil,
+    convenience init(shooter: Shuttle, color: UIColor, direction: CGVector, rotation: CGFloat) {
+        self.init(shooter: shooter,
+                  texture: nil,
                   color: color,
                   size: CGSize(width: 3, height: 20),
                   speedFactor: 8.0,

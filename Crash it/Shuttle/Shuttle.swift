@@ -70,6 +70,10 @@ class Shuttle : MovingItem {
         init(stats: Shuttle.Stats) {
             self.init(defense: stats.defense, attack: stats.attack, shootStats: stats.shoot_stats)
         }
+        
+        init() {
+            self.init(defense: 0, attack: 0, shootStats: Shuttle.Stats.ShootStats())
+        }
     }
     
     
@@ -97,7 +101,7 @@ class Shuttle : MovingItem {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.stats = Shuttle.Stats(defense: 0, attack: 0, shootStats: Shuttle.Stats.ShootStats())
+        self.stats = Shuttle.Stats()
         self.lifeBar = ProgressBar()
         super.init(coder: aDecoder)
     }
@@ -105,7 +109,7 @@ class Shuttle : MovingItem {
     
     /** Crée un rayon laser, à l'emplacement du vaisseau, et l'ajoute à la scene */
     func shoot(direction: CGVector, rotation: CGFloat) {
-        let laser = LaserShot(color: self.color, direction: direction, rotation: rotation)
+        let laser = LaserShot(shooter: self, color: self.color, direction: direction, rotation: rotation)
         laser.position = self.position
         self.scene!.addChild(laser)
     }
