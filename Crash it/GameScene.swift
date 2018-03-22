@@ -105,6 +105,7 @@ class GameScene: SKScene {
         var list: [Collisionable] = []
         for i in self.children {
             if let child = i as? Collisionable {
+                if(item as! MovingItem == child as! MovingItem) {continue}
                 if item.isOverlaps(child) { list.append(child) }
             }
         }

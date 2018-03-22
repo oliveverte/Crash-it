@@ -38,7 +38,7 @@ class ShuttlePlayer: Shuttle {
     override func inCollisionWith(item: Collisionable) {
         if let laser = item as? LaserShot {
             if(laser.shooter == self) { return }
-             self.lifeBar.value -= laser.shooter.stats.attack
+            self.lifeBar.value -= laser.shooter.stats.attack
         } else if let _ = item as? ShuttleEnemy {
             self.lifeBar.value = 0
         }
