@@ -39,7 +39,7 @@ class ShuttlePlayer: Shuttle {
         if let laser = item as? LaserShot {
             if(laser.shooter == self) { return }
              self.lifeBar.value -= laser.shooter.stats.attack
-        } else if let enemy = item as? ShuttleEnemy {
+        } else if let _ = item as? ShuttleEnemy {
             self.lifeBar.value = 0
         }
     }

@@ -41,9 +41,10 @@ class LaserShot: MovingItem, Collisionable {
     }
     
     func inCollisionWith(item: Collisionable) {
-//        if(item as? Shuttle != shooter) {
-//            self.scene?.removeChildren(in: [self])
-//        }
+        if let target = item as? Shuttle {
+            if target == shooter { return }
+            self.scene?.removeChildren(in: [self])
+        }
     }
     
 }
