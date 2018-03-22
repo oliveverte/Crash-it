@@ -42,7 +42,7 @@ class ProgressBar: SKSpriteNode {
     
     init(maxValue: Int, size: CGSize) {
         self.maxValue = maxValue
-        self._value = 0
+        self._value = maxValue
         self._nonEditedPosition = CGPoint.zero
         self.background = SKSpriteNode(texture: nil, color: UIColor.gray, size: size)
         super.init(texture: nil, color: UIColor.green, size: size)
