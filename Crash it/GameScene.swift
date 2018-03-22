@@ -10,11 +10,11 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-    var player: ShuttlePlayer!
-    var score = SKLabelNode()
-    var starsGenerator_topLayer:StarsGenerator!
-    var starsGenerator_bottomLayer:StarsGenerator!
-    var shuttle_enemy_generator: ShuttleEnemyGenerator!
+    private var player: ShuttlePlayer!
+    private var score = SKLabelNode()
+    private var starsGenerator_topLayer:StarsGenerator!
+    private var starsGenerator_bottomLayer:StarsGenerator!
+    private var shuttle_enemy_generator: ShuttleEnemyGenerator!
     
     
     override func didMove(to view: SKView) {
@@ -110,6 +110,10 @@ class GameScene: SKScene {
             }
         }
         return list
+    }
+    
+    internal func increaseScore(_ valueToAdd: Int) {
+        score.text! = String((Int(score.text!)! + valueToAdd))
     }
 }
 

@@ -58,11 +58,20 @@ class ShuttleEnemy: Shuttle {
     }
 
     override func inCollisionWith(item: Collisionable) {
+        var increaseScore = 0
         if let laser = item as? LaserShot {
             if type(of: laser.shooter) == ShuttleEnemy.self { return }
             self.lifeBar.value -= laser.shooter.stats.attack
+            if self.lifeBar.value == 0 { increaseScore += 1 }
         } else if let _ = item as? ShuttlePlayer {
             self.lifeBar.value = 0
+            increaseScore += 1
+        }
+        
+        if(increaseScore > 0) {
+            let gameScene = self.scene! as! GameScene
+            gameScene.increaseScore(1)
+            gameScene.removeChildren(in: [self])
         }
     }
     
