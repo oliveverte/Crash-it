@@ -39,7 +39,8 @@ class ShuttleEnemy: Shuttle {
             shoot(direction: self.direction, rotation: self.zRotation)
         }
         if(currentTime - self.previous_time_updatedDirection >= self.deltaTime_check_targetPosition
-            && self.position.y - target.position.y > 20) {
+            && self.position.y - target.position.y > self.target.position.y + self.scene!.size.height/15) {
+            
             self.previous_time_updatedDirection = currentTime
             updateDirectionToTarget()
         }
