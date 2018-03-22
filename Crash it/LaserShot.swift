@@ -42,6 +42,8 @@ class LaserShot: MovingItem, Collisionable {
     
     func inCollisionWith(item: Collisionable) {
         if let target = item as? Shuttle {
+            // Ne supprime pas le rayon laser si un enemy tire sur un autre(continu sa trajetoire)
+            if shooter is ShuttleEnemy && target is ShuttleEnemy { return }
             if target == shooter { return }
             self.scene?.removeChildren(in: [self])
         }
