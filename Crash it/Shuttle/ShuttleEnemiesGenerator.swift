@@ -10,6 +10,7 @@ import Foundation
 import SpriteKit
 
 class ShuttleEnemyGenerator {
+    /** Nombre d'image de vaisseau comptenu dans l'atlas */
     private let NUMBER_OF_IMAGE_SHUTTLE: UInt32 = 5
     private let scene: SKScene
     private let target: ShuttlePlayer

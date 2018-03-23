@@ -10,13 +10,12 @@ import Foundation
 import SpriteKit
 
 class Asteroid: AnimatedItem {
-    
-    init() {
+    init(size: CGSize) {
         let splitedAtlas:[SKTexture] = Tools.splitAtlas(atlas: SKTextureAtlas(named: "asteroids"),
                                                         baseName: "asteroid_")
         super.init(textureGroup: splitedAtlas,
                    numberOfLooping: nil,
-                   size: CGSize(width: 50, height: 50),
+                   size: size,
                    latency: 0.3)
     }
     

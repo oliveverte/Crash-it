@@ -15,6 +15,7 @@ class GameScene: SKScene {
     private var starsGenerator_topLayer:StarsGenerator!
     private var starsGenerator_bottomLayer:StarsGenerator!
     private var shuttle_enemy_generator: ShuttleEnemyGenerator!
+    private var asteroids_generator: AsteroidsGenerator!
     
     
     override func didMove(to view: SKView) {
@@ -25,6 +26,7 @@ class GameScene: SKScene {
         self.addChild(player!)
         
         shuttle_enemy_generator = ShuttleEnemyGenerator(scene: self, target: player)
+        asteroids_generator = AsteroidsGenerator(scene: self)
         
         score = self.childNode(withName: "Score") as! SKLabelNode
         score.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.8))
@@ -80,6 +82,7 @@ class GameScene: SKScene {
         starsGenerator_topLayer.generate()
         starsGenerator_bottomLayer.generate()
         shuttle_enemy_generator.generate(currentTime)
+        asteroids_generator.generate(currentTime)
         
         var itemsToDelete:[SKNode] = []
         for item in self.children {
