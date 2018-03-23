@@ -63,15 +63,16 @@ class ShuttleEnemy: Shuttle {
             if type(of: laser.shooter) == ShuttleEnemy.self { return }
             self.lifeBar.value -= laser.shooter.stats.attack
             if self.lifeBar.value == 0 { increaseScore += 1 }
-        } else if let _ = item as? ShuttlePlayer {
+        } else if item is ShuttlePlayer {
             self.lifeBar.value = 0
             increaseScore += 1
         }
         
         if(increaseScore > 0) {
-            let gameScene = self.scene! as! GameScene
-            gameScene.increaseScore(1)
-            gameScene.removeChildren(in: [self])
+            if let gameScene = self.scene as? GameScene {
+                gameScene.increaseScore(1)
+                gameScene.removeChildren(in: [self])
+            }
         }
     }
     
