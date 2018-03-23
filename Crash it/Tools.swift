@@ -47,12 +47,15 @@ class Tools {
                       height: (Tools.scene_size?.height)! * size.height)
     }
     
-//    static func contains(_ arr:[SKNode], _ elem:SKNode ) -> Bool{
-//        for e in arr {
-//            if(e == elem) { return true }
-//        }
-//        return false
-//    }
+    static func splitAtlas(atlas: SKTextureAtlas,
+                           baseName name: String) -> [SKTexture]{
+        var textures:[SKTexture] = []
+        let nbSprite = atlas.textureNames.count
+        for i in 1...nbSprite {
+            textures.append(atlas.textureNamed(name+"\(i)"))
+        }
+        return textures
+    }
 
     
 }

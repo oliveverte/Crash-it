@@ -7,8 +7,22 @@
 //
 
 import Foundation
+import SpriteKit
 
 class Asteroid: AnimatedItem {
+    
+    init() {
+        let splitedAtlas:[SKTexture] = Tools.splitAtlas(atlas: SKTextureAtlas(named: "asteroids"),
+                                                        baseName: "asteroid_")
+        super.init(textureGroup: splitedAtlas,
+                   numberOfLooping: nil,
+                   size: CGSize(width: 50, height: 50),
+                   latency: 0.3)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
 }
 

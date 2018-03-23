@@ -10,33 +10,56 @@ import Foundation
 import SpriteKit
 
 class AnimatedItem: MovingItem {
-    var loop:Int
+    var loop:Int?
     var counterLoop:Int
-    var textureGroup:[SKTexture]?
+    var latency: TimeInterval
+    var textures:[SKTexture]
+    var enableAnimation: Bool
+    private var previous_frame: TimeInterval
+    private var index_current_texture: Int
+    private var delete_atEnd: Bool
     
-    init(textureGroup textures: [SKTexture], numberOfLooping loop: Int,
-         spriteSize size: CGSize) {
+    
+    init(textureGroup textures: [SKTexture], numberOfLooping loop: Int?,
+         size: CGSize, latency: TimeInterval, deleteAtEnd: Bool = true) {
         self.loop = loop
         self.counterLoop = 0
-        self.textureGroup = textures
+        self.textures = textures
+        self.latency = latency
+        self.previous_frame = 0
+        self.index_current_texture = 0
+        self.enableAnimation = true
+        self.delete_atEnd = deleteAtEnd
         super.init(texture: textures[0], color: UIColor.white, size: size)
     }
     
     
     required init?(coder aDecoder: NSCoder) {
-        self.loop = 0
+        self.textures = []
         self.counterLoop = 0
-        self.textureGroup = nil
+        self.latency = 0
+        self.previous_frame = 0
+        self.index_current_texture = 0
+        self.enableAnimation = false
+        self.delete_atEnd = true
         super.init(coder: aDecoder)
     }
     
     
-    func start() {
+    override func update(_ currentTime: TimeInterval) {
+        super.update(currentTime)
+        if(!enableAnimation) { return }
+        if (self.loop ?? 0) > 0 && self.counterLoop >= (self.loop ?? 0) {
+            if(self.delete_atEnd) {self.scene?.removeChildren(in: [self])}
+            return
+        }
+        if currentTime - self.previous_frame < self.latency { return }
         
-    }
-    
-    func stop() {
-        
+        self.index_current_texture = (self.index_current_texture + 1 >= self.textures.count)
+            ? 0 : self.index_current_texture + 1
+        self.texture = self.textures[self.index_current_texture]
+        self.previous_frame = currentTime
+        self.counterLoop += 1
     }
     
 }

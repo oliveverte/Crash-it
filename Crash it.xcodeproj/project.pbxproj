@@ -17,6 +17,7 @@
 		8103700F2057255D00F907E6 /* PlayerStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8103700E2057255D00F907E6 /* PlayerStatistic.swift */; };
 		810370132057263F00F907E6 /* HeadupDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810370122057263F00F907E6 /* HeadupDisplay.swift */; };
 		813C6D62205E7B7700AEAD9E /* ShuttleEnemiesGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813C6D61205E7B7600AEAD9E /* ShuttleEnemiesGenerator.swift */; };
+		8165D42A206586CF00251731 /* AsteroidsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8165D429206586CF00251731 /* AsteroidsGenerator.swift */; };
 		81802DEE2055507500B83EE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81802DED2055507500B83EE5 /* AppDelegate.swift */; };
 		81802DF02055507500B83EE5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 81802DEF2055507500B83EE5 /* GameScene.sks */; };
 		81802DF22055507500B83EE5 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 81802DF12055507500B83EE5 /* Actions.sks */; };
@@ -43,6 +44,7 @@
 		8103700E2057255D00F907E6 /* PlayerStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatistic.swift; sourceTree = "<group>"; };
 		810370122057263F00F907E6 /* HeadupDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadupDisplay.swift; sourceTree = "<group>"; };
 		813C6D61205E7B7600AEAD9E /* ShuttleEnemiesGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuttleEnemiesGenerator.swift; sourceTree = "<group>"; };
+		8165D429206586CF00251731 /* AsteroidsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidsGenerator.swift; sourceTree = "<group>"; };
 		81802DEA2055507500B83EE5 /* Crash it.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crash it.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81802DED2055507500B83EE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81802DEF2055507500B83EE5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				81D193F2205DB60600F459BF /* Collisionable.swift */,
 				81D193F4205DCF0600F459BF /* Tools.swift */,
 				819063BC2061A8A5009C114C /* ProgressBar.swift */,
+				8165D429206586CF00251731 /* AsteroidsGenerator.swift */,
 			);
 			path = "Crash it";
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				810370132057263F00F907E6 /* HeadupDisplay.swift in Sources */,
 				81D193F5205DCF0700F459BF /* Tools.swift in Sources */,
 				8103700D2057254F00F907E6 /* Shuttle.swift in Sources */,
+				8165D42A206586CF00251731 /* AsteroidsGenerator.swift in Sources */,
 				8103700F2057255D00F907E6 /* PlayerStatistic.swift in Sources */,
 				81FB7CE5205ABEC40072D2E7 /* StarsGenerator.swift in Sources */,
 				81802DEE2055507500B83EE5 /* AppDelegate.swift in Sources */,
