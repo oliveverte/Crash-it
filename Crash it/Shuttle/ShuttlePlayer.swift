@@ -49,7 +49,7 @@ class ShuttlePlayer: Shuttle {
             self.scene?.addChild(Explosion(position: self.position))
             self.scene?.removeChildren(in: [self])
             if let gameScene = self.scene as? GameScene {
-                
+                gameScene.stop()
             }
         }
     }

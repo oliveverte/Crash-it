@@ -36,7 +36,7 @@ class Asteroid: AnimatedItem, Collisionable {
         
         if(isDestroy) {
             if let gameScene = self.scene as? GameScene {
-                gameScene.increaseScore(1)
+                gameScene.score += 1
             }
             let pos = self.position
             self.scene?.addChild(Explosion(position: pos))

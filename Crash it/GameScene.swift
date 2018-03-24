@@ -11,32 +11,30 @@ import GameplayKit
 
 class GameScene: SKScene {
     private var player: ShuttlePlayer!
-    private var score = SKLabelNode()
+    private var score_label = SKLabelNode()
     private var starsGenerator_topLayer:StarsGenerator!
     private var starsGenerator_bottomLayer:StarsGenerator!
     private var shuttle_enemy_generator: ShuttleEnemyGenerator!
     private var asteroids_generator: AsteroidsGenerator!
-    
+
+    var score: Int {
+        get { return Int(self.score_label.text!)! }
+        set {
+            score_label.text! = String(
+                (Int(score_label.text!)! + newValue))
+        }
+    }
     
     override func didMove(to view: SKView) {
         Tools.scene_size = self.size
-        
-        player = ShuttlePlayer()
-        player!.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.2))
-        self.addChild(player!)
-        
-        shuttle_enemy_generator = ShuttleEnemyGenerator(scene: self, target: player)
-        asteroids_generator = AsteroidsGenerator(scene: self)
-        
-        score = self.childNode(withName: "Score") as! SKLabelNode
-        score.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.8))
-        
+        score_label = self.childNode(withName: "Score") as! SKLabelNode
+        score_label.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.8))
         starsGenerator_topLayer = StarsGenerator(scene: self,
-                                                    screenSize: self.size,
-                                                    starsPercent: 8,
-                                                    opacityRange: Tools.Interval(min: 40, max: 70),
-                                                    starSize: CGSize(width: 1, height: 2),
-                                                    speedFactor: 1.0)
+                                                 screenSize: self.size,
+                                                 starsPercent: 8,
+                                                 opacityRange: Tools.Interval(min: 40, max: 70),
+                                                 starSize: CGSize(width: 1, height: 2),
+                                                 speedFactor: 1.0)
         
         starsGenerator_bottomLayer = StarsGenerator(scene: self,
                                                     screenSize: self.size,
@@ -44,6 +42,17 @@ class GameScene: SKScene {
                                                     opacityRange: Tools.Interval(min: 30, max: 50),
                                                     starSize: CGSize(width: 1, height: 1),
                                                     speedFactor: 0.4)
+        start()
+    }
+    
+    
+    func start() {
+        player = ShuttlePlayer()
+        player!.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.2))
+        self.addChild(player!)
+        
+        shuttle_enemy_generator = ShuttleEnemyGenerator(scene: self, target: player)
+        asteroids_generator = AsteroidsGenerator(scene: self)
     }
     
     
@@ -115,8 +124,9 @@ class GameScene: SKScene {
         return list
     }
     
-    func increaseScore(_ valueToAdd: Int) {
-        score.text! = String((Int(score.text!)! + valueToAdd))
+
+    func stop() {
+        
     }
 }
 
