@@ -55,11 +55,14 @@ class AnimatedItem: MovingItem {
         }
         if currentTime - self.previous_frame < self.latency { return }
         
-        self.index_current_texture = (self.index_current_texture + 1 >= self.textures.count)
-            ? 0 : self.index_current_texture + 1
+        if self.index_current_texture + 1 >= self.textures.count {
+            self.index_current_texture = 0
+            self.counterLoop += 1;
+        } else { self.index_current_texture += 1 }
+        
         self.texture = self.textures[self.index_current_texture]
         self.previous_frame = currentTime
-        self.counterLoop += 1
+        
     }
     
 }
