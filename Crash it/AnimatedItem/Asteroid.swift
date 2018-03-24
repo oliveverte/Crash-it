@@ -14,7 +14,7 @@ class Asteroid: AnimatedItem, Collisionable {
     let dammage: Int = 50
     
     init(size: CGSize) {
-        let splitedAtlas:[SKTexture] = Tools.splitAtlas(atlas: SKTextureAtlas(named: "asteroids"),
+        let splitedAtlas:[SKTexture] = Tools.splitAtlas(atlas: SKTextureAtlas(named: "Asteroids"),
                                                         baseName: "asteroid_")
         self.enable_collision = true
         super.init(textureGroup: splitedAtlas,
