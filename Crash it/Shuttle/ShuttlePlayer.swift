@@ -46,7 +46,11 @@ class ShuttlePlayer: Shuttle {
         }
         
         if self.lifeBar.value == 0 {
-            
+            self.scene?.addChild(Explosion(position: self.position))
+            self.scene?.removeChildren(in: [self])
+            if let gameScene = self.scene as? GameScene {
+                
+            }
         }
     }
     
