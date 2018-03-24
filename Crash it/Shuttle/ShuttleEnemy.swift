@@ -68,11 +68,13 @@ class ShuttleEnemy: Shuttle {
             increaseScore += 1
         }
         
+        // L'ennemie(self) est détruit
         if(increaseScore > 0) {
             if let gameScene = self.scene as? GameScene {
                 gameScene.increaseScore(1)
-                gameScene.removeChildren(in: [self])
             }
+            self.scene?.addChild(Explosion(position: self.position))
+            self.scene?.removeChildren(in: [self])
         }
     }
     
