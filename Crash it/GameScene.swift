@@ -115,7 +115,7 @@ class GameScene: SKScene {
         return list
     }
     
-    internal func increaseScore(_ valueToAdd: Int) {
+    func increaseScore(_ valueToAdd: Int) {
         score.text! = String((Int(score.text!)! + valueToAdd))
     }
 }
