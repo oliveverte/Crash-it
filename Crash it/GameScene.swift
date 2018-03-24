@@ -10,6 +10,7 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
+    private let PLAYER_MOVING_SPEED:CGFloat = 3
     private var player: ShuttlePlayer!
     private var score_label = SKLabelNode()
     private var starsGenerator_topLayer:StarsGenerator!
@@ -27,41 +28,46 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         Tools.scene_size = self.size
-        score_label = self.childNode(withName: "Score") as! SKLabelNode
-        score_label.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.8))
-        starsGenerator_topLayer = StarsGenerator(scene: self,
+        
+        self.score_label = self.childNode(withName: "Score") as! SKLabelNode
+        self.score_label.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.8))
+        
+        self.player = ShuttlePlayer()
+        self.player.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.2))
+        
+        self.starsGenerator_topLayer = StarsGenerator(scene: self,
                                                  screenSize: self.size,
                                                  starsPercent: 8,
                                                  opacityRange: Tools.Interval(min: 40, max: 70),
                                                  starSize: CGSize(width: 1, height: 2),
                                                  speedFactor: 1.0)
         
-        starsGenerator_bottomLayer = StarsGenerator(scene: self,
+        self.starsGenerator_bottomLayer = StarsGenerator(scene: self,
                                                     screenSize: self.size,
                                                     starsPercent: 13,
                                                     opacityRange: Tools.Interval(min: 30, max: 50),
                                                     starSize: CGSize(width: 1, height: 1),
                                                     speedFactor: 0.4)
+        
+        self.shuttle_enemy_generator = ShuttleEnemyGenerator(scene: self, target: player)
+        self.asteroids_generator = AsteroidsGenerator(scene: self)
         start()
     }
     
-    
     func start() {
-        player = ShuttlePlayer()
-        player!.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.2))
-        self.addChild(player!)
-        
-        shuttle_enemy_generator = ShuttleEnemyGenerator(scene: self, target: player)
-        asteroids_generator = AsteroidsGenerator(scene: self)
+        self.score = 0
+        self.addChild(player)
+        self.asteroids_generator.enable = true
+        self.shuttle_enemy_generator.enable = true
     }
     
     
     
     func touchDown(atPoint pos : CGPoint) {
         if(pos.x < self.size.width/2){
-            player.direction.dx = -3
+            player.direction.dx = -self.PLAYER_MOVING_SPEED
         } else if(pos.x > self.size.width/2) {
-            player.direction.dx = 3
+            player.direction.dx = self.PLAYER_MOVING_SPEED
         }
     }
     
@@ -124,9 +130,12 @@ class GameScene: SKScene {
         return list
     }
     
-
-    func stop() {
-        
+    
+    func gameOver() {
+        self.player.position = Tools.fromSceneToWorldPosition(
+            screenSpacePos: CGPoint(x: 0.5, y: 0.2))
+        self.shuttle_enemy_generator.enable = false
+        self.asteroids_generator.enable = false
     }
 }
 

@@ -18,7 +18,7 @@ class ShuttleEnemyGenerator {
     private var previous_generate_time: TimeInterval?
     private var maxTime_before_generate: TimeInterval = 0.5 // en seconde
     var enemies_percent: Int = 10
-    
+    var enable:Bool = false
     
     
     init(scene: SKScene, target: ShuttlePlayer) {
@@ -28,6 +28,7 @@ class ShuttleEnemyGenerator {
     }
     
     func generate(_ currentTime: TimeInterval) {
+        if(!self.enable) { return }
         if currentTime - (previous_generate_time ?? 0) < maxTime_before_generate { return }
         self.previous_generate_time = currentTime
         if arc4random_uniform(101) > self.enemies_percent { return }
