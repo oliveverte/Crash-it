@@ -7,7 +7,21 @@
 //
 
 import Foundation
+import SpriteKit
 
 class Explosion: AnimatedItem {
+    
+    init(size: CGSize) {
+        let splitedAtlas:[SKTexture] = Tools.splitAtlas(atlas: SKTextureAtlas(named: "Explosions"),
+                                                        baseName: "explosion_")
+        super.init(textureGroup: splitedAtlas,
+                   numberOfLooping: 1,
+                   size: size,
+                   latency: 0.1)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
 }
