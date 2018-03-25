@@ -13,7 +13,7 @@ class GameScene: SKScene {
     enum GameState {
         case play
         case gameOver
-        case start
+        case welcome
     }
     
     private let PLAYER_MOVING_SPEED:CGFloat = 3
@@ -62,18 +62,19 @@ class GameScene: SKScene {
         self.asteroids_generator = AsteroidsGenerator(scene: self)
 
         self.gameOver_screen = GameOverScreen(scene: self)
-        gameOver_screen.show()
-        
+        self.welcome_screen = WelcomeScreen(scene: self)
+        self.welcome_screen.show()
+        self.state = GameState.welcome
     }
     
     func start() {
         self.score = 0
         self.addChild(player)
         self.state = GameState.play
-        self.player.lifeBar.value = self.player.stats.defense
         self.score_label.isHidden = false
         self.asteroids_generator.enable = true
         self.shuttle_enemy_generator.enable = true
+        self.player.lifeBar.value = self.player.stats.defense
     }
     
     
@@ -94,7 +95,7 @@ class GameScene: SKScene {
     
     func touchUp(atPoint pos : CGPoint) {
         if self.state == GameState.play { player.direction.dx = 0 }
-        else if self.state == GameState.start { }
+        else if self.state == GameState.welcome { self.welcome_screen.touchUp(pos) }
         else { gameOver_screen.touchUp(pos) }
     }
     
