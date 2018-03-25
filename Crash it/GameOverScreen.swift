@@ -15,7 +15,7 @@ class GameOverScreen {
     var score_label: SKLabelNode!
     var save_button:Button
     var retry_button:Button
-    var score_button:Button
+    var menu_button:Button
     
     
     init(scene: GameScene) {
@@ -36,15 +36,15 @@ class GameOverScreen {
         self.score_label.position = CGPoint(x: self.scoreText_label.position.x,
                                             y: self.scoreText_label.position.y - self.scoreText_label.frame.height - 10)
         self.save_button = Button(text: "Sauvegarder")
-        self.save_button.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.4))
+        self.save_button.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.5))
         
         self.retry_button = Button(text: "Recommencer")
         self.retry_button.position = self.save_button.position
         self.retry_button.position.y -= self.save_button.size.height + 30
         
-        self.score_button = Button(text: "Scores")
-        self.score_button.position = self.retry_button.position
-        self.score_button.position.y -= self.retry_button.size.height + 30
+        self.menu_button = Button(text: "Accueil")
+        self.menu_button.position = self.retry_button.position
+        self.menu_button.position.y -= self.retry_button.size.height + 30
         
     }
     
@@ -54,7 +54,7 @@ class GameOverScreen {
                                        self.score_label,
                                        self.save_button,
                                        self.retry_button,
-                                       self.score_button])
+                                       self.menu_button])
     }
     
     func show() {
@@ -63,14 +63,14 @@ class GameOverScreen {
         self.scene.addChild(self.score_label)
         self.scene.addChild(self.save_button)
         self.scene.addChild(self.retry_button)
-        self.scene.addChild(self.score_button)
+        self.scene.addChild(self.menu_button)
     }
     
     
     func touchUp(_ pos: CGPoint) {
         if(save_button.isClicked(pos)) {  }
         else if(retry_button.isClicked(pos)) { hide(); scene.start() }
-        else if(score_button.isClicked(pos)) {  }
+        else if(menu_button.isClicked(pos)) { hide(); self.scene.switchScreen(GameScene.GameState.welcome) }
     }
     
     

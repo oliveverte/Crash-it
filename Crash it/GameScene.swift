@@ -72,9 +72,12 @@ class GameScene: SKScene {
         self.addChild(player)
         self.state = GameState.play
         self.score_label.isHidden = false
+        self.player.direction = CGVector.zero
         self.asteroids_generator.enable = true
         self.shuttle_enemy_generator.enable = true
         self.player.lifeBar.value = self.player.stats.defense
+        self.player.position = Tools.fromSceneToWorldPosition(
+            screenSpacePos: CGPoint(x: 0.5, y: 0.2))
     }
     
     
@@ -153,13 +156,21 @@ class GameScene: SKScene {
     
     
     func gameOver() {
-        self.player.position = Tools.fromSceneToWorldPosition(
-            screenSpacePos: CGPoint(x: 0.5, y: 0.2))
         self.shuttle_enemy_generator.enable = false
         self.asteroids_generator.enable = false
         self.score_label.isHidden = true
         self.state = GameState.gameOver
         self.gameOver_screen.show()
+    }
+    
+    func switchScreen(_ state: GameState) {
+        if state == GameState.gameOver {
+            self.state = state
+            self.gameOver_screen.show()
+        } else if state == GameState.welcome {
+            self.state = state
+            self.welcome_screen.show()
+        }
     }
 }
 
