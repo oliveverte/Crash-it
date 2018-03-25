@@ -26,12 +26,10 @@ class GameScene: SKScene {
     private var gameOver_screen: GameOverScreen!
     private var state: GameState!
     
-
     var score: Int {
         get { return Int(self.score_label.text!)! }
         set {
-            score_label.text! = String(
-                (Int(score_label.text!)! + newValue))
+            score_label.text! = String(newValue)
         }
     }
     
@@ -39,6 +37,7 @@ class GameScene: SKScene {
         Tools.scene_size = self.size
         self.score_label = self.childNode(withName: "Score") as! SKLabelNode
         self.score_label.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.8))
+        self.score_label.text! = "0"
         
         self.player = ShuttlePlayer()
         self.player.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.2))
@@ -61,12 +60,14 @@ class GameScene: SKScene {
         self.asteroids_generator = AsteroidsGenerator(scene: self)
 
         gameOver_screen = GameOverScreen(scene: self)
+        gameOver_screen.show()
     }
     
     func start() {
         self.score = 0
         self.addChild(player)
         self.state = GameState.play
+        self.player.lifeBar.value = self.player.stats.defense
         self.score_label.isHidden = false
         self.asteroids_generator.enable = true
         self.shuttle_enemy_generator.enable = true
@@ -75,10 +76,12 @@ class GameScene: SKScene {
     
     
     func touchDown(atPoint pos : CGPoint) {
-        if(pos.x < self.size.width/2){
-            player.direction.dx = -self.PLAYER_MOVING_SPEED
-        } else if(pos.x > self.size.width/2) {
-            player.direction.dx = self.PLAYER_MOVING_SPEED
+        if(self.state == GameState.play) {
+            if(pos.x < self.size.width/2){
+                player.direction.dx = -self.PLAYER_MOVING_SPEED
+            } else if(pos.x > self.size.width/2) {
+                player.direction.dx = self.PLAYER_MOVING_SPEED
+            }
         }
     }
     
@@ -152,6 +155,7 @@ class GameScene: SKScene {
         self.asteroids_generator.enable = false
         self.score_label.isHidden = true
         self.state = GameState.gameOver
+        self.gameOver_screen.show()
     }
 }
 

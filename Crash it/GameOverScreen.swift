@@ -17,6 +17,7 @@ class GameOverScreen {
     var retry_button:Button
     var score_button:Button
     
+    
     init(scene: GameScene) {
         self.scene = scene
         self.scoreText_label = SKLabelNode.init(text: "Score")
@@ -45,6 +46,19 @@ class GameOverScreen {
         self.score_button.position = self.retry_button.position
         self.score_button.position.y -= self.retry_button.size.height + 30
         
+    }
+    
+    
+    func hide() {
+        self.scene.removeChildren(in: [self.scoreText_label,
+                                       self.score_label,
+                                       self.save_button,
+                                       self.retry_button,
+                                       self.score_button])
+    }
+    
+    func show() {
+        self.score_label.text = String(self.scene.score)
         self.scene.addChild(self.scoreText_label)
         self.scene.addChild(self.score_label)
         self.scene.addChild(self.save_button)
@@ -53,10 +67,9 @@ class GameOverScreen {
     }
     
     
-    
     func touchUp(_ pos: CGPoint) {
         if(save_button.isClicked(pos)) {  }
-        else if(retry_button.isClicked(pos)) {  }
+        else if(retry_button.isClicked(pos)) { hide(); scene.start() }
         else if(score_button.isClicked(pos)) {  }
     }
     
