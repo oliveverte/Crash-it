@@ -56,7 +56,9 @@ class WelcomeScreen {
     func touchUp(_ pos: CGPoint) {
         if self.play_button.isClicked(pos) { hide(); self.scene.start() }
         else if self.resume_button.isClicked(pos) { }
-        else if self.score_button.isClicked(pos) { }
+        else if self.score_button.isClicked(pos) {
+            self.scene.view_Controller.performSegue(withIdentifier: "Scores", sender: nil)
+        }
     }
 }
 

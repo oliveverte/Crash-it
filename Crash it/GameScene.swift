@@ -15,6 +15,11 @@ class GameScene: SKScene {
         case gameOver
         case welcome
     }
+    struct SaveData {
+        static var title: String?
+        static var date: TimeInterval?
+        static var score: Int?
+    }
     
     private let PLAYER_MOVING_SPEED:CGFloat = 3
     private var player: ShuttlePlayer!
@@ -26,6 +31,9 @@ class GameScene: SKScene {
     private var gameOver_screen: GameOverScreen!
     private var welcome_screen: WelcomeScreen!
     private var state: GameState!
+    internal var view_Controller: UIViewController!
+    
+    
     
     var score: Int {
         get { return Int(self.score_label.text!)! }
@@ -162,6 +170,8 @@ class GameScene: SKScene {
         self.state = GameState.gameOver
         self.gameOver_screen.show()
     }
+    
+    
     
     func switchScreen(_ state: GameState) {
         if state == GameState.gameOver {
