@@ -55,9 +55,9 @@ class GameOverScreen {
     
     
     func touchUp(_ pos: CGPoint) {
-        if(save_button.isClicked(pos)) { print("save") }
-        else if(retry_button.isClicked(pos)) { print("retry") }
-        else if(score_button.isClicked(pos)) { print("score") }
+        if(save_button.isClicked(pos)) {  }
+        else if(retry_button.isClicked(pos)) {  }
+        else if(score_button.isClicked(pos)) {  }
     }
     
     

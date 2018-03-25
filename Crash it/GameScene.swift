@@ -112,8 +112,6 @@ class GameScene: SKScene {
         shuttle_enemy_generator.generate(currentTime)
         asteroids_generator.generate(currentTime)
         
-        if(self.state != GameState.play) { return }
-        
         var itemsToDelete:[SKNode] = []
         for item in self.children {
             if let movingItem = item as? MovingItem {
