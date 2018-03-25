@@ -10,6 +10,12 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
+    enum GameState {
+        case play
+        case gameOver
+        case start
+    }
+    
     private let PLAYER_MOVING_SPEED:CGFloat = 3
     private var player: ShuttlePlayer!
     private var score_label = SKLabelNode()
@@ -17,6 +23,9 @@ class GameScene: SKScene {
     private var starsGenerator_bottomLayer:StarsGenerator!
     private var shuttle_enemy_generator: ShuttleEnemyGenerator!
     private var asteroids_generator: AsteroidsGenerator!
+    private var gameOver_screen: GameOverScreen!
+    private var state: GameState!
+    
 
     var score: Int {
         get { return Int(self.score_label.text!)! }
@@ -28,7 +37,6 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         Tools.scene_size = self.size
-        
         self.score_label = self.childNode(withName: "Score") as! SKLabelNode
         self.score_label.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.8))
         
@@ -51,12 +59,15 @@ class GameScene: SKScene {
         
         self.shuttle_enemy_generator = ShuttleEnemyGenerator(scene: self, target: player)
         self.asteroids_generator = AsteroidsGenerator(scene: self)
-        start()
+
+        gameOver_screen = GameOverScreen(scene: self)
     }
     
     func start() {
         self.score = 0
         self.addChild(player)
+        self.state = GameState.play
+        self.score_label.isHidden = false
         self.asteroids_generator.enable = true
         self.shuttle_enemy_generator.enable = true
     }
@@ -76,7 +87,9 @@ class GameScene: SKScene {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        player.direction.dx = 0
+        if self.state == GameState.play { player.direction.dx = 0 }
+        else if self.state == GameState.start { }
+        else { gameOver_screen.touchUp(pos) }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -98,6 +111,8 @@ class GameScene: SKScene {
         starsGenerator_bottomLayer.generate()
         shuttle_enemy_generator.generate(currentTime)
         asteroids_generator.generate(currentTime)
+        
+        if(self.state != GameState.play) { return }
         
         var itemsToDelete:[SKNode] = []
         for item in self.children {
@@ -131,11 +146,14 @@ class GameScene: SKScene {
     }
     
     
+    
     func gameOver() {
         self.player.position = Tools.fromSceneToWorldPosition(
             screenSpacePos: CGPoint(x: 0.5, y: 0.2))
         self.shuttle_enemy_generator.enable = false
         self.asteroids_generator.enable = false
+        self.score_label.isHidden = true
+        self.state = GameState.gameOver
     }
 }
 
