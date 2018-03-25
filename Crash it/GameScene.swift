@@ -24,6 +24,7 @@ class GameScene: SKScene {
     private var shuttle_enemy_generator: ShuttleEnemyGenerator!
     private var asteroids_generator: AsteroidsGenerator!
     private var gameOver_screen: GameOverScreen!
+    private var welcome_screen: WelcomeScreen!
     private var state: GameState!
     
     var score: Int {
@@ -38,6 +39,7 @@ class GameScene: SKScene {
         self.score_label = self.childNode(withName: "Score") as! SKLabelNode
         self.score_label.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.8))
         self.score_label.text! = "0"
+        self.score_label.isHidden = true
         
         self.player = ShuttlePlayer()
         self.player.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.2))
@@ -59,8 +61,9 @@ class GameScene: SKScene {
         self.shuttle_enemy_generator = ShuttleEnemyGenerator(scene: self, target: player)
         self.asteroids_generator = AsteroidsGenerator(scene: self)
 
-        gameOver_screen = GameOverScreen(scene: self)
+        self.gameOver_screen = GameOverScreen(scene: self)
         gameOver_screen.show()
+        
     }
     
     func start() {
