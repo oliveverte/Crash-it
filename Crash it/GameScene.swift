@@ -15,11 +15,6 @@ class GameScene: SKScene {
         case gameOver
         case welcome
     }
-    struct SaveData {
-        static var title: String?
-        static var date: TimeInterval?
-        static var score: Int?
-    }
     
     private let PLAYER_MOVING_SPEED:CGFloat = 3
     private var player: ShuttlePlayer!
@@ -32,6 +27,7 @@ class GameScene: SKScene {
     private var welcome_screen: WelcomeScreen!
     private var state: GameState!
     internal var view_Controller: UIViewController!
+    internal var userDefault: UserDefaults!
     
     
     
@@ -48,6 +44,7 @@ class GameScene: SKScene {
         self.score_label.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.8))
         self.score_label.text! = "0"
         self.score_label.isHidden = true
+        self.userDefault = UserDefaults.standard
         
         self.player = ShuttlePlayer()
         self.player.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.2))
@@ -169,6 +166,7 @@ class GameScene: SKScene {
         self.score_label.isHidden = true
         self.state = GameState.gameOver
         self.gameOver_screen.show()
+        Tools.saveData_addScore(userDefault: self.userDefault, score: self.score)
     }
     
     

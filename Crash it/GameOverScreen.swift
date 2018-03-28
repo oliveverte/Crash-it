@@ -45,7 +45,6 @@ class GameOverScreen {
         self.menu_button = Button(text: "Accueil")
         self.menu_button.position = self.retry_button.position
         self.menu_button.position.y -= self.retry_button.size.height + 30
-        
     }
     
     
