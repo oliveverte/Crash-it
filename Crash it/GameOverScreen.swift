@@ -11,8 +11,9 @@ import SpriteKit
 
 class GameOverScreen {
     let scene: GameScene
-    let scoreText_label: SKLabelNode!
-    var score_label: SKLabelNode!
+    let scoreText_label: SKLabelNode
+    var score_label: SKLabelNode
+    let saved_label: SKLabelNode
     var save_button:Button
     var retry_button:Button
     var menu_button:Button
@@ -20,21 +21,30 @@ class GameOverScreen {
     
     init(scene: GameScene) {
         self.scene = scene
-        self.scoreText_label = SKLabelNode.init(text: "Score")
+        
         self.score_label = SKLabelNode.init(text: String(scene.score))
-        
-        self.scoreText_label.fontSize = 64
         self.score_label.fontSize = 48
-        self.scoreText_label.alpha = 0.5
         self.score_label.alpha = 0.5
-        
         self.score_label.fontName = "Helvetica Neue Medium"
+        
+        self.scoreText_label = SKLabelNode.init(text: "Score")
+        self.scoreText_label.fontSize = 64
+        self.scoreText_label.alpha = 0.5
         self.scoreText_label.fontName = "Helvetica Neue Light"
+        
+        self.saved_label = SKLabelNode.init(text: "La partie a été sauvegardée")
+        self.saved_label.fontSize = 20
+        self.saved_label.alpha = 0.5
+        self.saved_label.fontName = "HelveticaNeue-Light"
         
         self.scoreText_label.position = Tools.fromSceneToWorldPosition(
             screenSpacePos: CGPoint(x: 0.5, y: 0.85))
+        
         self.score_label.position = CGPoint(x: self.scoreText_label.position.x,
                                             y: self.scoreText_label.position.y - self.scoreText_label.frame.height - 10)
+        
+        self.saved_label.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.5))
+        
         self.save_button = Button(text: "Sauvegarder")
         self.save_button.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.5))
         
@@ -45,6 +55,7 @@ class GameOverScreen {
         self.menu_button = Button(text: "Accueil")
         self.menu_button.position = self.retry_button.position
         self.menu_button.position.y -= self.retry_button.size.height + 30
+        
     }
     
     
@@ -53,7 +64,8 @@ class GameOverScreen {
                                        self.score_label,
                                        self.save_button,
                                        self.retry_button,
-                                       self.menu_button])
+                                       self.menu_button,
+                                       self.saved_label])
     }
     
     func show() {
@@ -67,10 +79,17 @@ class GameOverScreen {
     
     
     func touchUp(_ pos: CGPoint) {
-        if(save_button.isClicked(pos)) {  }
+        if(save_button.isClicked(pos)) {
+            self.scene.removeChildren(in: [self.save_button])
+            self.scene.addChild(self.saved_label)
+            let encodedDatas = Tools.addEncodedSaveDatas(Tools.KEY_DEFAULT_GAMEINFOS, self.scene.score)
+            UserDefaults.standard.set(encodedDatas, forKey: Tools.KEY_DEFAULT_GAMEINFOS)
+        }
         else if(retry_button.isClicked(pos)) { hide(); scene.start() }
         else if(menu_button.isClicked(pos)) { hide(); self.scene.switchScreen(GameScene.GameState.welcome) }
     }
+    
+    
     
     
     

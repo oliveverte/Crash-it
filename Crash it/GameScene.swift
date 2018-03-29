@@ -27,8 +27,6 @@ class GameScene: SKScene {
     private var welcome_screen: WelcomeScreen!
     private var state: GameState!
     internal var view_Controller: UIViewController!
-    internal var userDefault: UserDefaults!
-    
     
     
     var score: Int {
@@ -38,13 +36,13 @@ class GameScene: SKScene {
         }
     }
     
+    
     override func didMove(to view: SKView) {
         Tools.scene_size = self.size
         self.score_label = self.childNode(withName: "Score") as! SKLabelNode
         self.score_label.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.8))
         self.score_label.text! = "0"
         self.score_label.isHidden = true
-        self.userDefault = UserDefaults.standard
         
         self.player = ShuttlePlayer()
         self.player.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.2))
@@ -68,8 +66,12 @@ class GameScene: SKScene {
 
         self.gameOver_screen = GameOverScreen(scene: self)
         self.welcome_screen = WelcomeScreen(scene: self)
-        self.welcome_screen.show()
-        self.state = GameState.welcome
+        
+//        self.welcome_screen.show()
+//        self.state = GameState.welcome
+        
+        self.gameOver_screen.show()
+        self.state = GameState.gameOver
     }
     
     func start() {
@@ -166,7 +168,8 @@ class GameScene: SKScene {
         self.score_label.isHidden = true
         self.state = GameState.gameOver
         self.gameOver_screen.show()
-        Tools.saveData_addScore(userDefault: self.userDefault, score: self.score)
+        let encodedDatas = Tools.addEncodedSaveDatas(Tools.KEY_DEFAULT_SCORES, self.score)
+        UserDefaults.standard.set(encodedDatas, forKey: Tools.KEY_DEFAULT_SCORES)
     }
     
     

@@ -24,26 +24,23 @@ class Tools {
         }
     }
     
+    
     @objc(_TtCC8Crash_it5Tools8SaveData)class SaveData: NSObject, NSCoding {
-        var id: Int?
         var date: Date?
         var score: Int?
         
-        init(_ id: Int?, _ date: Date?, _ score: Int?) {
-            self.id = id
+        init(_ date: Date?, _ score: Int?) {
             self.date = date
             self.score = score
         }
         
         required convenience init?(coder aDecoder: NSCoder) {
-            let id = aDecoder.decodeObject(forKey: "id") as? Int
             let date = aDecoder.decodeObject(forKey: "date") as? Date
             let score = aDecoder.decodeObject(forKey: "score") as? Int
-            self.init(id, date, score)
+            self.init(date, score)
         }
         
         func encode(with aCoder: NSCoder) {
-            aCoder.encode(id, forKey: "id")
             aCoder.encode(date, forKey: "date")
             aCoder.encode(score, forKey: "score")
         }
@@ -53,6 +50,7 @@ class Tools {
     
     static var scene_size: CGSize?
     static let KEY_DEFAULT_SCORES = "scores"
+    static let KEY_DEFAULT_GAMEINFOS = "gameInfos"
     
     
     /**
@@ -89,19 +87,18 @@ class Tools {
     /**
      Sauvegarde le score actuel.
     */
-    static func saveData_addScore(userDefault: UserDefaults, score: Int) {
+    static func addEncodedSaveDatas(_ key: String, _ score: Int) -> Data {
         var listSavedData: [Tools.SaveData] = []
-        if let encoded = UserDefaults.standard.object(forKey: Tools.KEY_DEFAULT_SCORES) {
+        if let encoded = UserDefaults.standard.object(forKey: key) {
             listSavedData = NSKeyedUnarchiver.unarchiveObject(with: encoded as! Data) as! [Tools.SaveData]
         }
-        
-        let saveData = Tools.SaveData(nil, Date(), score)
+        let saveData = Tools.SaveData.init(Date(), score)
         listSavedData.append(saveData)
-        let encodedData = NSKeyedArchiver.archivedData(withRootObject: listSavedData)
-        userDefault.set(encodedData, forKey: Tools.KEY_DEFAULT_SCORES)
+        return NSKeyedArchiver.archivedData(withRootObject: listSavedData)
     }
     
-
+    
+    
     
     
 

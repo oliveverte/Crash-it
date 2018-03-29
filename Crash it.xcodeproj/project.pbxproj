@@ -17,6 +17,7 @@
 		8103700B2057251900F907E6 /* AnimatedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8103700A2057251900F907E6 /* AnimatedItem.swift */; };
 		8103700D2057254F00F907E6 /* Shuttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8103700C2057254F00F907E6 /* Shuttle.swift */; };
 		8103700F2057255D00F907E6 /* PlayerStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8103700E2057255D00F907E6 /* PlayerStatistic.swift */; };
+		812EE110206C28AD00F81612 /* ResumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812EE10F206C28AD00F81612 /* ResumeViewController.swift */; };
 		813C6D62205E7B7700AEAD9E /* ShuttleEnemiesGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813C6D61205E7B7600AEAD9E /* ShuttleEnemiesGenerator.swift */; };
 		8165D42A206586CF00251731 /* AsteroidsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8165D429206586CF00251731 /* AsteroidsGenerator.swift */; };
 		81802DEE2055507500B83EE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81802DED2055507500B83EE5 /* AppDelegate.swift */; };
@@ -48,6 +49,7 @@
 		8103700A2057251900F907E6 /* AnimatedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedItem.swift; sourceTree = "<group>"; };
 		8103700C2057254F00F907E6 /* Shuttle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shuttle.swift; sourceTree = "<group>"; };
 		8103700E2057255D00F907E6 /* PlayerStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatistic.swift; sourceTree = "<group>"; };
+		812EE10F206C28AD00F81612 /* ResumeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeViewController.swift; sourceTree = "<group>"; };
 		813C6D61205E7B7600AEAD9E /* ShuttleEnemiesGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuttleEnemiesGenerator.swift; sourceTree = "<group>"; };
 		8165D429206586CF00251731 /* AsteroidsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidsGenerator.swift; sourceTree = "<group>"; };
 		81802DEA2055507500B83EE5 /* Crash it.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crash it.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +126,7 @@
 				81C4EAFE2067073800C16675 /* Button.swift */,
 				8103067C2067CDD6002C6815 /* WelcomeScreen.swift */,
 				8103067E206801DF002C6815 /* ScoreViewController.swift */,
+				812EE10F206C28AD00F81612 /* ResumeViewController.swift */,
 			);
 			path = "Crash it";
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				8103700F2057255D00F907E6 /* PlayerStatistic.swift in Sources */,
 				8103067D2067CDD7002C6815 /* WelcomeScreen.swift in Sources */,
 				81FB7CE5205ABEC40072D2E7 /* StarsGenerator.swift in Sources */,
+				812EE110206C28AD00F81612 /* ResumeViewController.swift in Sources */,
 				81802DEE2055507500B83EE5 /* AppDelegate.swift in Sources */,
 				81D193F3205DB60600F459BF /* Collisionable.swift in Sources */,
 			);
