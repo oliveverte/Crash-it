@@ -29,7 +29,11 @@ class ShuttlePlayer: Shuttle {
     
     
     override func update(_ currentTime: TimeInterval) {
-        super.update(currentTime)
+        if(self.direction.dx < 0 && self.position.x > self.size.width/2
+            || self.direction.dx > 0 && self.position.x < (self.scene?.size.width)! - self.size.width/2) {
+            super.update(currentTime)
+        }
+        
         if self.stats.shoot_stats.canShoot(currentTime) {
             shoot(direction: CGVector(dx: 0, dy: 1), rotation: self.zRotation)
         }
