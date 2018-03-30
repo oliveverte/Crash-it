@@ -53,10 +53,13 @@
                             <outlet property="delegate" destination="i1n-HH-5Bb" id="xlB-KF-Vng"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="BV1-FR-VrT" kind="show" identifier="FromScoreToScene" id="Gh3-pN-OvA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0gd-oR-B1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1889" y="321"/>
+            <point key="canvasLocation" x="1774" y="-161"/>
         </scene>
         <!--Resume View Controller-->
         <scene sceneID="vEb-FI-fwh">
@@ -81,10 +84,13 @@
                             <outlet property="delegate" destination="nPJ-GM-yLd" id="wEe-1n-B0F"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="BV1-FR-VrT" kind="show" identifier="FromResumeToScene" id="xSM-ah-vgl"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dl2-AQ-ByE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1902" y="1046"/>
+            <point key="canvasLocation" x="1774" y="1382"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Nx8-aD-hgS">
@@ -102,4 +108,7 @@
             <point key="canvasLocation" x="150" y="607"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="xSM-ah-vgl"/>
+    </inferredMetricsTieBreakers>
 </document>

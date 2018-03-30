@@ -18,7 +18,7 @@ class GameScene: SKScene {
     
     private let PLAYER_MOVING_SPEED:CGFloat = 3
     private var player: ShuttlePlayer!
-    private var score_label = SKLabelNode()
+    internal var score_label: SKLabelNode!
     private var starsGenerator_topLayer:StarsGenerator!
     private var starsGenerator_bottomLayer:StarsGenerator!
     private var shuttle_enemy_generator: ShuttleEnemyGenerator!
@@ -26,7 +26,7 @@ class GameScene: SKScene {
     private var gameOver_screen: GameOverScreen!
     private var welcome_screen: WelcomeScreen!
     private var state: GameState!
-    internal var view_Controller: UIViewController!
+    internal var view_Controller: GameViewController!
     
     
     var score: Int {
@@ -39,27 +39,31 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         Tools.scene_size = self.size
-        self.score_label = self.childNode(withName: "Score") as! SKLabelNode
+        self.score_label = SKLabelNode.init(text: "0")
+        self.score_label.alpha = 0.5
+        self.score_label.fontName = "HelveticaNeue-Light"
+        self.score_label.fontSize = 55
+        self.score_label.fontColor = UIColor.white
         self.score_label.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.8))
-        self.score_label.text! = "0"
         self.score_label.isHidden = true
+        self.addChild(self.score_label)
         
         self.player = ShuttlePlayer()
         self.player.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.2))
         
         self.starsGenerator_topLayer = StarsGenerator(scene: self,
-                                                 screenSize: self.size,
-                                                 starsPercent: 8,
-                                                 opacityRange: Tools.Interval(min: 40, max: 70),
-                                                 starSize: CGSize(width: 1, height: 2),
-                                                 speedFactor: 1.0)
+                                                      screenSize: self.size,
+                                                      starsPercent: 8,
+                                                      opacityRange: Tools.Interval(min: 40, max: 70),
+                                                      starSize: CGSize(width: 1, height: 2),
+                                                      speedFactor: 1.0)
         
         self.starsGenerator_bottomLayer = StarsGenerator(scene: self,
-                                                    screenSize: self.size,
-                                                    starsPercent: 13,
-                                                    opacityRange: Tools.Interval(min: 30, max: 50),
-                                                    starSize: CGSize(width: 1, height: 1),
-                                                    speedFactor: 0.4)
+                                                         screenSize: self.size,
+                                                         starsPercent: 13,
+                                                         opacityRange: Tools.Interval(min: 30, max: 50),
+                                                         starSize: CGSize(width: 1, height: 1),
+                                                         speedFactor: 0.4)
         
         self.shuttle_enemy_generator = ShuttleEnemyGenerator(scene: self, target: player)
         self.asteroids_generator = AsteroidsGenerator(scene: self)
@@ -67,15 +71,21 @@ class GameScene: SKScene {
         self.gameOver_screen = GameOverScreen(scene: self)
         self.welcome_screen = WelcomeScreen(scene: self)
         
-//        self.welcome_screen.show()
-//        self.state = GameState.welcome
+        if(self.view_Controller.initWithScore != nil) { start(); return }
         
-        self.gameOver_screen.show()
-        self.state = GameState.gameOver
+        self.welcome_screen.show()
+        self.state = GameState.welcome
+        
+        
+
+//        self.gameOver_screen.show()
+//        self.state = GameState.gameOver
     }
     
     func start() {
-        self.score = 0
+        self.score = self.view_Controller.initWithScore ?? 0
+        self.view_Controller.initWithScore = nil
+        
         self.addChild(player)
         self.state = GameState.play
         self.score_label.isHidden = false

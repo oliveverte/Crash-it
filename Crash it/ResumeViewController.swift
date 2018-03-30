@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 
 
-class ResumeViewController: UITableViewController {    
+class ResumeViewController: UITableViewController {
+    var clickedIndexPath: Int?
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -50,6 +52,20 @@ class ResumeViewController: UITableViewController {
         let newEncoded = NSKeyedArchiver.archivedData(withRootObject: scores)
         UserDefaults.standard.set(newEncoded, forKey: Tools.KEY_DEFAULT_GAMEINFOS)
         self.tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.clickedIndexPath = indexPath.row
+        performSegue(withIdentifier: "FromResumeToScene", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "FromResumeToScene" {
+            let encoded = UserDefaults.standard.object(forKey: Tools.KEY_DEFAULT_GAMEINFOS)
+            var scores = NSKeyedUnarchiver.unarchiveObject(with: encoded as! Data) as! [Tools.SaveData]
+            let data = scores[self.clickedIndexPath!]
+            (segue.destination as! GameViewController).initWithScore = data.score!
+        }
     }
 }
 

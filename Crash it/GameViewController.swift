@@ -11,6 +11,8 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
+    var initWithScore: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let view = self.view as! SKView? {
@@ -22,7 +24,6 @@ class GameViewController: UIViewController {
                 // Present the scene
                 view.presentScene(scene)
             }
-            
             view.ignoresSiblingOrder = true
             
             view.showsFPS = true
@@ -53,6 +54,7 @@ class GameViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.initWithScore = nil
     }
     
     override func viewWillAppear(_ animated: Bool) {
