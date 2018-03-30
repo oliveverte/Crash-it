@@ -58,13 +58,11 @@ class Shuttle : MovingItem, Collisionable {
         let attack: Int
         internal let defense: Int
         internal var shoot_stats: ShootStats
-        internal let linked_bonus: [Bonus]
         
         init(defense: Int, attack: Int, shootStats: ShootStats) {
             self.defense = defense
             self.attack = attack
             self.shoot_stats = shootStats
-            self.linked_bonus = []
         }
         
         init(stats: Shuttle.Stats) {
@@ -92,7 +90,6 @@ class Shuttle : MovingItem, Collisionable {
     init(image: UIImage, color: UIColor, stats: Shuttle.Stats) {
         self.stats = stats
         self.enable_collision = true
-        
         super.init(texture: SKTexture.init(image: image),
                   color: color,
                   size: Tools.fromSceneToWorldSize(sceneSpaceSize: CGSize(width: 0.1, height: 0.05)),
@@ -101,6 +98,7 @@ class Shuttle : MovingItem, Collisionable {
         
         self.lifeBar = ProgressBar(maxValue: self.stats.defense,
                                    size: CGSize(width: self.size.width + self.size.width/3, height: 5))
+        self.zPosition = 900
         self.addChild(self.lifeBar)
     }
     

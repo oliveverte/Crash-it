@@ -19,6 +19,7 @@ class Explosion: AnimatedItem {
                    size: size,
                    latency: 0.1)
         self.position = position
+        self.zPosition = 500
     }
     
     convenience init(position: CGPoint) {

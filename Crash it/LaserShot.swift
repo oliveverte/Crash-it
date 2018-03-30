@@ -22,6 +22,7 @@ class LaserShot: MovingItem, Collisionable {
         super.init(texture: texture, color: color, size: size,
                    speedFactor: speedFactor, direction: direction)
         self.alpha = 0.6
+        self.zPosition = 100
     }
 
     required init?(coder aDecoder: NSCoder) {

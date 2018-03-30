@@ -21,6 +21,7 @@ class Asteroid: AnimatedItem, Collisionable {
                    numberOfLooping: nil,
                    size: size,
                    latency: 0.1)
+        self.zPosition = 800
     }
     
     required init?(coder aDecoder: NSCoder) {

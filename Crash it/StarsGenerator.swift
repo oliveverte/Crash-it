@@ -38,6 +38,7 @@ class StarsGenerator {
             star.speed_factor = self.speed_factor
             star.position = CGPoint(x: Int(randWidth), y: Int(randHeight))
             star.color = star.color.withAlphaComponent(CGFloat(opacity_range.random()) / 100)
+            star.zPosition = 10
             self.current_scene.addChild(star)
         }
     }
@@ -65,7 +66,7 @@ class StarsGenerator {
         star.position = CGPoint(x: xPos, y: yPos)
         star.color = UIColor.white
         star.alpha = CGFloat(opacity_range.random()) / 100
-        
+        star.zPosition = 10
         self.current_scene.addChild(star)
         
     }

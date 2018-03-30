@@ -27,6 +27,7 @@ class Button: SKSpriteNode {
         self.label.fontName = "Helvetica Neue Light"
         self.label.fontColor = UIColor.black
         self.addChild(self.label)
+        self.zPosition = 1000
     }
     
     convenience init(text: String) {

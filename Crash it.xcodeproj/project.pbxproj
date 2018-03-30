@@ -10,7 +10,6 @@
 		8103067D2067CDD7002C6815 /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8103067C2067CDD6002C6815 /* WelcomeScreen.swift */; };
 		8103067F206801DF002C6815 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8103067E206801DF002C6815 /* ScoreViewController.swift */; };
 		810370012057245400F907E6 /* MovingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810370002057245300F907E6 /* MovingItem.swift */; };
-		810370032057247000F907E6 /* Bonus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810370022057247000F907E6 /* Bonus.swift */; };
 		810370052057249800F907E6 /* ShuttleEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810370042057249800F907E6 /* ShuttleEnemy.swift */; };
 		81037007205724BF00F907E6 /* LaserShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81037006205724BF00F907E6 /* LaserShot.swift */; };
 		81037009205724D000F907E6 /* Asteroid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81037008205724D000F907E6 /* Asteroid.swift */; };
@@ -42,7 +41,6 @@
 		8103067C2067CDD6002C6815 /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
 		8103067E206801DF002C6815 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		810370002057245300F907E6 /* MovingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingItem.swift; sourceTree = "<group>"; };
-		810370022057247000F907E6 /* Bonus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bonus.swift; sourceTree = "<group>"; };
 		810370042057249800F907E6 /* ShuttleEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuttleEnemy.swift; sourceTree = "<group>"; };
 		81037006205724BF00F907E6 /* LaserShot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaserShot.swift; sourceTree = "<group>"; };
 		81037008205724D000F907E6 /* Asteroid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asteroid.swift; sourceTree = "<group>"; };
@@ -115,7 +113,6 @@
 				81C4EAFB206686CE00C16675 /* AnimatedItem */,
 				810370002057245300F907E6 /* MovingItem.swift */,
 				8103700E2057255D00F907E6 /* PlayerStatistic.swift */,
-				810370022057247000F907E6 /* Bonus.swift */,
 				81037006205724BF00F907E6 /* LaserShot.swift */,
 				81FB7CE4205ABEC40072D2E7 /* StarsGenerator.swift */,
 				81D193F2205DB60600F459BF /* Collisionable.swift */,
@@ -231,7 +228,6 @@
 				81037007205724BF00F907E6 /* LaserShot.swift in Sources */,
 				81802DF42055507500B83EE5 /* GameScene.swift in Sources */,
 				81C4EAFA206685F400C16675 /* Explosion.swift in Sources */,
-				810370032057247000F907E6 /* Bonus.swift in Sources */,
 				819063BD2061A8A5009C114C /* ProgressBar.swift in Sources */,
 				810370052057249800F907E6 /* ShuttleEnemy.swift in Sources */,
 				81C4EAFF2067073900C16675 /* Button.swift in Sources */,

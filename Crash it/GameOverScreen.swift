@@ -17,10 +17,14 @@ class GameOverScreen {
     var save_button:Button
     var retry_button:Button
     var menu_button:Button
+    var timer:Timer!
+    var enable_userInteraction: Bool
+    
     
     
     init(scene: GameScene) {
         self.scene = scene
+        self.enable_userInteraction = false
         
         self.score_label = SKLabelNode.init(text: String(scene.score))
         self.score_label.fontSize = 48
@@ -60,6 +64,7 @@ class GameOverScreen {
     
     
     func hide() {
+        self.enable_userInteraction = false
         self.scene.removeChildren(in: [self.scoreText_label,
                                        self.score_label,
                                        self.save_button,
@@ -75,10 +80,14 @@ class GameOverScreen {
         self.scene.addChild(self.save_button)
         self.scene.addChild(self.retry_button)
         self.scene.addChild(self.menu_button)
+        self.timer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false, block: { _ in
+            self.enable_userInteraction = true
+        })
     }
     
     
     func touchUp(_ pos: CGPoint) {
+        if !self.enable_userInteraction { return }
         if(save_button.isClicked(pos)) {
             self.scene.removeChildren(in: [self.save_button])
             self.scene.addChild(self.saved_label)
