@@ -91,14 +91,14 @@ class GameScene: SKScene {
         self.starsGenerator_topLayer = StarsGenerator(scene: self,
                                                       screenSize: self.size,
                                                       starsPercent: 8,
-                                                      opacityRange: Tools.Interval(min: 40, max: 70),
+                                                      opacityRange: Tools.Interval(min: 55, max: 85),
                                                       starSize: CGSize(width: 1, height: 2),
                                                       speedFactor: 1.0)
         
         self.starsGenerator_bottomLayer = StarsGenerator(scene: self,
                                                          screenSize: self.size,
                                                          starsPercent: 13,
-                                                         opacityRange: Tools.Interval(min: 30, max: 50),
+                                                         opacityRange: Tools.Interval(min: 45, max: 60),
                                                          starSize: CGSize(width: 1, height: 1),
                                                          speedFactor: 0.4)
         
