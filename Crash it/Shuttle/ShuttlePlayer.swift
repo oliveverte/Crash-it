@@ -14,9 +14,9 @@ class ShuttlePlayer: Shuttle {
     init() {
         super.init(image: #imageLiteral(resourceName: "shuttle_1"),
                    color: UIColor.red,
-                   stats: Shuttle.Stats(defense: 200, attack: 30,
-                                         shootStats: Shuttle.Stats.ShootStats(deltaTimeToShoot: 1/4,
-                                                                              probSuccessFire: 40)))
+                   stats: Shuttle.Stats(defense: 230, attack: 35,
+                                         shootStats: Shuttle.Stats.ShootStats(deltaTimeToShoot: 1/6,
+                                                                              probSuccessFire: 48)))
         super.direction = CGVector(dx: 0, dy: 0)
         super.lifeBar.position = CGPoint(x: self.position.x,
                                          y: self.position.y - self.size.height/2 - super.lifeBar.size.height/2 - 8)
@@ -29,7 +29,8 @@ class ShuttlePlayer: Shuttle {
     
     
     override func update(_ currentTime: TimeInterval) {
-        if(self.direction.dx < 0 && self.position.x > self.size.width/2
+        if(self.scene != nil
+            && self.direction.dx < 0 && self.position.x > self.size.width/2
             || self.direction.dx > 0 && self.position.x < (self.scene?.size.width)! - self.size.width/2) {
             super.update(currentTime)
         }

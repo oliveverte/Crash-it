@@ -38,8 +38,9 @@ class ShuttleEnemy: Shuttle {
         if self.stats.shoot_stats.canShoot(currentTime) {
             shoot(direction: self.direction, rotation: self.zRotation)
         }
-        if(currentTime - self.previous_time_updatedDirection >= self.deltaTime_check_targetPosition
-            && self.position.y - target.position.y > self.target.position.y + self.scene!.size.height/15) {
+        
+        if(self.scene != nil && currentTime - self.previous_time_updatedDirection >= self.deltaTime_check_targetPosition
+            && self.position.y - target.position.y > self.target.position.y + (self.scene?.size.height)!/15) {
             
             self.previous_time_updatedDirection = currentTime
             updateDirectionToTarget()

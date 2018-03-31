@@ -16,6 +16,40 @@ class GameScene: SKScene {
         case welcome
     }
     
+    class TutoImage {
+        var click_left: SKSpriteNode
+        var click_right: SKSpriteNode
+        var middle_line: SKSpriteNode
+        let scene: SKScene
+
+        
+        init(_ scene: SKScene) {
+            self.scene = scene
+            middle_line = SKSpriteNode(color: UIColor.white, size: CGSize(width: 3, height: scene.size.height))
+            middle_line.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.5))
+            
+            click_left = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "pointer")), color: UIColor.white, size: CGSize(width: 60, height: 60))
+            click_left.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.25, y: 0.4))
+            
+            click_right = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "pointer")), color: UIColor.white, size: CGSize(width: 70, height: 70))
+            click_right.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.75, y: 0.5))
+            
+            click_left.alpha = 0.5
+            click_right.alpha = 0.5
+            middle_line.alpha = 0.5
+            
+            scene.addChild(self.click_left)
+            scene.addChild(self.click_right)
+            scene.addChild(self.middle_line)
+        }
+        
+        deinit {
+            self.scene.removeChildren(in: [self.click_left, self.click_right, self.middle_line])
+        }
+        
+        
+    }
+    
     private let PLAYER_MOVING_SPEED:CGFloat = 3
     private var player: ShuttlePlayer!
     internal var score_label: SKLabelNode!
@@ -27,6 +61,9 @@ class GameScene: SKScene {
     private var welcome_screen: WelcomeScreen!
     private var state: GameState!
     internal var view_Controller: GameViewController!
+    private var tutoImage: TutoImage?
+    
+    
     
     
     var score: Int {
@@ -85,7 +122,7 @@ class GameScene: SKScene {
     func start() {
         self.score = self.view_Controller.initWithScore ?? 0
         self.view_Controller.initWithScore = nil
-        
+        self.tutoImage = TutoImage(self)
         self.addChild(player)
         self.state = GameState.play
         self.score_label.isHidden = false
@@ -100,6 +137,7 @@ class GameScene: SKScene {
     
     
     func touchDown(atPoint pos : CGPoint) {
+        self.tutoImage = nil
         if(self.state == GameState.play) {
             if(pos.x < self.size.width/2){
                 player.direction.dx = -self.PLAYER_MOVING_SPEED

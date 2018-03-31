@@ -62,29 +62,29 @@ class ShuttleEnemyGenerator {
         
         switch img {
         case #imageLiteral(resourceName: "ennemy_1"):
-            stats = Shuttle.Stats(defense: 70, attack: 30,
+            stats = Shuttle.Stats(defense: 90, attack: 15,
                                   shootStats: Shuttle.Stats.ShootStats(deltaTimeToShoot: 1/5,
                                                                        probSuccessFire: 30))
             color = UIColor.orange
         case #imageLiteral(resourceName: "ennemy_2"):
-            stats = Shuttle.Stats(defense: 80, attack: 10,
+            stats = Shuttle.Stats(defense: 100, attack: 10,
                                   shootStats: Shuttle.Stats.ShootStats(deltaTimeToShoot: 1/3,
-                                                                       probSuccessFire: 40))
+                                                                       probSuccessFire: 30))
             color = UIColor.cyan
         case #imageLiteral(resourceName: "ennemy_3"):
             stats = Shuttle.Stats(defense: 120, attack: 10,
                                   shootStats: Shuttle.Stats.ShootStats(deltaTimeToShoot: 1/3,
-                                                                       probSuccessFire: 30))
+                                                                       probSuccessFire: 25))
             color = UIColor.cyan
         case #imageLiteral(resourceName: "ennemy_4"):
             stats = Shuttle.Stats(defense: 230, attack: 10,
                                   shootStats: Shuttle.Stats.ShootStats(deltaTimeToShoot: 1/3,
-                                                                       probSuccessFire: 40))
+                                                                       probSuccessFire: 25))
             color = UIColor.cyan
         case #imageLiteral(resourceName: "ennemy_5"):
-            stats = Shuttle.Stats(defense: 70, attack: 20,
+            stats = Shuttle.Stats(defense: 90, attack: 20,
                                   shootStats: Shuttle.Stats.ShootStats(deltaTimeToShoot: 1/6,
-                                                                       probSuccessFire: 20))
+                                                                       probSuccessFire: 15))
             color = UIColor.green
         default:
             stats = Shuttle.Stats(defense: 0, attack: 0, shootStats: Shuttle.Stats.ShootStats())
