@@ -40,7 +40,8 @@ class Button: SKSpriteNode {
     }
     
     func isClicked(_ touchAt: CGPoint) -> Bool {
-        if(touchAt.x > self.position.x - self.size.width/2
+        if(self.scene != nil
+            && touchAt.x > self.position.x - self.size.width/2
             && touchAt.x < self.position.x + self.size.width/2
             && touchAt.y < self.position.y + self.size.height/2
             && touchAt.y > self.position.y - self.size.height/2) {

@@ -14,9 +14,11 @@ class GameOverScreen {
     let scoreText_label: SKLabelNode
     var score_label: SKLabelNode
     let saved_label: SKLabelNode
+    let savedScore_label: SKLabelNode
     var save_button:Button
     var retry_button:Button
     var menu_button:Button
+    var saveScore_button:Button
     var timer:Timer!
     var enable_userInteraction: Bool
     
@@ -41,25 +43,35 @@ class GameOverScreen {
         self.saved_label.alpha = 0.5
         self.saved_label.fontName = "HelveticaNeue-Light"
         
+        self.savedScore_label = SKLabelNode.init(text: "Le score a été sauvegardé")
+        self.savedScore_label.fontSize = 20
+        self.savedScore_label.alpha = 0.5
+        self.savedScore_label.fontName = "HelveticaNeue-Light"
+        
         self.scoreText_label.position = Tools.fromSceneToWorldPosition(
             screenSpacePos: CGPoint(x: 0.5, y: 0.85))
         
         self.score_label.position = CGPoint(x: self.scoreText_label.position.x,
                                             y: self.scoreText_label.position.y - self.scoreText_label.frame.height - 10)
         
-        self.saved_label.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.5))
         
-        self.save_button = Button(text: "Sauvegarder")
+        self.save_button = Button(text: "Sauvegarder la partie")
         self.save_button.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.5))
         
+        self.saveScore_button = Button(text: "Enregistrer le score")
+        self.saveScore_button.position = self.save_button.position
+        self.saveScore_button.position.y -= self.save_button.size.height + 30
+        
         self.retry_button = Button(text: "Recommencer")
-        self.retry_button.position = self.save_button.position
-        self.retry_button.position.y -= self.save_button.size.height + 30
+        self.retry_button.position = self.saveScore_button.position
+        self.retry_button.position.y -= self.saveScore_button.size.height + 30
         
         self.menu_button = Button(text: "Accueil")
         self.menu_button.position = self.retry_button.position
         self.menu_button.position.y -= self.retry_button.size.height + 30
         
+        self.saved_label.position = self.save_button.position
+        self.savedScore_label.position = self.saveScore_button.position
     }
     
     
@@ -70,7 +82,9 @@ class GameOverScreen {
                                        self.save_button,
                                        self.retry_button,
                                        self.menu_button,
-                                       self.saved_label])
+                                       self.saved_label,
+                                       self.saveScore_button,
+                                       self.savedScore_label])
     }
     
     func show() {
@@ -80,6 +94,7 @@ class GameOverScreen {
         self.scene.addChild(self.save_button)
         self.scene.addChild(self.retry_button)
         self.scene.addChild(self.menu_button)
+        self.scene.addChild(self.saveScore_button)
         self.timer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false, block: { _ in
             self.enable_userInteraction = true
         })
@@ -93,6 +108,12 @@ class GameOverScreen {
             self.scene.addChild(self.saved_label)
             let encodedDatas = Tools.addEncodedSaveDatas(Tools.KEY_DEFAULT_GAMEINFOS, self.scene.score)
             UserDefaults.standard.set(encodedDatas, forKey: Tools.KEY_DEFAULT_GAMEINFOS)
+        }
+        else if (saveScore_button.isClicked(pos)) {
+            self.scene.removeChildren(in: [self.saveScore_button])
+            self.scene.addChild(self.savedScore_label)
+            let encodedDatas = Tools.addEncodedSaveDatas(Tools.KEY_DEFAULT_SCORES, self.scene.score)
+            UserDefaults.standard.set(encodedDatas, forKey: Tools.KEY_DEFAULT_SCORES)
         }
         else if(retry_button.isClicked(pos)) { hide(); scene.start() }
         else if(menu_button.isClicked(pos)) { hide(); self.scene.switchScreen(GameScene.GameState.welcome) }

@@ -113,8 +113,6 @@ class GameScene: SKScene {
         self.welcome_screen.show()
         self.state = GameState.welcome
         
-        
-
 //        self.gameOver_screen.show()
 //        self.state = GameState.gameOver
     }
@@ -216,8 +214,6 @@ class GameScene: SKScene {
         self.score_label.isHidden = true
         self.state = GameState.gameOver
         self.gameOver_screen.show()
-        let encodedDatas = Tools.addEncodedSaveDatas(Tools.KEY_DEFAULT_SCORES, self.score)
-        UserDefaults.standard.set(encodedDatas, forKey: Tools.KEY_DEFAULT_SCORES)
     }
     
     
