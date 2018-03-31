@@ -24,6 +24,7 @@ class GameScene: SKScene {
 
         
         init(_ scene: SKScene) {
+            
             self.scene = scene
             middle_line = SKSpriteNode(color: UIColor.white, size: CGSize(width: 3, height: scene.size.height))
             middle_line.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.5))

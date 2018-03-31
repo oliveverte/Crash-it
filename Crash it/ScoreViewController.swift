@@ -26,7 +26,8 @@ class ScoreViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let encoded = UserDefaults.standard.object(forKey: Tools.KEY_DEFAULT_SCORES)
-        let scores = NSKeyedUnarchiver.unarchiveObject(with: encoded as! Data) as! [Tools.SaveData]
+        var scores = NSKeyedUnarchiver.unarchiveObject(with: encoded as! Data) as! [Tools.SaveData]
+        scores = scores.sorted(by: { $0.score! > $1.score! })
         let data = scores[indexPath.row]
         
         let title = "Score : " + String(data.score!)
@@ -42,7 +43,6 @@ class ScoreViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle != .delete { return }
-        print("Delete")
         let encoded = UserDefaults.standard.object(forKey: Tools.KEY_DEFAULT_SCORES)
         var scores = NSKeyedUnarchiver.unarchiveObject(with: encoded as! Data) as! [Tools.SaveData]
         scores.remove(at: indexPath.row)
