@@ -20,36 +20,48 @@ class GameScene: SKScene {
         var click_left: SKSpriteNode
         var click_right: SKSpriteNode
         var middle_line: SKSpriteNode
+        var explain_text: SKLabelNode
         let scene: SKScene
 
         
         init(_ scene: SKScene) {
             
             self.scene = scene
-            middle_line = SKSpriteNode(color: UIColor.white, size: CGSize(width: 3, height: scene.size.height))
-            middle_line.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.5))
+            self.middle_line = SKSpriteNode(color: UIColor.white, size: CGSize(width: 2, height: scene.size.height))
+            self.middle_line.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.5))
             
-            click_left = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "pointer")), color: UIColor.white, size: CGSize(width: 60, height: 60))
-            click_left.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.25, y: 0.4))
+            self.click_left = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "pointer")), color: UIColor.white, size: CGSize(width: 60, height: 60))
+            self.click_left.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.25, y: 0.3))
             
-            click_right = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "pointer")), color: UIColor.white, size: CGSize(width: 70, height: 70))
-            click_right.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.75, y: 0.5))
+            self.click_right = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "pointer")), color: UIColor.white, size: CGSize(width: 70, height: 70))
+            self.click_right.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.75, y: 0.4))
+            
+            self.explain_text = SKLabelNode(text: "Cliquez à droite ou à gauche de l'écran\nPour déplacer le vaisseau")
+            self.explain_text.numberOfLines = 0
+            self.explain_text.horizontalAlignmentMode = .center
+            self.explain_text.preferredMaxLayoutWidth = scene.size.width - 40
+            self.explain_text.alpha = 0.7
+            self.explain_text.fontName = "HelveticaNeue-Light"
+            self.explain_text.fontSize = 15
+            self.explain_text.fontColor = UIColor.white
+            self.explain_text.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.6))
             
             click_left.alpha = 0.5
             click_right.alpha = 0.5
-            middle_line.alpha = 0.5
+            middle_line.alpha = 0.35
             
-            scene.addChild(self.click_left)
-            scene.addChild(self.click_right)
-            scene.addChild(self.middle_line)
+            self.scene.addChild(self.click_left)
+            self.scene.addChild(self.click_right)
+            self.scene.addChild(self.middle_line)
+            self.scene.addChild(self.explain_text)
         }
         
         deinit {
-            self.scene.removeChildren(in: [self.click_left, self.click_right, self.middle_line])
+            self.scene.removeChildren(in: [self.click_left, self.click_right, self.middle_line, self.explain_text])
         }
-        
-        
     }
+    
+    
     
     private let PLAYER_MOVING_SPEED:CGFloat = 3
     private var player: ShuttlePlayer!
@@ -92,14 +104,14 @@ class GameScene: SKScene {
         self.starsGenerator_topLayer = StarsGenerator(scene: self,
                                                       screenSize: self.size,
                                                       starsPercent: 8,
-                                                      opacityRange: Tools.Interval(min: 40, max: 70),
+                                                      opacityRange: Tools.Interval(min: 50, max: 80),
                                                       starSize: CGSize(width: 1, height: 2),
                                                       speedFactor: 1.0)
         
         self.starsGenerator_bottomLayer = StarsGenerator(scene: self,
                                                          screenSize: self.size,
                                                          starsPercent: 13,
-                                                         opacityRange: Tools.Interval(min: 30, max: 50),
+                                                         opacityRange: Tools.Interval(min: 40, max: 60),
                                                          starSize: CGSize(width: 1, height: 1),
                                                          speedFactor: 0.4)
         
@@ -147,7 +159,9 @@ class GameScene: SKScene {
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-        
+        if self.state == GameState.play {
+            
+        }
     }
     
     func touchUp(atPoint pos : CGPoint) {
@@ -171,10 +185,13 @@ class GameScene: SKScene {
     
     
     override func update(_ currentTime: TimeInterval) {
-        starsGenerator_topLayer.generate()
-        starsGenerator_bottomLayer.generate()
-        shuttle_enemy_generator.generate(currentTime)
-        asteroids_generator.generate(currentTime)
+        self.starsGenerator_topLayer.generate()
+        self.starsGenerator_bottomLayer.generate()
+        
+        if self.tutoImage == nil {
+            self.shuttle_enemy_generator.generate(currentTime)
+            self.asteroids_generator.generate(currentTime)
+        }
         
         var itemsToDelete:[SKNode] = []
         for item in self.children {
@@ -215,6 +232,7 @@ class GameScene: SKScene {
         self.score_label.isHidden = true
         self.state = GameState.gameOver
         self.gameOver_screen.show()
+        self.tutoImage = nil
     }
     
     
@@ -229,19 +247,6 @@ class GameScene: SKScene {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
