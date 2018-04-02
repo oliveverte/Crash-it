@@ -7,8 +7,8 @@
     tools:context="com.olivierpicard.crachit.MainActivity">
 
     <view
-        android:id="@+id/view_gscene"
-        class="com.olivierpicard.crachit.Graphics.GScene"
+        android:id="@+id/sceneViewController"
+        class="com.olivierpicard.crachit.Graphics.GSceneViewController"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

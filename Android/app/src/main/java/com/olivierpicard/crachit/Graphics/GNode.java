@@ -9,9 +9,34 @@ import java.util.List;
 
 public class GNode {
     private List<GNode> children;
+    private GPoint position;
+    private GSize size;
+
+    private void init() {
+        this.children = new ArrayList<>();
+        this.position = GPoint.zero();
+        this.size = GSize.zero();
+    }
 
     public GNode() {
-        children = new ArrayList<>();
+        init();
+    }
+
+    public GNode(GSize size) {
+        init();
+        this.size = size;
+    }
+
+    public void addChild(GNode node) {
+        children.add(node);
+    }
+
+    public void removeChild(GNode node) {
+        children.remove(node);
+    }
+
+    public void removeChildren(List<GNode> nodes) {
+        for (GNode node: nodes)  this.children.remove(node);
     }
 
 }

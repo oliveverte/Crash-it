@@ -18,4 +18,6 @@ public class GSize {
     public String toString() {
         return "(w: " + this.width + ", h: " + this.height + ")";
     }
+
+    public static GSize zero() { return new GSize(0, 0); }
 }

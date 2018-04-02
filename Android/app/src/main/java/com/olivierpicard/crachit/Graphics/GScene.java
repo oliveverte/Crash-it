@@ -4,7 +4,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+
+import com.olivierpicard.crachit.Tools;
+
+import org.w3c.dom.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,32 +18,10 @@ import java.util.List;
  * Created by olivierpicard on 02/04/2018.
  */
 
-public class GScene extends View{
-    private List<GNode> children;
+public class GScene extends GNode{
+    private GScene() {}
 
-    private void init() {
-        this.children = new ArrayList<>();
+    public GScene(GSize size) {
+        super(size);
     }
-
-
-    public GScene(Context context) {
-        super(context);
-        init();
-    }
-
-    public GScene(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        init();
-    }
-
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        for(GNode child : children) {
-            
-        }
-        super.onDraw(canvas);
-    }
-
-
 }
