@@ -24,12 +24,17 @@ public class GSprite extends GNode implements IGDrawable {
     }
 
 
-    public GSprite(@Nullable Integer bitmapRessourceID, int color, GSize size) {
+    public GSprite(int bitmapRessourceID, GSize size) {
+        super(size);
+        init();
+        this.bitmap = BitmapFactory.decodeResource(Tools.resources, bitmapRessourceID);
+    }
+
+
+    public GSprite(GSize size, int color) {
         super(size);
         init();
         this.color = color;
-        if(bitmapRessourceID != null)
-            this.bitmap = BitmapFactory.decodeResource(Tools.resources, bitmapRessourceID);
     }
 
 

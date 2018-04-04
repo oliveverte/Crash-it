@@ -8,5 +8,14 @@ import android.graphics.Canvas;
  */
 
 public interface IGDrawable {
+    GPoint getPosition();
+    void setPosition(GPoint position);
+
+    GSize getSize();
+    void setSize(GSize size);
+
+    GScene getScene();
+    void setScene(GScene scene);
+
     void draw(Canvas canvas);
 }
