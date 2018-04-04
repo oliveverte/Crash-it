@@ -5,11 +5,9 @@ package com.olivierpicard.crachit.Graphics;
  */
 
 public class GVector {
-    public float dx, dy;
+    public int dx, dy;
 
-    private GVector() {}
-
-    public GVector(float dx, float dy) {
+    public GVector(int dx, int dy) {
         this.dx = dx;
         this.dy = dy;
     }
@@ -19,7 +17,7 @@ public class GVector {
         this.dy += v.dy;
     }
 
-    public void multiply(float factor) {
+    public void multiply(int factor) {
         this.dx *= factor;
         this.dy *= factor;
     }

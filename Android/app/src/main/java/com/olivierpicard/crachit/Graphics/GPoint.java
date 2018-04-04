@@ -1,17 +1,20 @@
 package com.olivierpicard.crachit.Graphics;
 
 /**
- * Created by olivierpicard on 02/04/2018.
+ * Représente un point sur la scene équivalent à position
  */
 
 public class GPoint {
-    public float x, y;
+    public int x, y;
 
-    private GPoint() {}
-
-    public GPoint(float x, float y) {
+    public GPoint(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public GPoint(float x, float y) {
+        this.x = (int)x;
+        this.y = (int)y;
     }
 
     public void add(GPoint p) {
@@ -30,6 +33,6 @@ public class GPoint {
     }
 
     public static GPoint zero() {
-        return new GPoint(0f, 0f);
+        return new GPoint(0, 0);
     }
 }

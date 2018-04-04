@@ -9,8 +9,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GInterval {
     int min, max;
 
-    private GInterval() {}
-
     public GInterval(int min, int max) {
         this.min = min;
         this.max = max;

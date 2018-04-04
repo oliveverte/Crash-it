@@ -5,11 +5,9 @@ package com.olivierpicard.crachit.Graphics;
  */
 
 public class GSize {
-    public float height, width;
+    public int height, width;
 
-    private GSize() {}
-
-    public GSize(float w, float h) {
+    public GSize(int w, int h) {
         this.width = w;
         this.height = h;
     }
