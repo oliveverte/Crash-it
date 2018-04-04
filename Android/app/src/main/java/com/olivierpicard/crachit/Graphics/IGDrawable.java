@@ -17,5 +17,8 @@ public interface IGDrawable {
     GScene getScene();
     void setScene(GScene scene);
 
+    float getZRotation();
+    void setZRotation(float zRotation);
+
     void draw(Canvas canvas);
 }
