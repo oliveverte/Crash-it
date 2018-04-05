@@ -20,5 +20,8 @@ public interface IGDrawable {
     float getZRotation();
     void setZRotation(float zRotation);
 
+    int getZPosition();
+    void setZPosition(int zPosition);
+
     void draw(Canvas canvas);
 }

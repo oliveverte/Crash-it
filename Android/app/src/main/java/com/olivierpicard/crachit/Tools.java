@@ -1,7 +1,6 @@
 package com.olivierpicard.crachit;
 
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
 
@@ -9,6 +8,7 @@ import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GSize;
 
 /**
+ * Panel d'outil pour faciliter le développement
  * Created by olivierpicard on 02/04/2018.
  */
 
@@ -33,8 +33,17 @@ public class Tools {
         return new Rect(
                 pos.x - size.width/2,
                 pos.y - size.height/2,
-                pos.x + size.width/2,
-                pos.y + size.height/2
+                pos.x + size.width/2 + 1,
+                pos.y + size.height/2 + 1
         );
+    }
+
+    public static int setColorOpacity(int baseColor, int opacity) {
+        int R = (baseColor >> 16) & 0xff;
+        int G = (baseColor >>  8) & 0xff;
+        int B = (baseColor      ) & 0xff;
+        int A = opacity;
+
+        return (A & 0xff) << 24 | (R & 0xff) << 16 | (G & 0xff) << 8 | (B & 0xff);
     }
 }

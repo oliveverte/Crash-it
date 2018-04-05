@@ -14,7 +14,9 @@ public class GInterval {
         this.max = max;
     }
 
-    public int random() {
-        return ThreadLocalRandom.current().nextInt(min, max+1);
+    public int random() { return ThreadLocalRandom.current().nextInt(this.min, this.max); }
+
+    public static int random(int min, int max) {
+        return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 }

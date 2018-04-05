@@ -14,27 +14,36 @@ import com.olivierpicard.crachit.Tools;
  */
 
 public class GSprite extends GNode implements IGDrawable {
+    private GSize size;
+    private GPoint position;
+    private float zRotation;
+    private int zPosition;
     private int color;
     private Bitmap bitmap;
 
 
     private void init() {
+        this.size = GSize.zero();
+        this.zRotation = 0;
+        this.zPosition = 0;
         this.color = 0xFFFFFFFF;
         this.bitmap = null;
     }
 
 
     public GSprite(int bitmapRessourceID, GSize size) {
-        super(size);
+        super();
         init();
         this.bitmap = BitmapFactory.decodeResource(Tools.resources, bitmapRessourceID);
+        this.size = size;
     }
 
 
     public GSprite(GSize size, int color) {
-        super(size);
+        super();
         init();
         this.color = color;
+        this.size = size;
     }
 
 
@@ -47,8 +56,9 @@ public class GSprite extends GNode implements IGDrawable {
             Paint p = new Paint();
             p.setColor(this.color);
             canvas.drawRect(bounds, p);
-        } else
+        } else {
             canvas.drawBitmap(bitmap, null, bounds, null);
+        }
     }
 
 
@@ -70,4 +80,16 @@ public class GSprite extends GNode implements IGDrawable {
     public void setBitmap(int bitmapRessourceID) {
         this.bitmap = BitmapFactory.decodeResource(Tools.resources, bitmapRessourceID);
     }
+
+    public GSize getSize() { return size; }
+    public void setSize(GSize size) { this.size = size; }
+
+    public float getZRotation() { return zRotation; }
+    public void setZRotation(float zRotation) { this.zRotation = zRotation; }
+
+    public int getZPosition() { return zPosition; }
+    public void setZPosition(int zPosition) { this.zPosition = zPosition; }
+
+    public GPoint getPosition() { return position; }
+    public void setPosition(GPoint position) { this.position = position;}
 }
