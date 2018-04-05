@@ -43,6 +43,7 @@ public class GNode {
 
 
     public GScene getScene() { return scene; }
+
     public void setScene(GScene scene) {
         this.scene = scene;
         for(GNode node : this.children) node.scene = scene;

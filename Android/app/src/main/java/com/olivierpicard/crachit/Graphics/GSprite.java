@@ -48,7 +48,7 @@ public class GSprite extends GNode implements IGDrawable {
 
 
     @Override
-    public void draw(Canvas canvas) {
+    public void render(Canvas canvas) {
         // On défini le rectangle accueillant le dessin
         final Rect bounds = Tools.getRectFromSizeAndPos(this.getPosition(), this.getSize());
         if(this.bitmap == null) {

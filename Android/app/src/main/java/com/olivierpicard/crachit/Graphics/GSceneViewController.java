@@ -7,7 +7,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.olivierpicard.crachit.Tools;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by olivierpicard on 02/04/2018.
@@ -23,16 +24,23 @@ public class GSceneViewController extends View {
 
     public GSceneViewController(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+
     }
 
 
-    public void init(GScene scene) {
+    public void initScene(final GScene scene) {
         this.scene = scene;
+        scene.didInitialized();
+        Timer timer = new Timer();
+        timer.schedule (new TimerTask() {
+            public void run() { scene.update(23.0); postInvalidate();}
+        }, 0, 16);
     }
 
 
     @Override
     protected void onDraw(Canvas canvas) {
+        this.scene.render(canvas);
         super.onDraw(canvas);
     }
 
@@ -51,6 +59,7 @@ public class GSceneViewController extends View {
                 break;
         }
     }
+
 }
 
 

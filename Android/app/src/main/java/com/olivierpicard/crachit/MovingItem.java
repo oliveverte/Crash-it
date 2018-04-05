@@ -31,7 +31,7 @@ public class MovingItem extends GSprite implements IGUpdatable {
 
 
     public MovingItem(GSize size, int color) {
-        super(color, size);
+        super(size, color);
         init();
     }
 

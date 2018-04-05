@@ -2,9 +2,7 @@ package com.olivierpicard.crachit;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
-import android.view.View;
 
 import com.olivierpicard.crachit.Graphics.*;
 
@@ -18,14 +16,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Tools.resources = getResources();
+        gameScene = new GameScene();
 
         // Récupération de la taille de l'écran et la stock dans Tools
         this.getWindowManager().getDefaultDisplay().getMetrics(Tools.screenMetrics);
-        gameScene = new GameScene(new GSize(Tools.screenMetrics.widthPixels,
-                Tools.screenMetrics.heightPixels));
-
         sceneViewController = findViewById(R.id.sceneViewController);
-        sceneViewController.init(gameScene);
+        sceneViewController.initScene(gameScene);
     }
 
     @Override
