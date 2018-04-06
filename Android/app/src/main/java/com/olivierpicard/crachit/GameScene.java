@@ -9,6 +9,9 @@ import com.olivierpicard.crachit.Graphics.GScene;
 import com.olivierpicard.crachit.Graphics.GSize;
 import com.olivierpicard.crachit.Graphics.IGUpdatable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * Created by olivierpicard on 03/04/2018.
@@ -46,11 +49,22 @@ public class GameScene extends GScene {
     public void update(Double currentTime) {
         this.starsGenerator_topLayer.generate();
         this.starsGenerator_bottomLayer.generate();
+        List<GNode> itemToDelete = new ArrayList<>();
         for(GNode node : children) {
-            if(!(node instanceof IGUpdatable)) continue;
-            ((IGUpdatable) node).update(currentTime);
+            if(!(node instanceof MovingItem)) continue;
+            MovingItem movingItem = (MovingItem) node;
+            movingItem.update(currentTime);
+            if(movingItem.isOutOfScreen())
+                itemToDelete.add(node);
         }
+        removeChildren(itemToDelete);
     }
+
+
+
+
+
+
 
     @Override
     public void touchDown(GPoint pos) {
