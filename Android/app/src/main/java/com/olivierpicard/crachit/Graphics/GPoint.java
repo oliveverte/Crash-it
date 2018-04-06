@@ -5,16 +5,11 @@ package com.olivierpicard.crachit.Graphics;
  */
 
 public class GPoint {
-    public int x, y;
-
-    public GPoint(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
+    public float x, y;
 
     public GPoint(float x, float y) {
-        this.x = (int)x;
-        this.y = (int)y;
+        this.x = x;
+        this.y = y;
     }
 
     public void add(GPoint p) {
@@ -22,10 +17,16 @@ public class GPoint {
         this.y += p.y;
     }
 
+    public GPoint add(GVector v) {
+        return new GPoint(this.x + v.dx, this.y + v.dy);
+    }
+
     public void multiply(GPoint p) {
         this.x *= p.x;
         this.y *= p.y;
     }
+
+
 
     @Override
     public String toString() {

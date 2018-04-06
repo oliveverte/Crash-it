@@ -31,10 +31,10 @@ public class Tools {
 
     public static Rect getRectFromSizeAndPos(GPoint pos, GSize size) {
         return new Rect(
-                pos.x - size.width/2,
-                pos.y - size.height/2,
-                pos.x + size.width/2 + 1,
-                pos.y + size.height/2 + 1
+                (int)(pos.x - size.width/2),
+                (int)(pos.y - size.height/2),
+                (int)(pos.x + size.width/2),
+                (int)(pos.y + size.height/2)
         );
     }
 

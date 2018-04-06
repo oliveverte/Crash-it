@@ -5,21 +5,24 @@ package com.olivierpicard.crachit.Graphics;
  */
 
 public class GVector {
-    public int dx, dy;
+    public float dx, dy;
 
-    public GVector(int dx, int dy) {
+    public GVector(float dx, float dy) {
         this.dx = dx;
         this.dy = dy;
     }
 
-    public void add(GVector v) {
-        this.dx += v.dx;
-        this.dy += v.dy;
+    public GVector(GVector vector) {
+        this.dx = vector.dx;
+        this.dy = vector.dy;
     }
 
-    public void multiply(int factor) {
-        this.dx *= factor;
-        this.dy *= factor;
+    public GVector add(GVector v) {
+        return new GVector(this.dx + v.dx, this.dy + v.dy);
+    }
+
+    public GVector multiply(float factor) {
+        return new GVector(this.dx * factor, this.dy * factor);
     }
 
     @Override

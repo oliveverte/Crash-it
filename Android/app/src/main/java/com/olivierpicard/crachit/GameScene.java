@@ -33,11 +33,11 @@ public class GameScene extends GScene {
         this.starsGenerator_topLayer = new StarsGenerator(this, 8,
                 new GInterval(50, 80),
                 new GSize(1,2),
-                2);
+                1f);
         this.starsGenerator_bottomLayer = new StarsGenerator(this, 13,
                 new GInterval(40, 60),
                 new GSize(1,1),
-                1);
+                0.4f);
 
     }
 

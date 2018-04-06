@@ -17,14 +17,14 @@ public class StarsGenerator {
     private int stars_percent;
     private GameScene current_scene;
     GSize star_size;
-    int speed_factor;
+    float speed_factor;
     GInterval opacity_range;
 
     StarsGenerator(GameScene scene,
                    int starsPercent,
                    GInterval opacityRange,
                    GSize starSize,
-                   int speedFactor)
+                   float speedFactor)
     {
         this.current_scene = scene;
         this.stars_percent = starsPercent;

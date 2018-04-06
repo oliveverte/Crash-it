@@ -12,14 +12,14 @@ import com.olivierpicard.crachit.Graphics.IGUpdatable;
  */
 
 public class MovingItem extends GSprite implements IGUpdatable {
-    static int base_moving_speed = 1;
+    static float base_moving_speed = 1.2f;
     private final int MARGIN_OUT_OF_SCREEN_TO_DELETE = 30;
-    public int speed_factor = 1;
+    public float speed_factor = 1;
     public GVector direction;
 
 
     private void init() {
-        this.speed_factor = 3;
+        this.speed_factor = 2.5f;
         this.direction = new GVector(0, 1);
     }
 
@@ -38,12 +38,9 @@ public class MovingItem extends GSprite implements IGUpdatable {
 
 
     public void update(Double currentTime) {
-        final int realSpeed = MovingItem.base_moving_speed * this.speed_factor;
-        final GVector realDirection = new GVector(this.direction.dx * realSpeed,
-                this.direction.dy * realSpeed);
-
-        setPosition(new GPoint(this.getPosition().x + realDirection.dx,
-                this.getPosition().y + realDirection.dy));
+        final float realSpeed = MovingItem.base_moving_speed * this.speed_factor;
+        final GVector realDirection = new GVector(this.direction).multiply(realSpeed);
+        setPosition(this.getPosition().add(realDirection));
     }
 
 
