@@ -26,6 +26,16 @@ public class GPoint {
         this.y *= p.y;
     }
 
+    public GPoint setX(float x) {
+        this.x = x;
+        return this;
+    }
+
+
+    public GPoint setY(float y) {
+        this.y = y;
+        return this;
+    }
 
 
     @Override

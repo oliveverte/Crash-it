@@ -46,6 +46,14 @@ public class GSprite extends GNode implements IGDrawable {
         this.size = size;
     }
 
+    public GSprite(int bitmapRessourceID, int color, GSize size) {
+        super();
+        init();
+        this.bitmap = BitmapFactory.decodeResource(Tools.resources, bitmapRessourceID);
+        this.color = color;
+        this.size = size;
+    }
+
 
     @Override
     public void render(Canvas canvas) {

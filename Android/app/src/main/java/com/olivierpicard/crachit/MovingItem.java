@@ -1,5 +1,7 @@
 package com.olivierpicard.crachit;
 
+import android.support.annotation.Nullable;
+
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GSize;
 import com.olivierpicard.crachit.Graphics.GSprite;
@@ -33,6 +35,15 @@ public class MovingItem extends GSprite implements IGUpdatable {
     public MovingItem(GSize size, int color) {
         super(size, color);
         init();
+    }
+
+
+    public MovingItem(int bitmapRessourceID, int color, GSize size,
+                      @Nullable Float speed_factor, GVector direction) {
+        super(bitmapRessourceID, color, size);
+        init();
+        if(speed_factor != null) this.speed_factor = speed_factor;
+        this.direction = direction;
     }
 
 

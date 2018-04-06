@@ -12,6 +12,16 @@ public class GSize {
         this.height = h;
     }
 
+    public GSize setWidth(float w) {
+        this.width = w;
+        return this;
+    }
+
+    public GSize setHeight(float h) {
+        this.height = h;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "(w: " + this.width + ", h: " + this.height + ")";
