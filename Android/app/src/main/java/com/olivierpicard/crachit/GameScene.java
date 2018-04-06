@@ -50,18 +50,35 @@ public class GameScene extends GScene {
         this.starsGenerator_topLayer.generate();
         this.starsGenerator_bottomLayer.generate();
         List<GNode> itemToDelete = new ArrayList<>();
-        for(GNode node : children) {
+        for(GNode node : this.children) {
             if(!(node instanceof MovingItem)) continue;
             MovingItem movingItem = (MovingItem) node;
             movingItem.update(currentTime);
             if(movingItem.isOutOfScreen())
                 itemToDelete.add(node);
+            else if(node instanceof ICollisionable) {
+                final ICollisionable collisionableItem = (ICollisionable) node;
+                final List<ICollisionable> overlapsedItems = overlapsListItems(collisionableItem);
+                for(ICollisionable ovItem : overlapsedItems){
+                    collisionableItem.inCollisionWith(ovItem);
+                    ovItem.inCollisionWith(collisionableItem);
+                }
+            }
         }
         removeChildren(itemToDelete);
     }
 
 
-
+    List<ICollisionable> overlapsListItems(ICollisionable item) {
+        List<ICollisionable> list = new ArrayList<>();
+        for(GNode node : this.children) {
+            if(!(node instanceof ICollisionable)) continue;
+            final ICollisionable child = (ICollisionable) node;
+            if(item == child) continue;
+            if(item.isOverlaps(child)) list.add(child);
+        }
+        return list;
+    }
 
 
 
