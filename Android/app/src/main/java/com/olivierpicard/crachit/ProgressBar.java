@@ -23,16 +23,7 @@ public class ProgressBar extends GSprite {
     }
 
 
-    public int getValue() { return this._value; }
-
-    public void setValue(int value) {
-        if(value >= 0) this._value = value;
-        else this._value = 0;
-        updateView();
-    }
-
-
-    ProgressBar(int maxValue, GSize size) {
+    public ProgressBar(int maxValue, GSize size) {
         super(Color.GREEN, size);
         this.maxValue = maxValue;
         this._value = maxValue;
@@ -73,6 +64,15 @@ public class ProgressBar extends GSprite {
         // On applique les valeurs calculé
         super.setPosition(super.getPosition().setX(alignedTotheLeft));
         this.background.setPosition(this.background.getPosition().setX(centeredBackground));
+    }
+
+
+    public int getValue() { return this._value; }
+
+    public void setValue(int value) {
+        if(value >= 0) this._value = value;
+        else this._value = 0;
+        updateView();
     }
 
 }
