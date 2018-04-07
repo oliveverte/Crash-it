@@ -3,11 +3,13 @@ package com.olivierpicard.crachit.Shuttle;
 import com.olivierpicard.crachit.Graphics.GInterval;
 import com.olivierpicard.crachit.Graphics.GSize;
 import com.olivierpicard.crachit.Graphics.GVector;
+import com.olivierpicard.crachit.ICollisionable;
 import com.olivierpicard.crachit.LaserShot;
 import com.olivierpicard.crachit.MovingItem;
 import com.olivierpicard.crachit.ProgressBar;
 
 /**
+ * Représente un vaisseau non spécialisé, (joueur, ennemie...)
  * Created by olivierpicard on 06/04/2018.
  */
 
@@ -33,8 +35,7 @@ public abstract class Shuttle extends MovingItem {
             boolean canShoot(double currentTime) {
                 if(currentTime - this.time_since_last_shoot < this.delta_time_to_shoot) return false;
                 this.time_since_last_shoot = currentTime;
-                if(GInterval.random(0, 100) > this.prob_success_fire) return false;
-                return true;
+                return (GInterval.random(0, 100) > this.prob_success_fire);
             }
         }
 
@@ -82,19 +83,13 @@ public abstract class Shuttle extends MovingItem {
 
     }
 
+    public abstract void inCollisionWith(ICollisionable item);
 
-//    public void shoot(GVector direction, float rotation) {
-//
-//    }
-//
-//    /** Crée un rayon laser, à l'emplacement du vaisseau, et l'ajoute à la scene */
-//    func shoot(direction: CGVector, rotation: CGFloat) {
-//        let laser = LaserShot(shooter: self, color: self.color, direction: direction, rotation: rotation)
-//        laser.position = self.position
-//        self.scene!.addChild(laser)
-//    }
+    public void shoot(GVector direction, float rotation) {
+        final LaserShot laser = new LaserShot(this, getColor(), this.direction, rotation);
+        laser.setPosition(getPosition());
+        getScene().addChild(laser);
+    }
 
-
-//    public abstract void inCollisionWith(item: Collisionable);
 }
 

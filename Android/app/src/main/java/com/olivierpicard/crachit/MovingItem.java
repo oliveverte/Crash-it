@@ -38,10 +38,11 @@ public class MovingItem extends GSprite implements IGUpdatable {
     }
 
 
-    public MovingItem(int bitmapRessourceID, int color, GSize size,
+    public MovingItem(@Nullable Integer bitmapRessourceID, int color, GSize size,
                       @Nullable Float speed_factor, GVector direction) {
         super(bitmapRessourceID, color, size);
         init();
+        if(bitmapRessourceID != null) this.setBitmap(bitmapRessourceID);
         if(speed_factor != null) this.speed_factor = speed_factor;
         this.direction = direction;
     }
