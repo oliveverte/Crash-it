@@ -45,6 +45,11 @@ public class GameScene extends GScene {
 
     }
 
+    public void gameOver() {
+
+    }
+
+
     @Override
     public void update(Double currentTime) {
         this.starsGenerator_topLayer.generate();

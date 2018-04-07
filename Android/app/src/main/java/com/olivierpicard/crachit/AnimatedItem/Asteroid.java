@@ -7,6 +7,8 @@ import com.olivierpicard.crachit.Graphics.GSize;
  */
 
 public class Asteroid extends AnimatedItem {
+    public final int dammage = 50;
+
     public Asteroid(int bitmapRessourceID, GSize size) {
         super(bitmapRessourceID, size);
     }
