@@ -11,7 +11,7 @@ import com.olivierpicard.crachit.Shuttle.ShuttleEnemy;
  */
 
 public class LaserShot extends MovingItem implements ICollisionable {
-    final Shuttle shooter;
+    public final Shuttle shooter;
     private boolean enable_collision;
 
 
