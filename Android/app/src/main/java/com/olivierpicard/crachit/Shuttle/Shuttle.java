@@ -14,54 +14,6 @@ import com.olivierpicard.crachit.ProgressBar;
  */
 
 public abstract class Shuttle extends MovingItem {
-    class Stats {
-        class ShootStats {
-            public int prob_success_fire;
-            public double delta_time_to_shoot;
-            private double time_since_last_shoot;
-
-            ShootStats(double deltaTimeToShoot, int probSuccessFire) {
-                this.prob_success_fire = probSuccessFire;
-                this.delta_time_to_shoot = deltaTimeToShoot;
-                this.time_since_last_shoot = 0;
-            }
-
-            ShootStats() {
-                this.prob_success_fire = 0;
-                this.delta_time_to_shoot = 0;
-                this.time_since_last_shoot = 0;
-            }
-
-            boolean canShoot(double currentTime) {
-                if(currentTime - this.time_since_last_shoot < this.delta_time_to_shoot) return false;
-                this.time_since_last_shoot = currentTime;
-                return (GInterval.random(0, 100) > this.prob_success_fire);
-            }
-        }
-
-        int attack;
-        int defense;
-        ShootStats shoot_stats;
-
-        Stats(int defense, int attack, ShootStats shootStats) {
-            this.defense = defense;
-            this.attack = attack;
-            this.shoot_stats = shootStats;
-        }
-
-        Stats(Stats stats) {
-            this.defense = stats.defense;
-            this.attack = stats.attack;
-            this.shoot_stats = stats.shoot_stats;
-        }
-
-        Stats() {
-            this.defense = 0;
-            this.attack = 0;
-            this.shoot_stats = new ShootStats();
-        }
-    }
-
     public Stats stats;
     public ProgressBar lifeBar;
     public boolean enable_collision;
@@ -90,6 +42,7 @@ public abstract class Shuttle extends MovingItem {
         laser.setPosition(getPosition());
         getScene().addChild(laser);
     }
+
 
 }
 
