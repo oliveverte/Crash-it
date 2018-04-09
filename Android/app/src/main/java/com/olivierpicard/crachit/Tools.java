@@ -25,7 +25,7 @@ public class Tools {
 
     public static GPoint fromSceneToScreenPos(GPoint scenePos) {
         return new GPoint(scenePos.x * screenMetrics.widthPixels,
-                scenePos.y * screenMetrics.heightPixels);
+                (1 - scenePos.y) * screenMetrics.heightPixels);
     }
 
 

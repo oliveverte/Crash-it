@@ -17,6 +17,7 @@ public class GSprite extends GNode implements IGDrawable {
     private GSize size;
     private GPoint position;
     private float zRotation;
+    /** 0 est la position la plus éloignée */
     private int zPosition;
     private int color;
     private Bitmap bitmap;
@@ -24,6 +25,7 @@ public class GSprite extends GNode implements IGDrawable {
 
     private void init() {
         this.size = GSize.zero();
+        this.position = GPoint.zero();
         this.zRotation = 0;
         this.zPosition = 0;
         this.color = 0xFFFFFFFF;
@@ -46,10 +48,11 @@ public class GSprite extends GNode implements IGDrawable {
         this.size = size;
     }
 
-    public GSprite(int bitmapRessourceID, int color, GSize size) {
+    public GSprite(@Nullable Integer bitmapRessourceID, int color, GSize size) {
         super();
         init();
-        this.bitmap = BitmapFactory.decodeResource(Tools.resources, bitmapRessourceID);
+        if(bitmapRessourceID != null)
+            this.bitmap = BitmapFactory.decodeResource(Tools.resources, bitmapRessourceID);
         this.color = color;
         this.size = size;
     }

@@ -31,8 +31,8 @@ public class GVector {
     }
     
     public static GVector zero() { return new GVector(0, 0); }
-    public static GVector up() { return new GVector(0, 1); }
-    public static GVector down() { return new GVector(0, -1); }
+    public static GVector up() { return new GVector(0, -1); }
+    public static GVector down() { return new GVector(0, 1); }
     public static GVector left() { return new GVector(-1, 0); }
     public static GVector right() { return new GVector(1, 0); }
 }
