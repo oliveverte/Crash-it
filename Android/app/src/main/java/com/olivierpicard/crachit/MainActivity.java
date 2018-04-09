@@ -8,20 +8,17 @@ import com.olivierpicard.crachit.Graphics.*;
 
 public class MainActivity extends AppCompatActivity {
     private GSceneViewController sceneViewController;
-    private GameScene gameScene;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Tools.resources = getResources();
-        gameScene = new GameScene();
 
         // Récupération de la taille de l'écran et la stock dans Tools
         this.getWindowManager().getDefaultDisplay().getMetrics(Tools.screenMetrics);
         sceneViewController = findViewById(R.id.sceneViewController);
-        sceneViewController.initScene(gameScene);
+        sceneViewController.confScene(GameScene.class);
     }
 
     @Override
@@ -29,6 +26,4 @@ public class MainActivity extends AppCompatActivity {
         sceneViewController.onTouch(event);
         return super.onTouchEvent(event);
     }
-
-
 }

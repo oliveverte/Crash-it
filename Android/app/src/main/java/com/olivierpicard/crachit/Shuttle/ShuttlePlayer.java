@@ -3,11 +3,8 @@ package com.olivierpicard.crachit.Shuttle;
 import android.graphics.Color;
 
 import com.olivierpicard.crachit.AnimatedItem.Asteroid;
-import com.olivierpicard.crachit.AnimatedItem.Explosion;
 import com.olivierpicard.crachit.GameScene;
-import com.olivierpicard.crachit.Graphics.GNode;
 import com.olivierpicard.crachit.Graphics.GPoint;
-import com.olivierpicard.crachit.Graphics.GSize;
 import com.olivierpicard.crachit.Graphics.GVector;
 import com.olivierpicard.crachit.ICollisionable;
 import com.olivierpicard.crachit.LaserShot;
@@ -40,6 +37,7 @@ public class ShuttlePlayer extends Shuttle {
                 && this.getPosition().x < Tools.screenMetrics.widthPixels - this.getSize().width/2) {
             super.update(currentTime);
         }
+//        TODO : Ajouter en fin de frame, sinon ça bug avec l'exception chiante Concurant machin truc
         if(this.stats.shoot_stats.canShoot(currentTime))
             shoot(GVector.up(), this.getZRotation());
     }

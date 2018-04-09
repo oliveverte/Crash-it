@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Représente un un objet ayant une position, une taille, une angle de rotation,
- * qui peut contenir des noeuds enfant,
+ * Représente un un objet qui peut contenir des noeuds enfant,
  */
 
 public class GNode {
     protected List<GNode> children;
+
+
     private GPoint position;
     private GScene scene;
 
@@ -25,19 +26,49 @@ public class GNode {
     }
 
 
+    /**
+     * Ajoute un noeud enfant à celui-ci
+     * et l'ajoute à la même scène que ce noeud
+     * dans le cas où scène n'est pas null
+     * @param node noeud à ajouter
+     */
     public void addChild(GNode node) {
         children.add(node);
         node.scene = this.scene;
+        // Si le parent est déjà dans une scène
+        if(this.scene != null) {
+            // On ajoute le nouveau noeud à la scène
+            this.scene.addChild(node);
+        }
     }
 
-
+    /**
+     * Supprime un noeud enfant à celui-ci
+     * et supprime de la même scène que ce noeud
+     * dans le cas où scène n'est pas null
+     * @param node noeud à supprimer
+     */
     public void removeChild(GNode node) {
-        children.remove(node);
+        this.children.remove(node);
+        // Si le parent (this) est contenu dans une scène
+        if(this.scene != null)
+            this.scene.removeChild(node);
     }
 
 
+    /**
+     * Supprime une liste de noeuds enfant à celui-ci
+     * et les supprime de la même scène que ce noeud
+     * dans le cas où scène n'est pas null
+     * @param nodes noeud à supprimer
+     */
     public void removeChildren(List<GNode> nodes) {
-        for (GNode node: nodes)  this.children.remove(node);
+        for (GNode node: nodes) {
+            this.children.remove(node);
+            // Si le parent (this) est contenu dans une scène
+            if(this.scene != null)
+                this.scene.removeChild(node);
+        }
     }
 
 

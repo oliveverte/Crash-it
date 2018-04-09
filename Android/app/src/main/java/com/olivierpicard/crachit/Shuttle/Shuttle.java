@@ -38,9 +38,9 @@ public abstract class Shuttle extends MovingItem {
     public abstract void inCollisionWith(ICollisionable item);
 
     public void shoot(GVector direction, float rotation) {
-        final LaserShot laser = new LaserShot(this, getColor(), this.direction, rotation);
-        laser.setPosition(getPosition());
-        getScene().addChild(laser);
+//        final LaserShot laser = new LaserShot(this, getColor(), this.direction, rotation);
+//        laser.setPosition(getPosition());
+//        getScene().addChild(laser);
     }
 
 

@@ -5,8 +5,13 @@ import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 
+import com.olivierpicard.crachit.GameScene;
+
+import java.sql.SQLSyntaxErrorException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,8 +19,10 @@ import java.util.TimerTask;
  * Created by olivierpicard on 02/04/2018.
  */
 
-public class GSceneViewController extends View {
+public class GSceneViewController extends SurfaceView implements SurfaceHolder.Callback {
+    private Class sceneType;
     private GScene scene;
+    public static SurfaceHolder surfaceHolder;
 
     public GSceneViewController(Context context) {
         super(context);
@@ -24,25 +31,15 @@ public class GSceneViewController extends View {
 
     public GSceneViewController(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-
+        getHolder().addCallback(this);
     }
 
 
-    public void initScene(final GScene scene) {
-        this.scene = scene;
-        scene.didInitialized();
-        Timer timer = new Timer();
-        timer.schedule (new TimerTask() {
-            public void run() { scene.update(23.0); postInvalidate();}
-        }, 0, 16);
+
+    public void confScene(Class sceneType){
+        this.sceneType = sceneType;
     }
 
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        this.scene.render(canvas);
-        super.onDraw(canvas);
-    }
 
 
     public void onTouch(MotionEvent ev) {
@@ -60,6 +57,24 @@ public class GSceneViewController extends View {
         }
     }
 
+    @Override
+    public void surfaceCreated(SurfaceHolder surfaceHolder) {
+        this.surfaceHolder = getHolder();
+        try {
+            this.scene = (GScene)sceneType.newInstance();
+        } catch (Exception e) {}
+        new Thread(this.scene).start();
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+
+    }
 }
 
 
