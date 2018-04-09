@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 
+import com.olivierpicard.crachit.LaserShot;
 import com.olivierpicard.crachit.Tools;
 
 /**

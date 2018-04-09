@@ -37,7 +37,6 @@ public class ShuttlePlayer extends Shuttle {
                 && this.getPosition().x < Tools.screenMetrics.widthPixels - this.getSize().width/2) {
             super.update(currentTime);
         }
-//        TODO : Ajouter en fin de frame, sinon ça bug avec l'exception chiante Concurant machin truc
         if(this.stats.shoot_stats.canShoot(currentTime))
             shoot(GVector.up(), this.getZRotation());
     }
