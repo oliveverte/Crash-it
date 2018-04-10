@@ -23,6 +23,7 @@ public class GameScene extends GScene {
         welcome
     }
 
+    private final float PLAYER_MOVING_SPEED = 3;
     private GameState state;
     private StarsGenerator starsGenerator_topLayer;
     private StarsGenerator starsGenerator_bottomLayer;
@@ -51,6 +52,7 @@ public class GameScene extends GScene {
 
     public void start() {
         this.shuttle_enemy_generator.enable = true;
+        state = GameState.play;
     }
 
     public void gameOver() {
@@ -98,11 +100,21 @@ public class GameScene extends GScene {
     @Override
     public void touchDown(GPoint pos) {
         super.touchDown(pos);
+        if(this.state == GameState.play) {
+            if(pos.x < Tools.screenMetrics.widthPixels/2){
+                player.direction.dx = -PLAYER_MOVING_SPEED;
+            } else if(pos.x > Tools.screenMetrics.widthPixels/2) {
+                player.direction.dx = PLAYER_MOVING_SPEED;
+            }
+        }
     }
 
     @Override
     public void touchUp(GPoint pos) {
         super.touchUp(pos);
+        if(this.state == GameState.play) player.direction.dx = 0;
+//        else if(this.state == GameState.welcome) { this.welcome_screen.touchUp(pos); }
+//        else { gameOver_screen.touchUp(pos) }
     }
 
 }
