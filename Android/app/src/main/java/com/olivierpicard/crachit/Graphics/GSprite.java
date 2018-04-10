@@ -99,6 +99,9 @@ public class GSprite extends GNode implements IGDrawable {
     public float getZRotation() { return zRotation; }
     public void setZRotation(float zRotation) { this.zRotation = zRotation; }
 
+    public int getZPosition() { return zPosition; }
+    public void setZPosition(int zPosition) { this.zPosition = zPosition; }
+
     public GPoint getPosition() { return position; }
     public void setPosition(GPoint position) { this.position = position;}
 }
