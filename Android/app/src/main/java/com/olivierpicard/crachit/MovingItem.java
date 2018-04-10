@@ -21,7 +21,7 @@ public class MovingItem extends GSprite implements IGUpdatable {
 
     private void init() {
         this.speed_factor = 2.5f;
-        this.direction = new GVector(0, 1);
+        this.direction = GVector.down();
     }
 
     public MovingItem(int bitmapRessourceID, GSize size) {

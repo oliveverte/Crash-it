@@ -6,6 +6,7 @@ import com.olivierpicard.crachit.Graphics.GInterval;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GScene;
 import com.olivierpicard.crachit.Graphics.GSize;
+import com.olivierpicard.crachit.Graphics.GVector;
 
 import java.util.concurrent.ThreadLocalRandom;
 

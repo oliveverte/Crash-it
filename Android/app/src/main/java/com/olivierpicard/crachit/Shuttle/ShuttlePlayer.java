@@ -19,9 +19,9 @@ import com.olivierpicard.crachit.Tools;
 public class ShuttlePlayer extends Shuttle {
 
     public ShuttlePlayer() {
-        super(R.mipmap.shuttle_1, Color.RED,
+        super(R.drawable.shuttle_1, Color.RED,
                 new Stats(230, 35,
-                        new ShootStats((long)(1.0/6*100)*10, 48)));
+                        new ShootStats((long)(1.0/6*1000), 48)));
         this.direction = GVector.zero();
         this.lifeBar.setPosition(new GPoint(this.getPosition().x,
                 this.getPosition().y - this.getSize().height/2 - this.lifeBar.getSize().height/2 - 8));

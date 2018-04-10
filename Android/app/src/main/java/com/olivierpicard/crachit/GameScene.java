@@ -5,6 +5,7 @@ import com.olivierpicard.crachit.Graphics.GNode;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GScene;
 import com.olivierpicard.crachit.Graphics.GSize;
+import com.olivierpicard.crachit.Shuttle.ShuttleEnemiesGenerator;
 import com.olivierpicard.crachit.Shuttle.ShuttlePlayer;
 
 import java.util.ArrayList;
@@ -25,7 +26,9 @@ public class GameScene extends GScene {
     private GameState state;
     private StarsGenerator starsGenerator_topLayer;
     private StarsGenerator starsGenerator_bottomLayer;
+    private ShuttleEnemiesGenerator shuttle_enemy_generator;
     private ShuttlePlayer player;
+
 
     public void didInitialized() {
         state = GameState.welcome;
@@ -42,11 +45,12 @@ public class GameScene extends GScene {
                 new GInterval(40, 60),
                 new GSize(1,1),
                 0.4f);
-
+        this.shuttle_enemy_generator = new ShuttleEnemiesGenerator(this, player);
+        start();
     }
 
     public void start() {
-
+        this.shuttle_enemy_generator.enable = true;
     }
 
     public void gameOver() {
@@ -58,7 +62,7 @@ public class GameScene extends GScene {
     public void update(long currentTime) {
         this.starsGenerator_topLayer.generate();
         this.starsGenerator_bottomLayer.generate();
-
+        this.shuttle_enemy_generator.generate(currentTime);
         for(GNode node : children) {
             if(!(node instanceof MovingItem)) continue;
             MovingItem movingItem = (MovingItem) node;

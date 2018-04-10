@@ -12,6 +12,11 @@ public class GVector {
         this.dy = dy;
     }
 
+    public GVector(double dx, double dy) {
+        this.dx = (float)dx;
+        this.dy = (float)dy;
+    }
+
     public GVector(GVector vector) {
         this.dx = vector.dx;
         this.dy = vector.dy;
