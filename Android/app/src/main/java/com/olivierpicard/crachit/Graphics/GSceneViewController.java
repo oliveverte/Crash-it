@@ -55,7 +55,9 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
         try {
             this.scene = (GScene)sceneType.newInstance();
         } catch (Exception e) {}
-        new Thread(this.scene).start();
+        Thread thread = new Thread(this.scene);
+        thread.setDaemon(false);
+        thread.start();
     }
 
     @Override
