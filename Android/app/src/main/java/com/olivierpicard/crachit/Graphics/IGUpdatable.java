@@ -5,5 +5,5 @@ package com.olivierpicard.crachit.Graphics;
  * le à l'écran n'est pas fait tout de suite
  */
 public interface IGUpdatable {
-    void update(double currentTime);
+    void update(long currentTime);
 }

@@ -48,7 +48,7 @@ public class MovingItem extends GSprite implements IGUpdatable {
 
 
 
-    public void update(double currentTime) {
+    public void update(long currentTime) {
         final float realSpeed = MovingItem.base_moving_speed * this.speed_factor;
         final GVector realDirection = new GVector(this.direction).multiply(realSpeed);
         setPosition(this.getPosition().add(realDirection));

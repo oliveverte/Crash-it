@@ -21,7 +21,7 @@ public class ShuttlePlayer extends Shuttle {
     public ShuttlePlayer() {
         super(R.mipmap.shuttle_1, Color.RED,
                 new Stats(230, 35,
-                        new ShootStats(1/6, 48)));
+                        new ShootStats((long)(1.0/6*100)*10, 48)));
         this.direction = GVector.zero();
         this.lifeBar.setPosition(new GPoint(this.getPosition().x,
                 this.getPosition().y - this.getSize().height/2 - this.lifeBar.getSize().height/2 - 8));
@@ -30,7 +30,7 @@ public class ShuttlePlayer extends Shuttle {
 
 
     @Override
-    public void update(double currentTime) {
+    public void update(long currentTime) {
         if(this.getScene() != null
                 && this.direction.dx < 0 && this.getPosition().x > this.getSize().width/2
                 || this.direction.dx > 0

@@ -1,19 +1,14 @@
 package com.olivierpicard.crachit;
 
-import android.graphics.Color;
-
 import com.olivierpicard.crachit.Graphics.GInterval;
 import com.olivierpicard.crachit.Graphics.GNode;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GScene;
 import com.olivierpicard.crachit.Graphics.GSize;
-import com.olivierpicard.crachit.Graphics.IGUpdatable;
 import com.olivierpicard.crachit.Shuttle.ShuttlePlayer;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  *
@@ -60,7 +55,7 @@ public class GameScene extends GScene {
 
 
     @Override
-    public void update(Double currentTime) {
+    public void update(long currentTime) {
         this.starsGenerator_topLayer.generate();
         this.starsGenerator_bottomLayer.generate();
 

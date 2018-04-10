@@ -1,19 +1,11 @@
 package com.olivierpicard.crachit.Graphics;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-
-import com.olivierpicard.crachit.GameScene;
-
-import java.sql.SQLSyntaxErrorException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by olivierpicard on 02/04/2018.

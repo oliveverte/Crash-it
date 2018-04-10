@@ -8,10 +8,10 @@ import com.olivierpicard.crachit.Graphics.GInterval;
 
 public class ShootStats {
     public int prob_success_fire;
-    public double delta_time_to_shoot;
-    private double time_since_last_shoot;
+    public long delta_time_to_shoot;
+    private long time_since_last_shoot;
 
-    ShootStats(double deltaTimeToShoot, int probSuccessFire) {
+    ShootStats(long deltaTimeToShoot, int probSuccessFire) {
         this.prob_success_fire = probSuccessFire;
         this.delta_time_to_shoot = deltaTimeToShoot;
         this.time_since_last_shoot = 0;
@@ -23,7 +23,7 @@ public class ShootStats {
         this.time_since_last_shoot = 0;
     }
 
-    boolean canShoot(double currentTime) {
+    boolean canShoot(long currentTime) {
         if(currentTime - this.time_since_last_shoot < this.delta_time_to_shoot) return false;
         this.time_since_last_shoot = currentTime;
         return (GInterval.random(0, 100) > this.prob_success_fire);

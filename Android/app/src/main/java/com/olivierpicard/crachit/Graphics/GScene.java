@@ -3,12 +3,9 @@ package com.olivierpicard.crachit.Graphics;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.view.SurfaceHolder;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  * Scene côté vue, qui va servir à afficher
@@ -26,7 +23,7 @@ public abstract class GScene extends GNode implements Runnable {
     }
 
     abstract public void didInitialized();
-    abstract public void update(Double currentTime);
+    abstract public void update(long currentTime);
 
     public void touchDown(GPoint pos) { }
     public void touchUp(GPoint pos) { }
@@ -58,7 +55,7 @@ public abstract class GScene extends GNode implements Runnable {
     public void run() {
         didInitialized();
         while(true) {
-            update(23.0);
+            update(System.currentTimeMillis());
             refreshSceneNodes();
             Canvas canvas = GSceneViewController.surfaceHolder.lockCanvas();
             if (canvas != null) {

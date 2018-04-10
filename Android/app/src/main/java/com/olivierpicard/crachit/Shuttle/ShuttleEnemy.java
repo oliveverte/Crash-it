@@ -1,6 +1,5 @@
 package com.olivierpicard.crachit.Shuttle;
 
-import com.olivierpicard.crachit.AnimatedItem.Explosion;
 import com.olivierpicard.crachit.GameScene;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.ICollisionable;
@@ -30,7 +29,7 @@ public class ShuttleEnemy extends Shuttle {
 
 
     @Override
-    public void update(double currentTime) {
+    public void update(long currentTime) {
         super.update(currentTime);
         if(this.stats.shoot_stats.canShoot(currentTime))
             shoot(this.direction, this.getZRotation());
