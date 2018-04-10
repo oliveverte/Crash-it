@@ -36,9 +36,10 @@ public class ShuttleEnemy extends Shuttle {
         super.update(currentTime);
         if(this.stats.shoot_stats.canShoot(currentTime))
             shoot(this.direction, this.getZRotation());
+
         if(this.getScene() != null
                 && currentTime - this.previous_time_updatedDirection >= this.deltaTime_check_targetPosition
-                && this.getPosition().y - target.getPosition().y > this.target.getPosition().y + Tools.screenMetrics.heightPixels/15)
+                && target.getPosition().y - this.getPosition().y > this.target.getPosition().y - Tools.screenMetrics.heightPixels/15)
         {
             this.previous_time_updatedDirection = currentTime;
             updateDirectionToTarget();
@@ -50,8 +51,9 @@ public class ShuttleEnemy extends Shuttle {
         final float len_BA = this.getPosition().y - target.getPosition().y;
         final float len_CA = target.getPosition().x - this.getPosition().x;
         final float angle = (float)Math.atan(len_CA/len_BA);
-        setZRotation(angle);
-        direction = new GVector(Math.sin(angle), -Math.cos(angle));
+        setZRotation((float)(angle*180/Math.PI));
+
+        direction = new GVector(Math.sin((float)(angle*180/Math.PI)), -Math.cos((float)(angle*180/Math.PI)));
     }
 
 

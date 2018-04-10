@@ -22,7 +22,7 @@ public abstract class Shuttle extends MovingItem {
     Shuttle(int bitmapRessourceID, int color, Stats stats) {
         super(bitmapRessourceID,
                 color,
-                new GSize(45, 40),
+                new GSize(45, 35),
                 1.5f,
                 new GVector(0, -1));
 

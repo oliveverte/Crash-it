@@ -61,8 +61,10 @@ public class GSprite extends GNode implements IGDrawable {
 
     @Override
     public void render(Canvas canvas) {
+        canvas.save();
         // On défini le rectangle accueillant le dessin
         final Rect bounds = Tools.getRectFromSizeAndPos(this.getPosition(), this.getSize());
+        canvas.rotate(this.zRotation);
         if(this.bitmap == null) {
             // Signifie qu'on doit déssiner un rectangle de couleur
             Paint p = new Paint();
@@ -71,6 +73,7 @@ public class GSprite extends GNode implements IGDrawable {
         } else {
             canvas.drawBitmap(bitmap, null, bounds, null);
         }
+        canvas.restore();
     }
 
 
