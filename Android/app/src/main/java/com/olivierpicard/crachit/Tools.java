@@ -4,8 +4,13 @@ import android.content.res.Resources;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
 
+import com.olivierpicard.crachit.Graphics.GNode;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GSize;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Panel d'outil pour faciliter le développement
@@ -46,4 +51,5 @@ public class Tools {
 
         return (A & 0xff) << 24 | (R & 0xff) << 16 | (G & 0xff) << 8 | (B & 0xff);
     }
+
 }

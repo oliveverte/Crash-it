@@ -11,13 +11,15 @@ public class GNode {
     protected List<GNode> children;
 
 
-    private GPoint position;
+    /** 0 est la position la plus éloignée */
+    private int zPosition;
     private GScene scene;
 
 
     private void init() {
         this.children = new ArrayList<>();
         this.scene = null;
+        this.zPosition = 0;
     }
 
 
@@ -79,5 +81,8 @@ public class GNode {
         this.scene = scene;
         for(GNode node : this.children) node.scene = scene;
     }
+
+    public int getZPosition() { return zPosition; }
+    public void setZPosition(int zPosition) { this.zPosition = zPosition; }
 
 }

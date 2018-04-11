@@ -4,8 +4,16 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 
+import com.olivierpicard.crachit.Tools;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * Scene côté vue, qui va servir à afficher
@@ -30,15 +38,20 @@ public abstract class GScene extends GNode implements Runnable {
     public void touchMove(GPoint pos) { }
 
 
-    private final void render(Canvas canvas) {
-        for(GNode node : this.children) {
-            if (!(node instanceof IGDrawable)) continue;
-            ((IGDrawable) node).render(canvas);
+    private void render(Canvas canvas) {
+        Map<Integer, List<GNode>> renderElements = new LinkedHashMap<>();
+        processRenderOrder(renderElements);
+        SortedSet<Integer> orderedRenderElement = new TreeSet<>(renderElements.keySet());
+        for(Integer id : orderedRenderElement) {
+            for(GNode node : renderElements.get(id)) {
+                if (!(node instanceof IGDrawable)) continue;
+                ((IGDrawable) node).render(canvas);
+            }
         }
     }
 
 
-    private final void refreshSceneNodes() {
+    private void refreshSceneNodes() {
         this.children.removeAll(elementsToRemove);
         this.children.addAll(elementsToAdd);
 
@@ -47,6 +60,20 @@ public abstract class GScene extends GNode implements Runnable {
         // que clear()
         elementsToAdd = new ArrayList<>();
         elementsToRemove = new ArrayList<>();
+    }
+
+    /**
+     * Organise tous les noeuds de la scène selon leur position en z
+     * @param map : Key: position en Z  -  Value: Tous les élements à cette position
+     */
+    private void processRenderOrder(Map<Integer, List<GNode>> map) {
+        for(GNode node : this.children) {
+            List<GNode> list = map.get(node.getZPosition());
+            if(list == null)
+                list = new ArrayList<>();
+            list.add(node);
+            map.put(node.getZPosition(), list);
+        }
     }
 
 

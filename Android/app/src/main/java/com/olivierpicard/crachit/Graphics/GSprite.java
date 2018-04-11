@@ -18,8 +18,6 @@ public class GSprite extends GNode implements IGDrawable {
     private GSize size;
     private GPoint position;
     private float zRotation;
-    /** 0 est la position la plus éloignée */
-    private int zPosition;
     private int color;
     private Bitmap bitmap;
 
@@ -28,7 +26,6 @@ public class GSprite extends GNode implements IGDrawable {
         this.size = GSize.zero();
         this.position = GPoint.zero();
         this.zRotation = 0;
-        this.zPosition = 0;
         this.color = 0xFFFFFFFF;
         this.bitmap = null;
     }
@@ -101,9 +98,6 @@ public class GSprite extends GNode implements IGDrawable {
 
     public float getZRotation() { return zRotation; }
     public void setZRotation(float zRotation) { this.zRotation = zRotation; }
-
-    public int getZPosition() { return zPosition; }
-    public void setZPosition(int zPosition) { this.zPosition = zPosition; }
 
     public GPoint getPosition() { return position; }
     public void setPosition(GPoint position) { this.position = position;}
