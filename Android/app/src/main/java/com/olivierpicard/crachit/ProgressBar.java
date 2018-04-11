@@ -24,13 +24,14 @@ public class ProgressBar extends GSprite {
 
 
     public ProgressBar(int maxValue, GSize size) {
-        super(Color.GREEN, size);
+        super(size, Color.GREEN);
         this.maxValue = maxValue;
         this._value = maxValue;
         this._nonEditedPosition = GPoint.zero();
-        this.background = new GSprite(Color.LTGRAY, size);
-        this.background.setZPosition(-1);
-        this.addChild(this.background);
+        this.background = new GSprite(size, Color.LTGRAY);
+        this.background.setSize(this.getSize());
+        this.background.setZPosition(1);
+        addChild(this.background);
     }
 
 

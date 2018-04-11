@@ -68,8 +68,7 @@ public class MovingItem extends GSprite implements IGUpdatable {
 
 
     public boolean isOverlaps(ICollisionable item) {
-        if(item.isCollisionEnabled()
-                && getPosition().x - getSize().width/2 < item.getPosition().x + item.getSize().width/2
+        if(getPosition().x - getSize().width/2 < item.getPosition().x + item.getSize().width/2
                 && getPosition().x + getSize().width/2 > item.getPosition().x - item.getSize().width/2
                 && getPosition().y + getSize().height/2 > item.getPosition().y - item.getSize().height/2
                 && getPosition().y - getSize().height/2 < item.getPosition().y + item.getSize().height/2) {

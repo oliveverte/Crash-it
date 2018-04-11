@@ -13,7 +13,7 @@ import com.olivierpicard.crachit.ProgressBar;
  * Created by olivierpicard on 06/04/2018.
  */
 
-public abstract class Shuttle extends MovingItem {
+public abstract class Shuttle extends MovingItem implements ICollisionable {
     public Stats stats;
     public ProgressBar lifeBar;
     public boolean enable_collision;
@@ -35,12 +35,23 @@ public abstract class Shuttle extends MovingItem {
 
     }
 
+
     public abstract void inCollisionWith(ICollisionable item);
 
     public void shoot(GVector direction, float rotation) {
         final LaserShot laser = new LaserShot(this, getColor(), direction, rotation);
         laser.setPosition(getPosition());
         getScene().addChild(laser);
+    }
+
+    @Override
+    public boolean isCollisionEnabled() {
+        return this.enable_collision;
+    }
+
+    @Override
+    public void setCollisionEnable(boolean value) {
+        this.enable_collision = value;
     }
 
 
