@@ -24,7 +24,7 @@ public class ShuttlePlayer extends Shuttle {
                         new ShootStats((long)(1.0/6*1000), 48)));
         this.direction = GVector.zero();
         this.lifeBar.setPosition(new GPoint(this.getPosition().x,
-                this.getPosition().y - this.getSize().height/2 - this.lifeBar.getSize().height/2 - 8));
+                this.getPosition().y + this.getSize().height/2 + this.lifeBar.getSize().height/2 + 8));
 
     }
 

@@ -42,8 +42,8 @@ public class GPoint {
     public String toString() {
         return "(x: " + this.x + ", y: " + this.y + ")";
     }
-
     public static GPoint zero() {
         return new GPoint(0, 0);
     }
+    public static GPoint add(GPoint p1, GPoint p2) { return new GPoint(p1.x+p2.x, p1.y+p2.y); }
 }

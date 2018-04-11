@@ -26,8 +26,8 @@ public class ShuttleEnemy extends Shuttle {
         this.speed_factor = 2f;
         this.direction = GVector.down();
         this.lifeBar.setPosition(new GPoint(this.getPosition().x,
-                this.getPosition().y + this.getSize().height/2
-                        + this.lifeBar.getSize().height/2 + 8));
+                this.getPosition().y - this.getSize().height/2
+                        - this.lifeBar.getSize().height/2 - 8));
     }
 
 

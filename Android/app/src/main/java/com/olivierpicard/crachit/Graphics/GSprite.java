@@ -6,8 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
-
-import com.olivierpicard.crachit.LaserShot;
 import com.olivierpicard.crachit.Tools;
 
 /**
@@ -20,6 +18,7 @@ public class GSprite extends GNode implements IGDrawable {
     private float zRotation;
     private int color;
     private Bitmap bitmap;
+    private RelativeRender relativeRender;
 
 
     private void init() {
@@ -28,6 +27,7 @@ public class GSprite extends GNode implements IGDrawable {
         this.zRotation = 0;
         this.color = 0xFFFFFFFF;
         this.bitmap = null;
+        this.relativeRender = new RelativeRender();
     }
 
 
@@ -56,12 +56,15 @@ public class GSprite extends GNode implements IGDrawable {
     }
 
 
+
     @Override
     public void render(Canvas canvas) {
         canvas.save();
         // On défini le rectangle accueillant le dessin
-        final Rect bounds = Tools.getRectFromSizeAndPos(this.getPosition(), this.getSize());
-        canvas.rotate(this.zRotation);
+
+        this.relativeRender.processChildRelativity(this);
+        final Rect bounds = Tools.getRectFromSizeAndPos(this.relativeRender.position, this.getSize());
+        canvas.rotate(this.relativeRender.zRotation);
         if(this.bitmap == null) {
             // Signifie qu'on doit déssiner un rectangle de couleur
             Paint p = new Paint();
@@ -72,6 +75,7 @@ public class GSprite extends GNode implements IGDrawable {
         }
         canvas.restore();
     }
+
 
 
     public int getColor() {
@@ -101,4 +105,8 @@ public class GSprite extends GNode implements IGDrawable {
 
     public GPoint getPosition() { return position; }
     public void setPosition(GPoint position) { this.position = position;}
+
+    public RelativeRender getRelativeRender() {
+        return relativeRender;
+    }
 }

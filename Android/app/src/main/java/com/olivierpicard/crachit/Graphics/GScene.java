@@ -38,6 +38,27 @@ public abstract class GScene extends GNode implements Runnable {
     public void touchMove(GPoint pos) { }
 
 
+
+
+    public void run() {
+        didInitialized();
+        while(true) {
+            update(System.currentTimeMillis());
+            refreshSceneNodes();
+            Canvas canvas = GSceneViewController.surfaceHolder.lockCanvas();
+            if (canvas != null) {
+                synchronized (GSceneViewController.surfaceHolder) {
+                    canvas.drawColor(backgroundColor, PorterDuff.Mode.CLEAR);
+                    render(canvas);
+                }
+                GSceneViewController.surfaceHolder.unlockCanvasAndPost(canvas);
+            }
+            try {
+                Thread.sleep(16);
+            } catch (Exception e) {}
+        }
+    }
+
     private void render(Canvas canvas) {
         Map<Integer, List<GNode>> renderElements = new LinkedHashMap<>();
         processRenderOrder(renderElements);
@@ -76,29 +97,6 @@ public abstract class GScene extends GNode implements Runnable {
         }
     }
 
-
-
-
-    public void run() {
-        didInitialized();
-        while(true) {
-            update(System.currentTimeMillis());
-            refreshSceneNodes();
-            Canvas canvas = GSceneViewController.surfaceHolder.lockCanvas();
-            if (canvas != null) {
-                synchronized (GSceneViewController.surfaceHolder) {
-                    canvas.drawColor(backgroundColor, PorterDuff.Mode.CLEAR);
-                    render(canvas);
-                }
-                GSceneViewController.surfaceHolder.unlockCanvasAndPost(canvas);
-            }
-
-            try {
-                Thread.sleep(16);
-            } catch (Exception e) {}
-            
-        }
-    }
 
 
     /**

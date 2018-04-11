@@ -63,12 +63,10 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-        this.sceneThread.interrupt();
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-        this.sceneThread.interrupt();
     }
 }
 
