@@ -15,6 +15,7 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
     private Class sceneType;
     private GScene scene;
     public static SurfaceHolder surfaceHolder;
+    private Thread sceneThread;
 
     public GSceneViewController(Context context) {
         super(context);
@@ -55,19 +56,19 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
         try {
             this.scene = (GScene)sceneType.newInstance();
         } catch (Exception e) {}
-        Thread thread = new Thread(this.scene);
-        thread.setDaemon(false);
-        thread.start();
+        this.sceneThread = new Thread(this.scene);
+        this.sceneThread.setDaemon(false);
+        this.sceneThread.start();
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-
+        this.sceneThread.interrupt();
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-
+        this.sceneThread.interrupt();
     }
 }
 

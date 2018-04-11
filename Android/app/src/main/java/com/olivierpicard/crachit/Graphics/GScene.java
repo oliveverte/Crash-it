@@ -69,6 +69,7 @@ public abstract class GScene extends GNode implements Runnable {
             try {
                 Thread.sleep(16);
             } catch (Exception e) {}
+            
         }
     }
 

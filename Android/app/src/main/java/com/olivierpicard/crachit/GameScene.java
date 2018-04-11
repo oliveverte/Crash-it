@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Scène(vue) dans lequel le jeu prend vie
  * Created by olivierpicard on 03/04/2018.
  */
 
@@ -23,7 +23,7 @@ public class GameScene extends GScene {
         welcome
     }
 
-    private final float PLAYER_MOVING_SPEED = 3;
+    private final float PLAYER_MOVING_SPEED = 3f;
     private GameState state;
     private StarsGenerator starsGenerator_topLayer;
     private StarsGenerator starsGenerator_bottomLayer;
