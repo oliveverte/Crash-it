@@ -60,9 +60,9 @@ public class ShuttlePlayer extends Shuttle {
         if(this.lifeBar.getValue() == 0) {
             final GameScene scene = (GameScene)getScene();
             scene.gameOver();
-//            TODO: Configure explosion
+//            TODO: Configure explosion et remove le vaisseau
 //            scene.addChild(new Explosion(new GPoint(getPosition())));
-            scene.removeChild(this);
+//            scene.removeChild(this);
         }
     }
 }

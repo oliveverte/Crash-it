@@ -33,6 +33,11 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
         this.sceneType = sceneType;
     }
 
+    public void destroyCurrentScene() {
+        if(this.scene == null) return;
+        this.scene.enable = false;
+    }
+
 
 
     public void onTouch(MotionEvent ev) {
@@ -52,6 +57,7 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
+        destroyCurrentScene();
         this.surfaceHolder = getHolder();
         try {
             this.scene = (GScene)sceneType.newInstance();
@@ -62,11 +68,11 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
     }
 
     @Override
-    public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-    }
+    public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {}
 
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+        destroyCurrentScene();
     }
 }
 

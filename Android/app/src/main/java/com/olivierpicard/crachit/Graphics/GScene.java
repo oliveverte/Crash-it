@@ -4,24 +4,20 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 
-import com.olivierpicard.crachit.Tools;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
  * Scene côté vue, qui va servir à afficher
  * et gérer les items de la scene
  */
-
 public abstract class GScene extends GNode implements Runnable {
     protected int backgroundColor = Color.BLACK;
+    public boolean enable = true;
     private List<GNode> elementsToAdd;
     private List<GNode> elementsToRemove;
 
@@ -42,7 +38,7 @@ public abstract class GScene extends GNode implements Runnable {
 
     public void run() {
         didInitialized();
-        while(true) {
+        while(this.enable) {
             update(System.currentTimeMillis());
             refreshSceneNodes();
             Canvas canvas = GSceneViewController.surfaceHolder.lockCanvas();

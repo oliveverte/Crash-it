@@ -31,9 +31,10 @@ public class LaserShot extends MovingItem implements ICollisionable {
 
         final Shuttle target = (Shuttle)item;
         if(this.shooter instanceof ShuttleEnemy && target instanceof ShuttleEnemy) { return; }
-        if(item == shooter) return;
-        if(getScene() != null)
-            getScene().removeChild(this);
+        // TODO : Fair en sorte que quand on supprime les laser les collisions sont toujours détecté
+//        if(item == shooter) return;
+//        if(getScene() != null)
+//            getScene().removeChild(this);
     }
 
 

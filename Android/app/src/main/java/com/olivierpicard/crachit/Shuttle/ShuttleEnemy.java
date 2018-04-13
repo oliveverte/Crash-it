@@ -52,7 +52,6 @@ public class ShuttleEnemy extends Shuttle {
         final float len_CA = target.getPosition().x - this.getPosition().x;
         final float angle = (float)Math.atan(len_CA/len_BA);
         setZRotation((float)(angle*180/Math.PI));
-
     }
 
 
@@ -63,7 +62,8 @@ public class ShuttleEnemy extends Shuttle {
             final LaserShot laser = (LaserShot)item;
             if(laser.shooter instanceof ShuttleEnemy) return;
             this.lifeBar.setValue(this.lifeBar.getValue() - laser.shooter.stats.attack);
-            if(this.lifeBar.getValue() == 0) increaseScore += 1;
+//              TODO : increaseScore
+//            if(this.lifeBar.getValue() == 0) increaseScore += 1;
         } else if(item instanceof ShuttlePlayer) {
             this.lifeBar.setValue(0);
             increaseScore += 1;

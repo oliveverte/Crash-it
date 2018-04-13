@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
         sceneViewController.confScene(GameScene.class);
     }
 
+
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         sceneViewController.onTouch(event);
