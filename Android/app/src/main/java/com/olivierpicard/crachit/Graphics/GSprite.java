@@ -104,6 +104,10 @@ public class GSprite extends GNode implements IGDrawable {
         this.bitmap = BitmapFactory.decodeResource(Tools.resources, bitmapRessourceID);
     }
 
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
     public GSize getSize() { return size; }
     public void setSize(GSize size) { this.size = size; }
 

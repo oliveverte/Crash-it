@@ -28,12 +28,14 @@ public class AnimatedItem extends MovingItem {
     public AnimatedItem(List<Integer> bitmapRessouceIDs, int numberOfLooping,
                  GSize size, long latency, boolean deleteAtEnd) {
         super(bitmapRessouceIDs.get(0), size);
+        bitmaps = new ArrayList<>();
         this.loop = numberOfLooping;
         this.counterLoop = 0;
         for(int bitmapRessouceID : bitmapRessouceIDs) {
-            bitmaps = new ArrayList<>();
+            System.out.println(bitmapRessouceID);
             bitmaps.add(BitmapFactory.decodeResource(Tools.resources, bitmapRessouceID));
         }
+        System.out.println(bitmapRessouceIDs.size() + " - " + bitmaps.size());
         this.latency = latency;
         this.previous_frame = 0;
         this.index_current_texture = 0;
@@ -55,7 +57,7 @@ public class AnimatedItem extends MovingItem {
             this.counterLoop += 1;
         } else this.index_current_texture += 1;
 
-        this.setBitmap(this.index_current_texture);
+        setBitmap(this.bitmaps.get(this.index_current_texture));
         this.previous_frame = currentTime;
     }
 

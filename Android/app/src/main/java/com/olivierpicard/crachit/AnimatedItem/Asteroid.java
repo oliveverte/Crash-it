@@ -51,7 +51,7 @@ public class Asteroid  extends AnimatedItem implements ICollisionable {
             final GPoint pos = this.getPosition();
 //            TODO: Add Explosion
 //            getScene().addChild(new Explosion());
-            getScene().removeChild(this);
+//            getScene().removeChild(this);
         }
     }
 }

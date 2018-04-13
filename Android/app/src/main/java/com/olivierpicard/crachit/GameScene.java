@@ -1,10 +1,12 @@
 package com.olivierpicard.crachit;
 
+import com.olivierpicard.crachit.AnimatedItem.Asteroid;
 import com.olivierpicard.crachit.Graphics.GInterval;
 import com.olivierpicard.crachit.Graphics.GNode;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GScene;
 import com.olivierpicard.crachit.Graphics.GSize;
+import com.olivierpicard.crachit.Graphics.GVector;
 import com.olivierpicard.crachit.Shuttle.ShuttleEnemiesGenerator;
 import com.olivierpicard.crachit.Shuttle.ShuttlePlayer;
 
@@ -60,10 +62,12 @@ public class GameScene extends GScene {
         start();
     }
 
+
     public void start() {
         this.shuttle_enemy_generator.enable = true;
         state = GameState.play;
     }
+
 
     public void gameOver() {
 
