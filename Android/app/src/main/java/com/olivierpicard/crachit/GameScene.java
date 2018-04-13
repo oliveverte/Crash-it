@@ -76,6 +76,7 @@ public class GameScene extends GScene {
                 final List<ICollisionable> overlapsedItems = overlapsListItems(collisionableItem);
                 for(ICollisionable ovItem : overlapsedItems) {
                     collisionableItem.inCollisionWith(ovItem);
+                    ovItem.inCollisionWith(collisionableItem);
                 }
             }
         }
