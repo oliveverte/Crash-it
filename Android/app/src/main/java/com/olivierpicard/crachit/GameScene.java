@@ -24,11 +24,21 @@ public class GameScene extends GScene {
     }
 
     private final float PLAYER_MOVING_SPEED = 3f;
+    private int _score = 0;
     private GameState state;
     private StarsGenerator starsGenerator_topLayer;
     private StarsGenerator starsGenerator_bottomLayer;
     private ShuttleEnemiesGenerator shuttle_enemy_generator;
     private ShuttlePlayer player;
+
+
+    public int getScore() {
+        return _score;
+    }
+
+    public void setScore(int _score) {
+        this._score = _score;
+    }
 
 
     public void didInitialized() {

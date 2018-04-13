@@ -25,7 +25,7 @@ public class AnimatedItem extends MovingItem {
     private boolean delete_atEnd;
 
 
-    AnimatedItem(List<Integer> bitmapRessouceIDs, int numberOfLooping,
+    public AnimatedItem(List<Integer> bitmapRessouceIDs, int numberOfLooping,
                  GSize size, long latency, boolean deleteAtEnd) {
         super(bitmapRessouceIDs.get(0), size);
         this.loop = numberOfLooping;

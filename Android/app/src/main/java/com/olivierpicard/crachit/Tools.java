@@ -52,4 +52,16 @@ public class Tools {
         return (A & 0xff) << 24 | (R & 0xff) << 16 | (G & 0xff) << 8 | (B & 0xff);
     }
 
+
+    public static List<Integer> getListOfDrawableRessouce(String ressouceBaseName, int idFrom, int idTo) {
+        List<Integer> listOfRessouceID = new ArrayList<>();
+        for(int i = idFrom; i < idTo + 1; i++) {
+            final int resourceId = Tools.resources.getIdentifier(ressouceBaseName + i,
+                    "drawable",
+                    "com.olivierpicard.crachit");
+            listOfRessouceID.add(resourceId);
+        }
+        return listOfRessouceID;
+    }
+
 }
