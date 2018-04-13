@@ -52,6 +52,7 @@ public class ShuttleEnemy extends Shuttle {
         final float len_CA = target.getPosition().x - this.getPosition().x;
         final float angle = (float)Math.atan(len_CA/len_BA);
         setZRotation((float)(angle*180/Math.PI));
+        this.direction = new GVector(-Math.sin(angle), Math.cos(angle));
     }
 
 

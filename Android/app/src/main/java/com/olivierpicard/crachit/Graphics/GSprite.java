@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
+
+import com.olivierpicard.crachit.Shuttle.ShuttleEnemy;
 import com.olivierpicard.crachit.Tools;
 
 /**
@@ -64,7 +66,12 @@ public class GSprite extends GNode implements IGDrawable {
 
         this.relativeRender.processChildRelativity(this);
         final Rect bounds = Tools.getRectFromSizeAndPos(this.relativeRender.position, this.getSize());
-        canvas.rotate(this.relativeRender.zRotation);
+//        if(this instanceof ShuttleEnemy) {
+//            Paint p = new Paint();
+//            p.setColor(this.color);
+//            canvas.drawRect(bounds, p);
+//        }
+        canvas.rotate(this.relativeRender.zRotation, this.relativeRender.position.x, this.relativeRender.position.y);
         if(this.bitmap == null) {
             // Signifie qu'on doit déssiner un rectangle de couleur
             Paint p = new Paint();
