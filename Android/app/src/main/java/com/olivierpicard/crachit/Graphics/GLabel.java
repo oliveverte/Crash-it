@@ -13,7 +13,7 @@ import com.olivierpicard.crachit.Tools;
  */
 
 public class GLabel extends GNode implements IGDrawable {
-    /**
+    /*
      * Défini un alignement pour masquer à l'utilisateur celui de Paint.Align
      * (Plus conviviale et plus indépendant)
      */
@@ -92,6 +92,7 @@ public class GLabel extends GNode implements IGDrawable {
         Paint p = new Paint();
         p.setTextSize(this.fontSize);
         p.setColor(this.color);
+        p.setAntiAlias(true);
         p.setTextAlign(this.textAlign);
 
         canvas.drawText(this.text, this.relativeRender.position.x, this.relativeRender.position.y, p);

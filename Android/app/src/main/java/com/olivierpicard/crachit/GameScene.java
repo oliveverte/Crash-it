@@ -1,12 +1,13 @@
 package com.olivierpicard.crachit;
 
-import com.olivierpicard.crachit.AnimatedItem.Asteroid;
+import android.graphics.Color;
+
 import com.olivierpicard.crachit.Graphics.GInterval;
+import com.olivierpicard.crachit.Graphics.GLabel;
 import com.olivierpicard.crachit.Graphics.GNode;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GScene;
 import com.olivierpicard.crachit.Graphics.GSize;
-import com.olivierpicard.crachit.Graphics.GVector;
 import com.olivierpicard.crachit.Shuttle.ShuttleEnemiesGenerator;
 import com.olivierpicard.crachit.Shuttle.ShuttlePlayer;
 
@@ -26,7 +27,7 @@ public class GameScene extends GScene {
     }
 
     private final float PLAYER_MOVING_SPEED = 3f;
-    private int _score = 0;
+    private GLabel score_label;
     private GameState state;
     private StarsGenerator starsGenerator_topLayer;
     private StarsGenerator starsGenerator_bottomLayer;
@@ -36,11 +37,11 @@ public class GameScene extends GScene {
 
 
     public int getScore() {
-        return _score;
+        return Integer.valueOf(this.score_label.getText());
     }
 
-    public void setScore(int _score) {
-        this._score = _score;
+    public void setScore(int score) {
+        this.score_label.setText(Integer.toString(score));
     }
 
 
@@ -63,6 +64,14 @@ public class GameScene extends GScene {
 
         this.asteroids_generator = new AsteroidsGenerator(this);
 
+        this.score_label = new GLabel("0");
+        this.score_label.setFontSize(55);
+        this.score_label.setColor(Color.WHITE);
+        this.score_label.setAlpha(125);
+        this.setHidden(true);
+        this.score_label.setPosition(Tools.fromSceneToScreenPos(new GPoint(0.5f, 0.8f)));
+        addChild(this.score_label);
+
         start();
     }
 
@@ -70,6 +79,7 @@ public class GameScene extends GScene {
     public void start() {
         this.shuttle_enemy_generator.enable = true;
         this.asteroids_generator.enable = true;
+        this.setHidden(false);
         state = GameState.play;
     }
 

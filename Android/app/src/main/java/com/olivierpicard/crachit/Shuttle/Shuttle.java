@@ -1,6 +1,5 @@
 package com.olivierpicard.crachit.Shuttle;
 
-import com.olivierpicard.crachit.Graphics.GInterval;
 import com.olivierpicard.crachit.Graphics.GSize;
 import com.olivierpicard.crachit.Graphics.GVector;
 import com.olivierpicard.crachit.ICollisionable;
