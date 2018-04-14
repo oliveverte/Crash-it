@@ -1,10 +1,16 @@
-package com.olivierpicard.crachit.Graphics;
+package com.olivierpicard.crachit.Graphics.UI;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+
+import com.olivierpicard.crachit.Graphics.GNode;
+import com.olivierpicard.crachit.Graphics.GPoint;
+import com.olivierpicard.crachit.Graphics.GRelativeRender;
+import com.olivierpicard.crachit.Graphics.GSize;
+import com.olivierpicard.crachit.Graphics.IGDrawable;
 import com.olivierpicard.crachit.Tools;
 
 

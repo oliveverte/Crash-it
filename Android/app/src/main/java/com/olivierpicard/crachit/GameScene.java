@@ -3,7 +3,7 @@ package com.olivierpicard.crachit;
 import android.graphics.Color;
 
 import com.olivierpicard.crachit.Graphics.GInterval;
-import com.olivierpicard.crachit.Graphics.GLabel;
+import com.olivierpicard.crachit.Graphics.UI.GLabel;
 import com.olivierpicard.crachit.Graphics.GNode;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GScene;
