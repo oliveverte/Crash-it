@@ -3,6 +3,7 @@ package com.olivierpicard.crachit.Graphics;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
@@ -26,36 +27,22 @@ public class GSprite extends GNode implements IGDrawable {
         this.size = GSize.zero();
         this.position = GPoint.zero();
         this.zRotation = 0;
-        this.color = 0xFFFFFFFF;
+        this.color = Color.GRAY;
         this.bitmap = null;
         this.relativeRender = new GRelativeRender();
     }
 
 
-    public GSprite(int bitmapRessourceID, GSize size) {
-        super();
-        init();
-        this.bitmap = BitmapFactory.decodeResource(Tools.resources, bitmapRessourceID);
-        this.size = size;
-    }
-
-
-    public GSprite(GSize size, int color) {
-        super();
-        init();
-        this.color = color;
-        this.size = size;
-    }
-
-    public GSprite(@Nullable Integer bitmapRessourceID, int color, GSize size) {
+    public GSprite(@Nullable Integer bitmapRessourceID,
+                   @Nullable Integer color, GSize size) {
         super();
         init();
         if(bitmapRessourceID != null)
             this.bitmap = BitmapFactory.decodeResource(Tools.resources, bitmapRessourceID);
-        this.color = color;
+        if(color != null)
+            this.color = color;
         this.size = size;
     }
-
 
 
     @Override
@@ -63,7 +50,6 @@ public class GSprite extends GNode implements IGDrawable {
         if(isHidden()) return;
         canvas.save();
         // On défini le rectangle accueillant le dessin
-
         this.relativeRender.processChildRelativity(this);
         final Rect bounds = Tools.getRectFromSizeAndPos(this.relativeRender.position, this.getSize());
         canvas.rotate(this.relativeRender.zRotation, this.relativeRender.position.x, this.relativeRender.position.y);

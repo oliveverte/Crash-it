@@ -1,4 +1,4 @@
-package com.olivierpicard.crachit.Graphics.UI;
+package com.olivierpicard.crachit.Graphics;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -101,7 +101,7 @@ public class GLabel extends GNode implements IGDrawable {
         p.setAntiAlias(true);
         p.setTextAlign(this.textAlign);
 
-        canvas.drawText(this.text, this.relativeRender.position.x, this.relativeRender.position.y, p);
+        canvas.drawText(this.text, bounds.exactCenterX(), bounds.exactCenterY(), p);
 
         canvas.restore();
     }

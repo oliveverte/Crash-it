@@ -29,7 +29,7 @@ public class AnimatedItem extends MovingItem {
 
     public AnimatedItem(List<Integer> bitmapRessouceIDs, int numberOfLooping,
                  GSize size, long latency, boolean deleteAtEnd) {
-        super(bitmapRessouceIDs.get(0), size);
+        super(bitmapRessouceIDs.get(0), null, size);
         bitmaps = new ArrayList<>();
         this.loop = numberOfLooping;
         this.counterLoop = 0;

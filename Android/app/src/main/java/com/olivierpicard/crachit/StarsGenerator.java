@@ -38,7 +38,7 @@ public class StarsGenerator {
         for(int i = 0; i < starsPercent*10; i++) {
             final int randHeight = GInterval.random(0, Tools.screenMetrics.heightPixels);
             final int randWidth = GInterval.random(0, Tools.screenMetrics.widthPixels);
-            MovingItem star = new MovingItem(this.star_size, Color.WHITE);
+            MovingItem star = new MovingItem(null, Color.WHITE, this.star_size);
             star.speed_factor = this.speed_factor;
             star.setPosition(new GPoint(randWidth, randHeight));
             star.setZPosition(10);
@@ -59,7 +59,7 @@ public class StarsGenerator {
         int yPos = -10;
         int xPos = GInterval.random(0, Tools.screenMetrics.widthPixels);
 
-        MovingItem star = new MovingItem(this.star_size, Color.WHITE);
+        MovingItem star = new MovingItem(null, Color.WHITE, this.star_size);
         star.speed_factor = this.speed_factor;
         star.setPosition(new GPoint(xPos, yPos));
         star.setColor(Tools.setColorOpacity(Color.WHITE, opacity_range.random()));

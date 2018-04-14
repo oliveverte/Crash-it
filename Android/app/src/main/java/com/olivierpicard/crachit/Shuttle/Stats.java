@@ -5,8 +5,8 @@ package com.olivierpicard.crachit.Shuttle;
  */
 
 public class Stats {
-    int attack;
-    int defense;
+    public int attack;
+    public int defense;
     ShootStats shoot_stats;
 
     Stats(int defense, int attack, ShootStats shootStats) {

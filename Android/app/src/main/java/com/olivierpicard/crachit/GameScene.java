@@ -3,11 +3,12 @@ package com.olivierpicard.crachit;
 import android.graphics.Color;
 
 import com.olivierpicard.crachit.Graphics.GInterval;
-import com.olivierpicard.crachit.Graphics.UI.GLabel;
+import com.olivierpicard.crachit.Graphics.GLabel;
 import com.olivierpicard.crachit.Graphics.GNode;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GScene;
 import com.olivierpicard.crachit.Graphics.GSize;
+import com.olivierpicard.crachit.Graphics.GVector;
 import com.olivierpicard.crachit.Shuttle.ShuttleEnemiesGenerator;
 import com.olivierpicard.crachit.Shuttle.ShuttlePlayer;
 
@@ -34,6 +35,7 @@ public class GameScene extends GScene {
     private ShuttleEnemiesGenerator shuttle_enemy_generator;
     private AsteroidsGenerator asteroids_generator;
     private ShuttlePlayer player;
+    private WelcomeScreen welcomeScreen;
 
 
     public int getScore() {
@@ -46,11 +48,9 @@ public class GameScene extends GScene {
 
 
     public void didInitialized() {
-        state = GameState.welcome;
 
         this.player = new ShuttlePlayer();
         this.player.setPosition(Tools.fromSceneToScreenPos(new GPoint(0.5f, 0.2f)));
-        addChild(player);
 
         this.starsGenerator_topLayer = new StarsGenerator(this, 8,
                 new GInterval(50, 80),
@@ -72,20 +72,38 @@ public class GameScene extends GScene {
         this.score_label.setPosition(Tools.fromSceneToScreenPos(new GPoint(0.5f, 0.8f)));
         addChild(this.score_label);
 
-        start();
+        this.welcomeScreen = new WelcomeScreen(this);
+        this.welcomeScreen.show();
+        this.state = GameState.welcome;
+
     }
 
 
     public void start() {
-        this.shuttle_enemy_generator.enable = true;
+        setScore(0);
+//        this.view_Controller.initWithScore = nil
+        // TODO : Tuto image
+//        this.tutoImage = TutoImage(this)
+        this.addChild(player);
+        this.state = GameState.play;
+        this.score_label.setHidden(false);
+        this.player.direction = GVector.zero();
         this.asteroids_generator.enable = true;
-        this.setHidden(false);
-        state = GameState.play;
+        this.shuttle_enemy_generator.enable = true;
+        this.player.lifeBar.setValue(this.player.stats.defense);
+        this.player.setPosition(Tools.fromSceneToScreenPos(new GPoint(0.5f, 0.2f)));
     }
 
 
     public void gameOver() {
-
+        this.shuttle_enemy_generator.enable = false;
+        this.asteroids_generator.enable = false;
+        this.score_label.setHidden(true);
+        this.state = GameState.gameOver;
+//        TODO: GameOver
+//        this.gameOver_screen.show();
+//        TODO : tutoImage
+//        this.tutoImage = nil;
     }
 
 
@@ -144,8 +162,41 @@ public class GameScene extends GScene {
     public void touchUp(GPoint pos) {
         super.touchUp(pos);
         if(this.state == GameState.play) player.direction.dx = 0;
-//        else if(this.state == GameState.welcome) { this.welcome_screen.touchUp(pos); }
+        else if(this.state == GameState.welcome) { this.welcomeScreen.touchUp(pos); }
 //        else { gameOver_screen.touchUp(pos) }
     }
 
+
+    public void switchScreen(GameState state) {
+        this.state = state;
+        if(state == GameState.gameOver)
+            return;
+//            TODO : GameOver Show
+//            self.gameOver_screen.show()
+        else if(state == GameState.welcome) this.welcomeScreen.show();
+    }
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
