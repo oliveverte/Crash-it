@@ -31,11 +31,8 @@ public class AnimatedItem extends MovingItem {
         bitmaps = new ArrayList<>();
         this.loop = numberOfLooping;
         this.counterLoop = 0;
-        for(int bitmapRessouceID : bitmapRessouceIDs) {
-            System.out.println(bitmapRessouceID);
+        for(int bitmapRessouceID : bitmapRessouceIDs)
             bitmaps.add(BitmapFactory.decodeResource(Tools.resources, bitmapRessouceID));
-        }
-        System.out.println(bitmapRessouceIDs.size() + " - " + bitmaps.size());
         this.latency = latency;
         this.previous_frame = 0;
         this.index_current_texture = 0;
@@ -52,6 +49,9 @@ public class AnimatedItem extends MovingItem {
                 && this.delete_atEnd && this.getScene() != null) {
             this.getScene().removeChild(this);
         }
+
+        if(currentTime - this.previous_frame < this.latency) return;
+
         if(this.index_current_texture + 1 >= this.bitmaps.size()){
             this.index_current_texture = 0;
             this.counterLoop += 1;
