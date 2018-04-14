@@ -11,12 +11,12 @@ import android.support.annotation.NonNull;
  * et les stock en valeur absolue pour pouvoir être dessiné lors du rendu en fonction
  * en prenant en compte les informations du parents.
  */
-public class RelativeRender {
+public class GRelativeRender {
     public float zRotation;
     public GPoint position;
     public int zPosition;
 
-    public RelativeRender() {
+    public GRelativeRender() {
         this.zRotation = 0;
         this.position = GPoint.zero();
         this.zPosition = 0;

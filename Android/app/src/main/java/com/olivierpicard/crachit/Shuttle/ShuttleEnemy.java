@@ -9,6 +9,7 @@ import com.olivierpicard.crachit.LaserShot;
 import com.olivierpicard.crachit.Tools;
 
 /**
+ * Vaisseau Ennemie
  * Created by olivierpicard on 06/04/2018.
  */
 
@@ -63,8 +64,7 @@ public class ShuttleEnemy extends Shuttle {
             final LaserShot laser = (LaserShot)item;
             if(laser.shooter instanceof ShuttleEnemy) return;
             this.lifeBar.setValue(this.lifeBar.getValue() - laser.shooter.stats.attack);
-//              TODO : increaseScore
-//            if(this.lifeBar.getValue() == 0) increaseScore += 1;
+            if(this.lifeBar.getValue() == 0) increaseScore += 1;
         } else if(item instanceof ShuttlePlayer) {
             this.lifeBar.setValue(0);
             increaseScore += 1;
@@ -72,8 +72,7 @@ public class ShuttleEnemy extends Shuttle {
 
         if(increaseScore > 0) {
             final GameScene scene = (GameScene)getScene();
-//            TODO : Remplir la class Explosion
-//            scene.addChild(new Explosion(this.getPosition()));
+            scene.addChild(new Explosion(this.getPosition()));
             this.getScene().removeChild(this);
         }
     }

@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 
-import com.olivierpicard.crachit.Shuttle.ShuttleEnemy;
 import com.olivierpicard.crachit.Tools;
 
 /**
@@ -20,7 +19,7 @@ public class GSprite extends GNode implements IGDrawable {
     private float zRotation;
     private int color;
     private Bitmap bitmap;
-    private RelativeRender relativeRender;
+    private GRelativeRender relativeRender;
 
 
     private void init() {
@@ -29,7 +28,7 @@ public class GSprite extends GNode implements IGDrawable {
         this.zRotation = 0;
         this.color = 0xFFFFFFFF;
         this.bitmap = null;
-        this.relativeRender = new RelativeRender();
+        this.relativeRender = new GRelativeRender();
     }
 
 
@@ -66,11 +65,6 @@ public class GSprite extends GNode implements IGDrawable {
 
         this.relativeRender.processChildRelativity(this);
         final Rect bounds = Tools.getRectFromSizeAndPos(this.relativeRender.position, this.getSize());
-//        if(this instanceof ShuttleEnemy) {
-//            Paint p = new Paint();
-//            p.setColor(this.color);
-//            canvas.drawRect(bounds, p);
-//        }
         canvas.rotate(this.relativeRender.zRotation, this.relativeRender.position.x, this.relativeRender.position.y);
         if(this.bitmap == null) {
             // Signifie qu'on doit déssiner un rectangle de couleur
@@ -88,8 +82,6 @@ public class GSprite extends GNode implements IGDrawable {
     public int getColor() {
         return color;
     }
-
-
     public void setColor(int color) {
         this.color = color;
     }
@@ -98,15 +90,13 @@ public class GSprite extends GNode implements IGDrawable {
     public Bitmap getBitmap() {
         return bitmap;
     }
-
-
     public void setBitmap(int bitmapRessourceID) {
         this.bitmap = BitmapFactory.decodeResource(Tools.resources, bitmapRessourceID);
     }
-
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
     }
+
 
     public GSize getSize() { return size; }
     public void setSize(GSize size) { this.size = size; }
@@ -117,7 +107,7 @@ public class GSprite extends GNode implements IGDrawable {
     public GPoint getPosition() { return position; }
     public void setPosition(GPoint position) { this.position = position;}
 
-    public RelativeRender getRelativeRender() {
+    public GRelativeRender getRelativeRender() {
         return relativeRender;
     }
 }

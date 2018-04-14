@@ -23,7 +23,7 @@ public interface IGDrawable {
     int getZPosition();
     void setZPosition(int zPosition);
 
-    RelativeRender getRelativeRender();
+    GRelativeRender getRelativeRender();
 
     void render(Canvas canvas);
 }

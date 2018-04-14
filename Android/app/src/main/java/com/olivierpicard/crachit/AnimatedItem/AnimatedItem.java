@@ -7,19 +7,21 @@ import com.olivierpicard.crachit.Graphics.GSize;
 import com.olivierpicard.crachit.MovingItem;
 import com.olivierpicard.crachit.Tools;
 
+import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Représente un item annimé du genre GIF qui se déplace sur l'écran
  * Created by olivierpicard on 06/04/2018.
  */
 
 public class AnimatedItem extends MovingItem {
-    int loop;
-    int counterLoop;
-    long latency;
-    List<Bitmap> bitmaps;
-    boolean enableAnimation;
+    public int loop;
+    private int counterLoop;
+    public long latency;
+    private List<Bitmap> bitmaps;
+    public boolean enableAnimation;
     private long previous_frame;
     private int index_current_texture;
     private boolean delete_atEnd;

@@ -10,6 +10,7 @@ import com.olivierpicard.crachit.Tools;
 
 
 /**
+ * Le nom de la class est assez représentatif
  * Created by olivierpicard on 06/04/2018.
  */
 
@@ -49,8 +50,7 @@ public class Asteroid  extends AnimatedItem implements ICollisionable {
                 gameScene.setScore(gameScene.getScore() + 1);
             }
             final GPoint pos = this.getPosition();
-//            TODO: Add Explosion
-//            getScene().addChild(new Explosion());
+            getScene().addChild(new Explosion(this.getPosition()));
             getScene().removeChild(this);
         }
     }
