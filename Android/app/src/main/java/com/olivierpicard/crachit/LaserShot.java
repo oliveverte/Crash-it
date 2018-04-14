@@ -1,6 +1,7 @@
 package com.olivierpicard.crachit;
 
 import com.olivierpicard.crachit.Graphics.GSize;
+import com.olivierpicard.crachit.Graphics.GTools;
 import com.olivierpicard.crachit.Graphics.GVector;
 import com.olivierpicard.crachit.Shuttle.Shuttle;
 import com.olivierpicard.crachit.Shuttle.ShuttleEnemy;
@@ -20,7 +21,7 @@ public class LaserShot extends MovingItem implements ICollisionable {
         super(null, color, new GSize(3, 20), 8f, direction);
         this.shooter = shooter;
         this.enable_collision = true;
-        this.setColor(Tools.setColorOpacity(color, 102));
+        this.setColor(GTools.setColorOpacity(color, 102));
         this.setZRotation(rotation);
     }
 

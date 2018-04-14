@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 
 import com.olivierpicard.crachit.Graphics.GSize;
 import com.olivierpicard.crachit.Graphics.GSprite;
+import com.olivierpicard.crachit.Graphics.GTools;
 import com.olivierpicard.crachit.Graphics.GVector;
 import com.olivierpicard.crachit.Graphics.IGUpdatable;
 
@@ -52,8 +53,8 @@ public class MovingItem extends GSprite implements IGUpdatable {
     public boolean isOutOfScreen() {
         // Anchor point 0.5 par défaut donc on divise la taille par 2
         if(getPosition().y + getSize().height/2 < -MARGIN_OUT_OF_SCREEN_TO_DELETE
-                || getPosition().y - getSize().height/2 > Tools.screenMetrics.heightPixels + MARGIN_OUT_OF_SCREEN_TO_DELETE
-                || getPosition().x - getSize().width/2 > Tools.screenMetrics.widthPixels + MARGIN_OUT_OF_SCREEN_TO_DELETE
+                || getPosition().y - getSize().height/2 > GTools.screenMetrics.heightPixels + MARGIN_OUT_OF_SCREEN_TO_DELETE
+                || getPosition().x - getSize().width/2 > GTools.screenMetrics.widthPixels + MARGIN_OUT_OF_SCREEN_TO_DELETE
                 || getPosition().x + getSize().width/2 < -MARGIN_OUT_OF_SCREEN_TO_DELETE) {
             return true;
         }

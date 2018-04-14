@@ -4,13 +4,13 @@ import android.graphics.Color;
 
 import com.olivierpicard.crachit.AnimatedItem.Asteroid;
 import com.olivierpicard.crachit.AnimatedItem.Explosion;
+import com.olivierpicard.crachit.Graphics.GTools;
 import com.olivierpicard.crachit.GameScene;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GVector;
 import com.olivierpicard.crachit.ICollisionable;
 import com.olivierpicard.crachit.LaserShot;
 import com.olivierpicard.crachit.R;
-import com.olivierpicard.crachit.Tools;
 
 /**
  * Représente le vaisseau du joueur sur la scène
@@ -35,7 +35,7 @@ public class ShuttlePlayer extends Shuttle {
         if(this.getScene() != null
                 && this.direction.dx < 0 && this.getPosition().x > this.getSize().width/2
                 || this.direction.dx > 0
-                && this.getPosition().x < Tools.screenMetrics.widthPixels - this.getSize().width/2) {
+                && this.getPosition().x < GTools.screenMetrics.widthPixels - this.getSize().width/2) {
             super.update(currentTime);
         }
         if(this.stats.shoot_stats.canShoot(currentTime))

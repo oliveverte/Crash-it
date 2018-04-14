@@ -4,8 +4,8 @@ import android.graphics.Typeface;
 
 import com.olivierpicard.crachit.Graphics.GLabel;
 import com.olivierpicard.crachit.Graphics.GPoint;
+import com.olivierpicard.crachit.Graphics.GTools;
 
-import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,7 +30,7 @@ public class GameOverScreen {
 
 
     public GameOverScreen(GameScene scene) {
-        BUTTON_INTER_SPACE = Tools.screenMetrics.heightPixels / 15;
+        BUTTON_INTER_SPACE = GTools.screenMetrics.heightPixels / 15;
         this.scene = scene;
         this.enable_userInteraction = true;
 
@@ -40,27 +40,27 @@ public class GameOverScreen {
         this.score_label.setFontType(Typeface.create("Helvetica", Typeface.BOLD));
         System.out.println(score_label.getSize());
 
-        this.scoreText_label = new GLabel(Tools.resources.getString(R.string.score));
+        this.scoreText_label = new GLabel(GTools.resources.getString(R.string.score));
         this.scoreText_label.setFontSize(64);
         this.scoreText_label.setAlpha(128);
         this.scoreText_label.setFontType(Typeface.create("Helvetica", Typeface.NORMAL));
 
-        this.saved_label = new GLabel(Tools.resources.getString(R.string.partie_a_été_sauvegardé));
+        this.saved_label = new GLabel(GTools.resources.getString(R.string.partie_a_été_sauvegardé));
         this.saved_label.setFontSize(18);
         this.saved_label.setAlpha(128);
         this.saved_label.setFontType(Typeface.create("Helvetica", Typeface.NORMAL));
 
-        this.savedScore_label= new GLabel(Tools.resources.getString(R.string.score_a_été_sauvegardé));
+        this.savedScore_label= new GLabel(GTools.resources.getString(R.string.score_a_été_sauvegardé));
         this.savedScore_label.setFontSize(18);
         this.savedScore_label.setAlpha(128);
         this.savedScore_label.setFontType(Typeface.create("Helvetica", Typeface.NORMAL));
 
-        this.scoreText_label.setPosition(Tools.fromSceneToScreenPos(new GPoint(0.5f, 0.85f)));
+        this.scoreText_label.setPosition(GTools.fromSceneToScreenPos(new GPoint(0.5f, 0.85f)));
         this.score_label.setPosition(new GPoint(this.scoreText_label.getPosition().x,
                 this.scoreText_label.getPosition().y + this.scoreText_label.getSize().height + 5));
 
         this.save_button = new Button(R.string.sauvegarder_partie);
-        this.save_button.setPosition(Tools.fromSceneToScreenPos(new GPoint(0.5f, 0.6f)));
+        this.save_button.setPosition(GTools.fromSceneToScreenPos(new GPoint(0.5f, 0.6f)));
 
         this.saveScore_button = new Button(R.string.enregister_score);
         this.saveScore_button.setPosition(new GPoint(this.save_button.getPosition().x,
@@ -111,14 +111,14 @@ public class GameOverScreen {
         if(save_button.isClicked(pos)) {
             this.scene.removeChild(this.save_button);
             this.scene.addChild(this.saved_label);
-//            final encodedDatas = Tools.addEncodedSaveDatas(Tools.KEY_DEFAULT_GAMEINFOS, self.scene.score)
-//            UserDefaults.standard.set(encodedDatas, forKey: Tools.KEY_DEFAULT_GAMEINFOS)
+//            final encodedDatas = GTools.addEncodedSaveDatas(GTools.KEY_DEFAULT_GAMEINFOS, self.scene.score)
+//            UserDefaults.standard.set(encodedDatas, forKey: GTools.KEY_DEFAULT_GAMEINFOS)
         }
         else if(saveScore_button.isClicked(pos)) {
             this.scene.removeChild(this.saveScore_button);
             this.scene.addChild(this.savedScore_label);
-//            final encodedDatas = Tools.addEncodedSaveDatas(Tools.KEY_DEFAULT_SCORES, self.scene.score)
-//            UserDefaults.standard.set(encodedDatas, forKey: Tools.KEY_DEFAULT_SCORES)
+//            final encodedDatas = GTools.addEncodedSaveDatas(GTools.KEY_DEFAULT_SCORES, self.scene.score)
+//            UserDefaults.standard.set(encodedDatas, forKey: GTools.KEY_DEFAULT_SCORES)
         }
         else if(retry_button.isClicked(pos)) { hide(); scene.start(); }
         else if(menu_button.isClicked(pos)) { hide(); this.scene.switchScreen(GameScene.GameState.welcome); }

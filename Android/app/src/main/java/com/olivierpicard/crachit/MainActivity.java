@@ -13,10 +13,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Tools.resources = getResources();
+        GTools.resources = getResources();
 
-        // Récupération de la taille de l'écran et la stock dans Tools
-        this.getWindowManager().getDefaultDisplay().getMetrics(Tools.screenMetrics);
+        // Récupération de la taille de l'écran et la stock dans GTools
+        this.getWindowManager().getDefaultDisplay().getMetrics(GTools.screenMetrics);
         sceneViewController = findViewById(R.id.sceneViewController);
         sceneViewController.confScene(GameScene.class);
     }

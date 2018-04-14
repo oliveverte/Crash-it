@@ -2,12 +2,12 @@ package com.olivierpicard.crachit;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.annotation.Nullable;
 
 import com.olivierpicard.crachit.Graphics.GLabel;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GSize;
 import com.olivierpicard.crachit.Graphics.GSprite;
+import com.olivierpicard.crachit.Graphics.GTools;
 
 /**
  * Created by olivierpicard on 06/04/2018.
@@ -40,7 +40,7 @@ public class Button extends GSprite {
     public Button(int ressourceTextID) {
         super(null, Color.WHITE, new GSize(200, 40));
         init();
-        this.label.setText(Tools.resources.getString(ressourceTextID));
+        this.label.setText(GTools.resources.getString(ressourceTextID));
     }
 
 

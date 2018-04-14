@@ -1,23 +1,18 @@
-package com.olivierpicard.crachit;
+package com.olivierpicard.crachit.Graphics;
 
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
 
-import com.olivierpicard.crachit.Graphics.GNode;
-import com.olivierpicard.crachit.Graphics.GPoint;
-import com.olivierpicard.crachit.Graphics.GSize;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Panel d'outil pour faciliter le développement
  * Created by olivierpicard on 02/04/2018.
  */
 
-public class Tools {
+public class GTools {
     public static DisplayMetrics screenMetrics = new DisplayMetrics();
     public static Resources resources;
 
@@ -56,7 +51,7 @@ public class Tools {
     public static List<Integer> getListOfDrawableRessouce(String ressouceBaseName, int idFrom, int idTo) {
         List<Integer> listOfRessouceID = new ArrayList<>();
         for(int i = idFrom; i < idTo + 1; i++) {
-            final int resourceId = Tools.resources.getIdentifier(ressouceBaseName + i,
+            final int resourceId = GTools.resources.getIdentifier(ressouceBaseName + i,
                     "drawable",
                     "com.olivierpicard.crachit");
             listOfRessouceID.add(resourceId);

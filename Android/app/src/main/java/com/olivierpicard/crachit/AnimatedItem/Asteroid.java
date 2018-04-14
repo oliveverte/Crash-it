@@ -1,12 +1,12 @@
 package com.olivierpicard.crachit.AnimatedItem;
 
+import com.olivierpicard.crachit.Graphics.GTools;
 import com.olivierpicard.crachit.GameScene;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GSize;
 import com.olivierpicard.crachit.ICollisionable;
 import com.olivierpicard.crachit.LaserShot;
 import com.olivierpicard.crachit.Shuttle.ShuttlePlayer;
-import com.olivierpicard.crachit.Tools;
 
 
 /**
@@ -20,7 +20,7 @@ public class Asteroid  extends AnimatedItem implements ICollisionable {
 
 
     public Asteroid(GSize size) {
-        super(Tools.getListOfDrawableRessouce("asteroid_", 1, 64),
+        super(GTools.getListOfDrawableRessouce("asteroid_", 1, 64),
                 0, size, (long)(0.1*1000), false);
         this.enable_collision = true;
         this.setZPosition(800);

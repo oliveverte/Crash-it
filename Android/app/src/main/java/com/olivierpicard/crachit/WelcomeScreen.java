@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 
 import com.olivierpicard.crachit.Graphics.GLabel;
 import com.olivierpicard.crachit.Graphics.GPoint;
+import com.olivierpicard.crachit.Graphics.GTools;
 
 /**
  * Created by olivierpicard on 06/04/2018.
@@ -23,15 +24,15 @@ public class WelcomeScreen {
         this.title_label.setAlpha(128);
         this.title_label.setFontType(Typeface.create("Helvetica", Typeface.NORMAL));
         this.title_label.setFontSize(55);
-        this.title_label.setColor(Tools.setColorOpacity(Color.WHITE, 150));
+        this.title_label.setColor(GTools.setColorOpacity(Color.WHITE, 150));
 
         this.play_button = new Button(R.string.jouer);
         this.resume_button = new Button(R.string.reprendre);
         this.score_button = new Button(R.string.scores);
 
-        this.title_label.setPosition(Tools.fromSceneToScreenPos(new GPoint(0.5f, 0.8f)));
+        this.title_label.setPosition(GTools.fromSceneToScreenPos(new GPoint(0.5f, 0.8f)));
 
-        this.play_button.setPosition(Tools.fromSceneToScreenPos(new GPoint(0.5f, 0.5f)));
+        this.play_button.setPosition(GTools.fromSceneToScreenPos(new GPoint(0.5f, 0.5f)));
 
         this.resume_button.setPosition(new GPoint(this.play_button.getPosition().x,
                 this.play_button.getPosition().y + this.play_button.getSize().height + 30));

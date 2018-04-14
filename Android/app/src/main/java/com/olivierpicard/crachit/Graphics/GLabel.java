@@ -6,13 +6,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 
-import com.olivierpicard.crachit.Graphics.GNode;
-import com.olivierpicard.crachit.Graphics.GPoint;
-import com.olivierpicard.crachit.Graphics.GRelativeRender;
-import com.olivierpicard.crachit.Graphics.GSize;
-import com.olivierpicard.crachit.Graphics.IGDrawable;
-import com.olivierpicard.crachit.Tools;
-
 
 /**
  * Created by olivierpicard on 14/04/2018.
@@ -92,7 +85,7 @@ public class GLabel extends GNode implements IGDrawable {
         if(isHidden()) return;
         canvas.save();
         this.relativeRender.processChildRelativity(this);
-        final Rect bounds = Tools.getRectFromSizeAndPos(this.relativeRender.position, this.getSize());
+        final Rect bounds = GTools.getRectFromSizeAndPos(this.relativeRender.position, this.getSize());
         canvas.rotate(this.relativeRender.zRotation, this.relativeRender.position.x, this.relativeRender.position.y);
 
         Paint p = new Paint();
@@ -154,7 +147,7 @@ public class GLabel extends GNode implements IGDrawable {
 
     public int getAlpha() {return (this.color >> 24) & 0xff;}
     public void setAlpha(int value) {
-        this.color = Tools.setColorOpacity(this.color, value);
+        this.color = GTools.setColorOpacity(this.color, value);
     }
 
     public GRelativeRender getRelativeRender() {

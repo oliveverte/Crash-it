@@ -8,8 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 
-import com.olivierpicard.crachit.Tools;
-
 /**
  * Représente une image(sprite) sur la scene
  */
@@ -38,7 +36,7 @@ public class GSprite extends GNode implements IGDrawable {
         super();
         init();
         if(bitmapRessourceID != null)
-            this.bitmap = BitmapFactory.decodeResource(Tools.resources, bitmapRessourceID);
+            this.bitmap = BitmapFactory.decodeResource(GTools.resources, bitmapRessourceID);
         if(color != null)
             this.color = color;
         this.size = size;
@@ -51,7 +49,7 @@ public class GSprite extends GNode implements IGDrawable {
         canvas.save();
         // On défini le rectangle accueillant le dessin
         this.relativeRender.processChildRelativity(this);
-        final Rect bounds = Tools.getRectFromSizeAndPos(this.relativeRender.position, this.getSize());
+        final Rect bounds = GTools.getRectFromSizeAndPos(this.relativeRender.position, this.getSize());
         canvas.rotate(this.relativeRender.zRotation, this.relativeRender.position.x, this.relativeRender.position.y);
         if(this.bitmap == null) {
             // Signifie qu'on doit déssiner un rectangle de couleur
@@ -78,7 +76,7 @@ public class GSprite extends GNode implements IGDrawable {
         return bitmap;
     }
     public void setBitmap(int bitmapRessourceID) {
-        this.bitmap = BitmapFactory.decodeResource(Tools.resources, bitmapRessourceID);
+        this.bitmap = BitmapFactory.decodeResource(GTools.resources, bitmapRessourceID);
     }
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
@@ -96,7 +94,7 @@ public class GSprite extends GNode implements IGDrawable {
 
     public int getAlpha() {return (this.color >> 24) & 0xff;}
     public void setAlpha(int value) {
-        this.color = Tools.setColorOpacity(this.color, value);
+        this.color = GTools.setColorOpacity(this.color, value);
     }
 
     public GRelativeRender getRelativeRender() {

@@ -6,9 +6,7 @@ import com.olivierpicard.crachit.GameScene;
 import com.olivierpicard.crachit.Graphics.GInterval;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.R;
-import com.olivierpicard.crachit.Tools;
-
-import java.util.ArrayList;
+import com.olivierpicard.crachit.Graphics.GTools;
 
 /**
  * Created by olivierpicard on 06/04/2018.
@@ -51,7 +49,7 @@ public class ShuttleEnemiesGenerator {
         if(GInterval.random(0, 100) > this.enemies_percent) return;
 
         final int yPos = -10;
-        final int xPos = GInterval.random(0, Tools.screenMetrics.widthPixels);
+        final int xPos = GInterval.random(0, GTools.screenMetrics.widthPixels);
         final int image = randomEnemyShuttle(1, NUMBER_OF_IMAGE_SHUTTLE);
         final ShuttleConf shuttle_info = determineShuttleGlobalInformation(image);
         final ShuttleEnemy shuttle = new ShuttleEnemy(image,
@@ -64,7 +62,7 @@ public class ShuttleEnemiesGenerator {
     private int randomEnemyShuttle(int imageIdFrom, int imageIdTo) {
         final String imageName = "ennemy_"
                 + String.valueOf(GInterval.random(imageIdFrom, imageIdTo));
-        final int imageID = Tools.resources.getIdentifier(imageName,
+        final int imageID = GTools.resources.getIdentifier(imageName,
                 "drawable", "com.olivierpicard.crachit");
         return imageID;
     }

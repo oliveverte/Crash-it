@@ -6,7 +6,7 @@ import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GVector;
 import com.olivierpicard.crachit.ICollisionable;
 import com.olivierpicard.crachit.LaserShot;
-import com.olivierpicard.crachit.Tools;
+import com.olivierpicard.crachit.Graphics.GTools;
 
 /**
  * Vaisseau Ennemie
@@ -40,7 +40,7 @@ public class ShuttleEnemy extends Shuttle {
 
         if(this.getScene() != null
                 && currentTime - this.previous_time_updatedDirection >= this.deltaTime_check_targetPosition
-                && target.getPosition().y - this.getPosition().y > this.target.getPosition().y - Tools.screenMetrics.heightPixels/15)
+                && target.getPosition().y - this.getPosition().y > this.target.getPosition().y - GTools.screenMetrics.heightPixels/15)
         {
             this.previous_time_updatedDirection = currentTime;
             updateDirectionToTarget();

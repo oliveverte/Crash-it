@@ -4,11 +4,8 @@ import android.graphics.Color;
 
 import com.olivierpicard.crachit.Graphics.GInterval;
 import com.olivierpicard.crachit.Graphics.GPoint;
-import com.olivierpicard.crachit.Graphics.GScene;
 import com.olivierpicard.crachit.Graphics.GSize;
-import com.olivierpicard.crachit.Graphics.GVector;
-
-import java.util.concurrent.ThreadLocalRandom;
+import com.olivierpicard.crachit.Graphics.GTools;
 
 /**
  * Created by olivierpicard on 04/04/2018.
@@ -36,13 +33,13 @@ public class StarsGenerator {
         // Crée aléatoirement des étoiles sur l'écran
         // Pour ne pas commencer le jeu avec un écran vide
         for(int i = 0; i < starsPercent*10; i++) {
-            final int randHeight = GInterval.random(0, Tools.screenMetrics.heightPixels);
-            final int randWidth = GInterval.random(0, Tools.screenMetrics.widthPixels);
+            final int randHeight = GInterval.random(0, GTools.screenMetrics.heightPixels);
+            final int randWidth = GInterval.random(0, GTools.screenMetrics.widthPixels);
             MovingItem star = new MovingItem(null, Color.WHITE, this.star_size);
             star.speed_factor = this.speed_factor;
             star.setPosition(new GPoint(randWidth, randHeight));
             star.setZPosition(10);
-            star.setColor(Tools.setColorOpacity(Color.WHITE, opacity_range.random()));
+            star.setColor(GTools.setColorOpacity(Color.WHITE, opacity_range.random()));
             this.current_scene.addChild(star);
         }
     }
@@ -57,12 +54,12 @@ public class StarsGenerator {
         // hauteur de l'écran + 10 pour être sûre que
         // l'étoile sera générer en dehors de l'écran
         int yPos = -10;
-        int xPos = GInterval.random(0, Tools.screenMetrics.widthPixels);
+        int xPos = GInterval.random(0, GTools.screenMetrics.widthPixels);
 
         MovingItem star = new MovingItem(null, Color.WHITE, this.star_size);
         star.speed_factor = this.speed_factor;
         star.setPosition(new GPoint(xPos, yPos));
-        star.setColor(Tools.setColorOpacity(Color.WHITE, opacity_range.random()));
+        star.setColor(GTools.setColorOpacity(Color.WHITE, opacity_range.random()));
         star.setZPosition(10);
         this.current_scene.addChild(star);
     }

@@ -3,11 +3,10 @@ package com.olivierpicard.crachit.AnimatedItem;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.olivierpicard.crachit.Graphics.GTools;
 import com.olivierpicard.crachit.Graphics.GSize;
 import com.olivierpicard.crachit.MovingItem;
-import com.olivierpicard.crachit.Tools;
 
-import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class AnimatedItem extends MovingItem {
         this.loop = numberOfLooping;
         this.counterLoop = 0;
         for(int bitmapRessouceID : bitmapRessouceIDs)
-            bitmaps.add(BitmapFactory.decodeResource(Tools.resources, bitmapRessouceID));
+            bitmaps.add(BitmapFactory.decodeResource(GTools.resources, bitmapRessouceID));
         this.latency = latency;
         this.previous_frame = 0;
         this.index_current_texture = 0;
