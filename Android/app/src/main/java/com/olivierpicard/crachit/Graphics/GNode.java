@@ -10,6 +10,7 @@ import java.util.List;
 public abstract class GNode {
     protected List<GNode> children;
     protected GNode parent;
+    private boolean hidden;
 
 
     /** 0 est la position la plus éloignée */
@@ -90,4 +91,11 @@ public abstract class GNode {
     public void setZPosition(int zPosition) { this.zPosition = zPosition; }
 
 
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
 }

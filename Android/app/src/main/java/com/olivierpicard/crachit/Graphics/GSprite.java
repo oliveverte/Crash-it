@@ -60,6 +60,7 @@ public class GSprite extends GNode implements IGDrawable {
 
     @Override
     public void render(Canvas canvas) {
+        if(isHidden()) return;
         canvas.save();
         // On défini le rectangle accueillant le dessin
 
@@ -106,6 +107,11 @@ public class GSprite extends GNode implements IGDrawable {
 
     public GPoint getPosition() { return position; }
     public void setPosition(GPoint position) { this.position = position;}
+
+    public int getAlpha() {return (this.color >> 24) & 0xff;}
+    public void setAlpha(int value) {
+        this.color = Tools.setColorOpacity(this.color, value);
+    }
 
     public GRelativeRender getRelativeRender() {
         return relativeRender;
