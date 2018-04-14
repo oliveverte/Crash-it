@@ -31,6 +31,7 @@ public class GameScene extends GScene {
     private StarsGenerator starsGenerator_topLayer;
     private StarsGenerator starsGenerator_bottomLayer;
     private ShuttleEnemiesGenerator shuttle_enemy_generator;
+    private AsteroidsGenerator asteroids_generator;
     private ShuttlePlayer player;
 
 
@@ -59,12 +60,16 @@ public class GameScene extends GScene {
                 new GSize(1,1),
                 0.4f);
         this.shuttle_enemy_generator = new ShuttleEnemiesGenerator(this, player);
+
+        this.asteroids_generator = new AsteroidsGenerator(this);
+
         start();
     }
 
 
     public void start() {
         this.shuttle_enemy_generator.enable = true;
+        this.asteroids_generator.enable = true;
         state = GameState.play;
     }
 
@@ -79,6 +84,8 @@ public class GameScene extends GScene {
         this.starsGenerator_topLayer.generate();
         this.starsGenerator_bottomLayer.generate();
         this.shuttle_enemy_generator.generate(currentTime);
+        this.asteroids_generator.generate(currentTime);
+
         for(GNode node : children) {
             if(!(node instanceof MovingItem)) continue;
             MovingItem movingItem = (MovingItem) node;
