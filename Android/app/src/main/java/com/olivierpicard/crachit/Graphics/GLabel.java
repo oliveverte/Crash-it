@@ -115,7 +115,14 @@ public class GLabel extends GNode implements IGDrawable {
         this.color = color;
     }
 
-    public GSize getSize() { return size; }
+    public GSize getSize() {
+        Paint p = new Paint();
+        p.setTextSize(this.fontSize);
+        Rect bounds = new Rect();
+        p.getTextBounds(this.text, 0, this.text.length(), bounds);
+        return new GSize(bounds.width(), bounds.height());
+    }
+
     public void setSize(GSize size) { this.size = size; }
 
     public float getZRotation() { return zRotation; }

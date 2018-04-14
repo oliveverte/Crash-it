@@ -17,7 +17,7 @@ import java.util.TreeSet;
  */
 public abstract class GScene extends GNode implements Runnable {
     protected int backgroundColor = Color.BLACK;
-    public boolean enable = true;
+    public volatile boolean enable = true;
     private List<GNode> elementsToAdd;
     private List<GNode> elementsToRemove;
 
@@ -69,7 +69,10 @@ public abstract class GScene extends GNode implements Runnable {
 
 
     private void refreshSceneNodes() {
-        this.children.removeAll(elementsToRemove);
+        for(GNode node : elementsToRemove) {
+            this.children.remove(node);
+            node.setScene(null);
+        }
         this.children.addAll(elementsToAdd);
 
         // On peut utilisé clear, mais il me semble

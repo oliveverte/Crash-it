@@ -36,6 +36,7 @@ public class GameScene extends GScene {
     private AsteroidsGenerator asteroids_generator;
     private ShuttlePlayer player;
     private WelcomeScreen welcomeScreen;
+    private GameOverScreen gameOver_screen;
 
 
     public int getScore() {
@@ -48,7 +49,6 @@ public class GameScene extends GScene {
 
 
     public void didInitialized() {
-
         this.player = new ShuttlePlayer();
         this.player.setPosition(Tools.fromSceneToScreenPos(new GPoint(0.5f, 0.2f)));
 
@@ -70,11 +70,12 @@ public class GameScene extends GScene {
         this.score_label.setAlpha(125);
         this.setHidden(true);
         this.score_label.setPosition(Tools.fromSceneToScreenPos(new GPoint(0.5f, 0.8f)));
-        addChild(this.score_label);
 
+        this.gameOver_screen = new GameOverScreen(this);
         this.welcomeScreen = new WelcomeScreen(this);
         this.welcomeScreen.show();
         this.state = GameState.welcome;
+
 
     }
 
@@ -100,8 +101,7 @@ public class GameScene extends GScene {
         this.asteroids_generator.enable = false;
         this.score_label.setHidden(true);
         this.state = GameState.gameOver;
-//        TODO: GameOver
-//        this.gameOver_screen.show();
+        this.gameOver_screen.show();
 //        TODO : tutoImage
 //        this.tutoImage = nil;
     }
@@ -162,17 +162,14 @@ public class GameScene extends GScene {
     public void touchUp(GPoint pos) {
         super.touchUp(pos);
         if(this.state == GameState.play) player.direction.dx = 0;
-        else if(this.state == GameState.welcome) { this.welcomeScreen.touchUp(pos); }
-//        else { gameOver_screen.touchUp(pos) }
+        else if(this.state == GameState.welcome) this.welcomeScreen.touchUp(pos);
+        else gameOver_screen.touchUp(pos);
     }
 
 
     public void switchScreen(GameState state) {
         this.state = state;
-        if(state == GameState.gameOver)
-            return;
-//            TODO : GameOver Show
-//            self.gameOver_screen.show()
+        if(state == GameState.gameOver) this.gameOver_screen.show();
         else if(state == GameState.welcome) this.welcomeScreen.show();
     }
 

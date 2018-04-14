@@ -3,6 +3,7 @@
     <string name="jouer">Jouer</string>
     <string name="reprendre">Reprendre</string>
     <string name="scores">Scores</string>
+    <string name="score">Score</string>
     <string name="partie_a_été_sauvegardé">La partie a été sauvegardée</string>
     <string name="score_a_été_sauvegardé">Le score a été sauvegardé</string>
     <string name="sauvegarder_partie">Sauvegarder la partie</string>
