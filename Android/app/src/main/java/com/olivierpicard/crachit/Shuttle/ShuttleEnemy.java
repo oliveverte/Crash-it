@@ -40,7 +40,7 @@ public class ShuttleEnemy extends Shuttle {
 
         if(this.getScene() != null
                 && currentTime - this.previous_time_updatedDirection >= this.deltaTime_check_targetPosition
-                && target.getPosition().y - this.getPosition().y > this.target.getPosition().y - GTools.screenMetrics.heightPixels/15)
+                && target.getPosition().y - this.getPosition().y > this.target.getPosition().y - this.getScene().getSize().height/15)
         {
             this.previous_time_updatedDirection = currentTime;
             updateDirectionToTarget();

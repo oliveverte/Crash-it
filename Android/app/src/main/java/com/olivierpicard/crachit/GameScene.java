@@ -1,6 +1,7 @@
 package com.olivierpicard.crachit;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import com.olivierpicard.crachit.Graphics.GInterval;
 import com.olivierpicard.crachit.Graphics.GLabel;
@@ -50,9 +51,9 @@ public class GameScene extends GScene {
 
 
     public void didInitialized() {
+        System.out.println(this.getSize());
         this.player = new ShuttlePlayer();
-        this.player.setPosition(GTools.fromSceneToScreenPos(new GPoint(0.5f, 0.2f)));
-
+        this.player.setPosition(GTools.fromSceneToScreenPos(this.getSize(), new GPoint(0.5f, 0.2f)));
         this.starsGenerator_topLayer = new StarsGenerator(this, 8,
                 new GInterval(50, 80),
                 new GSize(1,2),
@@ -70,13 +71,12 @@ public class GameScene extends GScene {
         this.score_label.setColor(Color.WHITE);
         this.score_label.setAlpha(125);
         this.setHidden(true);
-        this.score_label.setPosition(GTools.fromSceneToScreenPos(new GPoint(0.5f, 0.8f)));
+        this.score_label.setPosition(GTools.fromSceneToScreenPos(this.getSize(), new GPoint(0.5f, 0.8f)));
 
         this.gameOver_screen = new GameOverScreen(this);
         this.welcomeScreen = new WelcomeScreen(this);
         this.welcomeScreen.show();
         this.state = GameState.welcome;
-
 
     }
 
@@ -93,7 +93,7 @@ public class GameScene extends GScene {
         this.asteroids_generator.enable = true;
         this.shuttle_enemy_generator.enable = true;
         this.player.lifeBar.setValue(this.player.stats.defense);
-        this.player.setPosition(GTools.fromSceneToScreenPos(new GPoint(0.5f, 0.2f)));
+        this.player.setPosition(GTools.fromSceneToScreenPos(this.getSize(), new GPoint(0.5f, 0.2f)));
     }
 
 
@@ -151,9 +151,9 @@ public class GameScene extends GScene {
     public void touchDown(GPoint pos) {
         super.touchDown(pos);
         if(this.state == GameState.play) {
-            if(pos.x < GTools.screenMetrics.widthPixels/2){
+            if(pos.x < this.getSize().width/2){
                 player.direction.dx = -PLAYER_MOVING_SPEED;
-            } else if(pos.x > GTools.screenMetrics.widthPixels/2) {
+            } else if(pos.x > this.getSize().width/2) {
                 player.direction.dx = PLAYER_MOVING_SPEED;
             }
         }

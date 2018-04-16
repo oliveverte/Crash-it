@@ -33,7 +33,7 @@ public class AsteroidsGenerator {
         final GSize asteroid_size = new GSize(50, 50);
         final float yPos = -asteroid_size.height;
         final float xPos = (float)(GInterval.random((int)(asteroid_size.width/2),
-                GTools.screenMetrics.widthPixels - (int)(asteroid_size.width/2)));
+                (int)this.scene.getSize().width - (int)(asteroid_size.width/2)));
 
         final Asteroid asteroid = new Asteroid(asteroid_size);
         asteroid.setPosition(new GPoint(xPos, yPos));

@@ -35,9 +35,10 @@ public class ShuttlePlayer extends Shuttle {
         if(this.getScene() != null
                 && this.direction.dx < 0 && this.getPosition().x > this.getSize().width/2
                 || this.direction.dx > 0
-                && this.getPosition().x < GTools.screenMetrics.widthPixels - this.getSize().width/2) {
+                && this.getPosition().x < this.getScene().getSize().width - this.getSize().width/2) {
             super.update(currentTime);
         }
+        System.out.println(this.stats.shoot_stats.delta_time_to_shoot);
         if(this.stats.shoot_stats.canShoot(currentTime))
             shoot(GVector.up(), this.getZRotation());
     }

@@ -33,8 +33,8 @@ public class StarsGenerator {
         // Crée aléatoirement des étoiles sur l'écran
         // Pour ne pas commencer le jeu avec un écran vide
         for(int i = 0; i < starsPercent*10; i++) {
-            final int randHeight = GInterval.random(0, GTools.screenMetrics.heightPixels);
-            final int randWidth = GInterval.random(0, GTools.screenMetrics.widthPixels);
+            final int randHeight = GInterval.random(0, (int)this.current_scene.getSize().height);
+            final int randWidth = GInterval.random(0, (int)this.current_scene.getSize().width);
             MovingItem star = new MovingItem(null, Color.WHITE, this.star_size);
             star.speed_factor = this.speed_factor;
             star.setPosition(new GPoint(randWidth, randHeight));
@@ -54,7 +54,7 @@ public class StarsGenerator {
         // hauteur de l'écran + 10 pour être sûre que
         // l'étoile sera générer en dehors de l'écran
         int yPos = -10;
-        int xPos = GInterval.random(0, GTools.screenMetrics.widthPixels);
+        int xPos = GInterval.random(0, (int)this.current_scene.getSize().width);
 
         MovingItem star = new MovingItem(null, Color.WHITE, this.star_size);
         star.speed_factor = this.speed_factor;

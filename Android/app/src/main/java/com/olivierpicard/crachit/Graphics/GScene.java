@@ -2,7 +2,9 @@ package com.olivierpicard.crachit.Graphics;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.graphics.Rect;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -17,14 +19,15 @@ import java.util.TreeSet;
  */
 public abstract class GScene extends GNode implements Runnable {
     protected int backgroundColor = Color.BLACK;
-    public volatile boolean enable = true;
     private List<GNode> elementsToAdd;
     private List<GNode> elementsToRemove;
+    private GSize baseSize;
+    private GSize scale;
 
-    public GScene() {
-        elementsToAdd = new ArrayList<>();
-        elementsToRemove = new ArrayList<>();
-    }
+    public volatile boolean enable = false;
+    private GSize size;
+    private long prev = 0;
+
 
     abstract public void didInitialized();
     abstract public void update(long currentTime);
@@ -34,11 +37,23 @@ public abstract class GScene extends GNode implements Runnable {
     public void touchMove(GPoint pos) { }
 
 
+    public void init(GSize baseSceneSize) {
+        elementsToAdd = new ArrayList<>();
+        elementsToRemove = new ArrayList<>();
+        this.baseSize = baseSceneSize;
+        final float xScale = GTools.screenMetrics.widthPixels / this.baseSize.width;
+        final float yScale = GTools.screenMetrics.heightPixels / this.baseSize.height;
+        this.scale = new GSize(xScale, yScale);
+        this.size = new GSize(GTools.screenMetrics.widthPixels / this.scale.width,
+                GTools.screenMetrics.heightPixels/ this.scale.height);
+    }
 
 
     public void run() {
         didInitialized();
         while(this.enable) {
+            System.out.println(System.currentTimeMillis() - prev);
+            prev = System.currentTimeMillis();
             update(System.currentTimeMillis());
             refreshSceneNodes();
             Canvas canvas = GSceneViewController.surfaceHolder.lockCanvas();
@@ -55,10 +70,22 @@ public abstract class GScene extends GNode implements Runnable {
         }
     }
 
+
+
     private void render(Canvas canvas) {
+        canvas.scale(this.scale.width, this.scale.height, GTools.screenMetrics.widthPixels,
+                GTools.screenMetrics.heightPixels);
+        canvas.translate(GTools.screenMetrics.widthPixels - this.size.width,
+                GTools.screenMetrics.heightPixels - this.size.height);
+
         Map<Integer, List<GNode>> renderElements = new LinkedHashMap<>();
         processRenderOrder(renderElements);
         SortedSet<Integer> orderedRenderElement = new TreeSet<>(renderElements.keySet());
+        Paint p = new Paint();
+        p.setColor(Color.RED);
+        canvas.drawRect(new Rect(0, 0, 40, 40), p);
+        p.setColor(Color.BLUE);
+        canvas.drawRect(new Rect((int)this.size.width-40, (int)this.size.height-40, (int)this.size.width, (int)this.size.height), p);
         for(Integer id : orderedRenderElement) {
             for(GNode node : renderElements.get(id)) {
                 if (!(node instanceof IGDrawable)) continue;
@@ -89,8 +116,7 @@ public abstract class GScene extends GNode implements Runnable {
     private void processRenderOrder(Map<Integer, List<GNode>> map) {
         for(GNode node : this.children) {
             List<GNode> list = map.get(node.getZPosition());
-            if(list == null)
-                list = new ArrayList<>();
+            if(list == null) list = new ArrayList<>();
             list.add(node);
             map.put(node.getZPosition(), list);
         }
@@ -139,5 +165,9 @@ public abstract class GScene extends GNode implements Runnable {
             for(GNode child : node.children)
                 this.elementsToRemove.add(child);
         }
+    }
+
+    public GSize getSize() {
+        return size;
     }
 }

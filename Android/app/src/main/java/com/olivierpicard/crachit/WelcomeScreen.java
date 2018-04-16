@@ -30,9 +30,9 @@ public class WelcomeScreen {
         this.resume_button = new Button(R.string.reprendre);
         this.score_button = new Button(R.string.scores);
 
-        this.title_label.setPosition(GTools.fromSceneToScreenPos(new GPoint(0.5f, 0.8f)));
+        this.title_label.setPosition(GTools.fromSceneToScreenPos(this.scene.getSize(), new GPoint(0.5f, 0.8f)));
 
-        this.play_button.setPosition(GTools.fromSceneToScreenPos(new GPoint(0.5f, 0.5f)));
+        this.play_button.setPosition(GTools.fromSceneToScreenPos(this.scene.getSize(), new GPoint(0.5f, 0.5f)));
 
         this.resume_button.setPosition(new GPoint(this.play_button.getPosition().x,
                 this.play_button.getPosition().y + this.play_button.getSize().height + 30));
@@ -58,6 +58,7 @@ public class WelcomeScreen {
     }
 
     public void touchUp(GPoint pos) {
+        System.out.println(pos);
         if(this.play_button.isClicked(pos)) { hide(); this.scene.start(); }
         else if(this.resume_button.isClicked(pos)) { /* Change to Resume View*/ }
         else if(this.score_button.isClicked(pos)) { /* Change to Resume Scores*/ }

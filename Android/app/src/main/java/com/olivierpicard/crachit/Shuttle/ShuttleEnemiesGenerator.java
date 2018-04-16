@@ -49,7 +49,7 @@ public class ShuttleEnemiesGenerator {
         if(GInterval.random(0, 100) > this.enemies_percent) return;
 
         final int yPos = -10;
-        final int xPos = GInterval.random(0, GTools.screenMetrics.widthPixels);
+        final int xPos = GInterval.random(0, (int)this.scene.getSize().width);
         final int image = randomEnemyShuttle(1, NUMBER_OF_IMAGE_SHUTTLE);
         final ShuttleConf shuttle_info = determineShuttleGlobalInformation(image);
         final ShuttleEnemy shuttle = new ShuttleEnemy(image,

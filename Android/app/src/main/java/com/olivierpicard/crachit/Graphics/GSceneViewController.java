@@ -41,16 +41,22 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
 
 
     public void onTouch(MotionEvent ev) {
-        final GPoint pos = new GPoint(ev.getX(), ev.getY());
+        final GPoint pos = new GPoint(ev.getX() - (GTools.screenMetrics.widthPixels - this.scene.getSize().width),
+                ev.getY() - (GTools.screenMetrics.heightPixels - this.scene.getSize().height));
+        final GPoint percent = new GPoint((ev.getX()*100)/GTools.screenMetrics.widthPixels,
+                (ev.getY()*100)/GTools.screenMetrics.heightPixels);
+        final GPoint realPos = new GPoint((this.scene.getSize().width*percent.x)/100,
+                (this.scene.getSize().height * percent.y)/100);
+
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN :
-                this.scene.touchDown(pos);
+                this.scene.touchDown(realPos);
                 break;
             case MotionEvent.ACTION_UP :
-                this.scene.touchUp(pos);
+                this.scene.touchUp(realPos);
                 break;
             case MotionEvent.ACTION_MOVE :
-                this.scene.touchMove(pos);
+                this.scene.touchMove(realPos);
                 break;
         }
     }
@@ -60,8 +66,11 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
         destroyCurrentScene();
         this.surfaceHolder = getHolder();
         try {
+//            this.scene = (GScene)sceneType.getDeclaredConstructor(GSize.class).newInstance(new GSize(480, 800));
             this.scene = (GScene)sceneType.newInstance();
-        } catch (Exception e) {}
+            this.scene.init(new GSize(360, 600));
+            this.scene.enable = true;
+        } catch (Exception e) {e.printStackTrace();}
         this.sceneThread = new Thread(this.scene);
         this.sceneThread.setDaemon(false);
         this.sceneThread.start();

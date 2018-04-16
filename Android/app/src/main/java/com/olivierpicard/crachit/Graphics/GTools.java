@@ -17,15 +17,15 @@ public class GTools {
     public static Resources resources;
 
 
-    public static GSize fromSceneToScreenSize(GSize sceneSize) {
-        return new GSize(sceneSize.width * screenMetrics.widthPixels,
-                sceneSize.height * screenMetrics.heightPixels);
+    public static GSize fromSceneToScreenSize(GSize screenSize, GSize sceneSize) {
+        return new GSize(sceneSize.width * screenSize.width,
+                sceneSize.height * sceneSize.height);
     }
 
 
-    public static GPoint fromSceneToScreenPos(GPoint scenePos) {
-        return new GPoint(scenePos.x * screenMetrics.widthPixels,
-                (1 - scenePos.y) * screenMetrics.heightPixels);
+    public static GPoint fromSceneToScreenPos(GSize screenSize, GPoint scenePos) {
+        return new GPoint(scenePos.x * screenSize.width,
+                (1 - scenePos.y) * screenSize.height);
     }
 
 

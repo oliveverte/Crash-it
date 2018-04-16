@@ -30,15 +30,14 @@ public class GameOverScreen {
 
 
     public GameOverScreen(GameScene scene) {
-        BUTTON_INTER_SPACE = GTools.screenMetrics.heightPixels / 15;
         this.scene = scene;
+        BUTTON_INTER_SPACE = (int)this.scene.getSize().height / 15;
         this.enable_userInteraction = true;
 
         this.score_label = new GLabel(String.valueOf(scene.getScore()));
         this.score_label.setFontSize(48);
         this.score_label.setAlpha(128);
         this.score_label.setFontType(Typeface.create("Helvetica", Typeface.BOLD));
-        System.out.println(score_label.getSize());
 
         this.scoreText_label = new GLabel(GTools.resources.getString(R.string.score));
         this.scoreText_label.setFontSize(64);
@@ -55,12 +54,12 @@ public class GameOverScreen {
         this.savedScore_label.setAlpha(128);
         this.savedScore_label.setFontType(Typeface.create("Helvetica", Typeface.NORMAL));
 
-        this.scoreText_label.setPosition(GTools.fromSceneToScreenPos(new GPoint(0.5f, 0.85f)));
+        this.scoreText_label.setPosition(GTools.fromSceneToScreenPos(this.scene.getSize(), new GPoint(0.5f, 0.85f)));
         this.score_label.setPosition(new GPoint(this.scoreText_label.getPosition().x,
                 this.scoreText_label.getPosition().y + this.scoreText_label.getSize().height + 5));
 
         this.save_button = new Button(R.string.sauvegarder_partie);
-        this.save_button.setPosition(GTools.fromSceneToScreenPos(new GPoint(0.5f, 0.6f)));
+        this.save_button.setPosition(GTools.fromSceneToScreenPos(this.scene.getSize(), new GPoint(0.5f, 0.6f)));
 
         this.saveScore_button = new Button(R.string.enregister_score);
         this.saveScore_button.setPosition(new GPoint(this.save_button.getPosition().x,

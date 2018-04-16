@@ -7,7 +7,7 @@ import java.util.List;
  * Représente un un objet qui peut contenir des noeuds enfant,
  */
 
-public abstract class GNode {
+public abstract class GNode{
     protected List<GNode> children;
     protected GNode parent;
     private boolean hidden;
