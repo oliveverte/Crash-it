@@ -70,8 +70,9 @@ public class GameScene extends GScene {
         this.score_label.setFontSize(55);
         this.score_label.setColor(Color.WHITE);
         this.score_label.setAlpha(125);
-        this.setHidden(true);
+        this.score_label.setHidden(true);
         this.score_label.setPosition(GTools.fromSceneToScreenPos(this.getSize(), new GPoint(0.5f, 0.8f)));
+        addChild(this.score_label);
 
         this.gameOver_screen = new GameOverScreen(this);
         this.welcomeScreen = new WelcomeScreen(this);
