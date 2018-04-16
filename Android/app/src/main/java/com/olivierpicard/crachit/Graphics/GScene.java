@@ -26,7 +26,7 @@ public abstract class GScene extends GNode implements Runnable {
 
     public volatile boolean enable = false;
     private GSize size;
-    private long prev = 0;
+    private long time_from_lastFrame = 0;
 
 
     abstract public void didInitialized();
@@ -52,8 +52,6 @@ public abstract class GScene extends GNode implements Runnable {
     public void run() {
         didInitialized();
         while(this.enable) {
-            System.out.println(System.currentTimeMillis() - prev);
-            prev = System.currentTimeMillis();
             update(System.currentTimeMillis());
             refreshSceneNodes();
             Canvas canvas = GSceneViewController.surfaceHolder.lockCanvas();
@@ -92,6 +90,17 @@ public abstract class GScene extends GNode implements Runnable {
                 ((IGDrawable) node).render(canvas);
             }
         }
+
+        p.setTextSize(12);
+        p.setColor(Color.WHITE);
+        p.setAntiAlias(true);
+        p.setTextAlign(Paint.Align.LEFT);
+
+        canvas.drawText("FPS : " + (System.currentTimeMillis() - this.time_from_lastFrame),
+                0, (int)this.size.height - 20, p);
+        canvas.drawText("Nodes : " + children.size(),
+                0, (int)this.size.height - 5, p);
+        this.time_from_lastFrame = System.currentTimeMillis();
     }
 
 
