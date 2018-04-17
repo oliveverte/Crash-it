@@ -68,6 +68,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 cursor.moveToFirst()) {
             do {
                 cell = new CellStruct();
+                cell.id = Integer.parseInt(cursor.getString(0));
                 cell.score = Integer.parseInt(cursor.getString(1));
                 cell.date = cursor.getString(2);
                 cells.add(cell);

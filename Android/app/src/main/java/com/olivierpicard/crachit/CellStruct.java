@@ -9,6 +9,7 @@ import java.util.Date;
 
 
 public final class CellStruct{
+    public int id;
     public int score;
     public String date;
 

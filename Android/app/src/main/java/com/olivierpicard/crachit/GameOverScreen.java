@@ -118,8 +118,6 @@ public class GameOverScreen {
             Scores.dbAdapter.add(new CellStruct(this.scene.getScore()));
             this.scene.removeChild(this.saveScore_button);
             this.scene.addChild(this.savedScore_label);
-//            final encodedDatas = GTools.addEncodedSaveDatas(GTools.KEY_DEFAULT_SCORES, self.scene.score)
-//            UserDefaults.standard.set(encodedDatas, forKey: GTools.KEY_DEFAULT_SCORES)
         }
         else if(retry_button.isClicked(pos)) { hide(); scene.start(); }
         else if(menu_button.isClicked(pos)) { hide(); this.scene.switchScreen(GameScene.GameState.welcome); }

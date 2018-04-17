@@ -22,7 +22,7 @@ public class MyArrayAdapter extends ArrayAdapter<CellStruct> {
         this.context = context;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View cellView = convertView;
 
         if (cellView == null) {
@@ -34,7 +34,13 @@ public class MyArrayAdapter extends ArrayAdapter<CellStruct> {
         TextView line1 = cellView.findViewById(R.id.line1);
         TextView line2 = cellView.findViewById(R.id.line2);
         ImageButton delete = cellView.findViewById(R.id.deleteButton);
-
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Scores.dbAdapter.remove(getItem(position).id);
+                remove(getItem(position));
+            }
+        });
 
         CellStruct sd = getItem(position);
         line1.setText("Score : " + sd.score);
