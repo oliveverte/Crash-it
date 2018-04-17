@@ -5,8 +5,10 @@ import android.os.Bundle;
 
 import com.olivierpicard.crachit.Graphics.*;
 
-public class MainActivity extends GActivity {
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
+public class MainActivity extends GActivity {
 
     public MainActivity() {
         super(R.id.sceneViewController, R.layout.activity_main, GameScene.class);
@@ -14,6 +16,7 @@ public class MainActivity extends GActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Scores.dbAdapter = new DataBaseHandler(this);
         super.onCreate(savedInstanceState);
     }
 
@@ -22,6 +25,7 @@ public class MainActivity extends GActivity {
         Intent intent = new Intent(this, Scores.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+
     }
 
     @Override

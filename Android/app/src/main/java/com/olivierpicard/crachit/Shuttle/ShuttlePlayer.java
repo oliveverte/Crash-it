@@ -38,7 +38,6 @@ public class ShuttlePlayer extends Shuttle {
                 && this.getPosition().x < this.getScene().getSize().width - this.getSize().width/2) {
             super.update(currentTime);
         }
-        System.out.println(this.stats.shoot_stats.delta_time_to_shoot);
         if(this.stats.shoot_stats.canShoot(currentTime))
             shoot(GVector.up(), this.getZRotation());
     }

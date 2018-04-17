@@ -6,6 +6,7 @@ import com.olivierpicard.crachit.Graphics.GLabel;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GTools;
 
+import java.text.SimpleDateFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -114,6 +115,7 @@ public class GameOverScreen {
 //            UserDefaults.standard.set(encodedDatas, forKey: GTools.KEY_DEFAULT_GAMEINFOS)
         }
         else if(saveScore_button.isClicked(pos)) {
+            Scores.dbAdapter.add(new CellStruct(this.scene.getScore()));
             this.scene.removeChild(this.saveScore_button);
             this.scene.addChild(this.savedScore_label);
 //            final encodedDatas = GTools.addEncodedSaveDatas(GTools.KEY_DEFAULT_SCORES, self.scene.score)

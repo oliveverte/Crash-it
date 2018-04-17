@@ -61,7 +61,6 @@ public class WelcomeScreen {
     }
 
     public void touchUp(GPoint pos) {
-        System.out.println(pos);
         if(this.play_button.isClicked(pos)) { hide(); this.scene.start(); }
         else if(this.resume_button.isClicked(pos)) { /* Change to Resume View*/ }
         else if(this.score_button.isClicked(pos)) {

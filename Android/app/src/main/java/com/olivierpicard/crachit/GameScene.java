@@ -51,7 +51,6 @@ public class GameScene extends GScene {
 
 
     public void didInitialized() {
-        System.out.println(this.getSize());
         this.player = new ShuttlePlayer();
         this.player.setPosition(GTools.fromSceneToScreenPos(this.getSize(), new GPoint(0.5f, 0.2f)));
         this.starsGenerator_topLayer = new StarsGenerator(this, 8,
