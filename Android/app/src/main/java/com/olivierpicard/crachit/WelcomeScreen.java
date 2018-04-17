@@ -62,10 +62,10 @@ public class WelcomeScreen {
 
     public void touchUp(GPoint pos) {
         if(this.play_button.isClicked(pos)) { hide(); this.scene.start(); }
-        else if(this.resume_button.isClicked(pos)) { /* Change to Resume View*/ }
-        else if(this.score_button.isClicked(pos)) {
+        else if(this.resume_button.isClicked(pos))
+            GTools.activitySwitcher.switchActivity(Resume.class);
+        else if(this.score_button.isClicked(pos))
             GTools.activitySwitcher.switchActivity(Scores.class);
-        }
     }
 
 }

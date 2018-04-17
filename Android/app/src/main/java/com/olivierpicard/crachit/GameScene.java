@@ -94,6 +94,8 @@ public class GameScene extends GScene {
         this.shuttle_enemy_generator.enable = true;
         this.player.lifeBar.setValue(this.player.stats.defense);
         this.player.setPosition(GTools.fromSceneToScreenPos(this.getSize(), new GPoint(0.5f, 0.2f)));
+        this.welcomeScreen.hide();
+        this.gameOver_screen.hide();
     }
 
 

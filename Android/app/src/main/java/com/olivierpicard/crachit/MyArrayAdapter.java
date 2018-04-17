@@ -15,11 +15,17 @@ import java.util.ArrayList;
  */
 
 public class MyArrayAdapter extends ArrayAdapter<CellStruct> {
+    public enum TypeOfData {
+        Score,
+        GameSave
+    }
     private final Context context;
+    private final TypeOfData typeOfData;
 
-    public MyArrayAdapter(Context context, ArrayList<CellStruct> values) {
+    public MyArrayAdapter(Context context, ArrayList<CellStruct> values, TypeOfData typeOfData) {
         super(context, R.layout.custom_cell, values);
         this.context = context;
+        this.typeOfData = typeOfData;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -37,7 +43,10 @@ public class MyArrayAdapter extends ArrayAdapter<CellStruct> {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Scores.dbAdapter.remove(getItem(position).id);
+                if(typeOfData == TypeOfData.Score)
+                    DataBaseHandler.reference.remove_score(getItem(position).id);
+                else
+                    DataBaseHandler.reference.remove_score(getItem(position).id);
                 remove(getItem(position));
             }
         });

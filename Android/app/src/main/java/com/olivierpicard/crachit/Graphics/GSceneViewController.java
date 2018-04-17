@@ -66,6 +66,10 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
         }
     }
 
+    public GScene getScene() {
+        return this.scene;
+    }
+
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
         destroyCurrentScene();

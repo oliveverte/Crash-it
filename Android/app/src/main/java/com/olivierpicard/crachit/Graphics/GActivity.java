@@ -4,13 +4,10 @@ package com.olivierpicard.crachit.Graphics;
  * Created by olivierpicard on 16/04/2018.
  */
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
-
-import com.olivierpicard.crachit.GameScene;
-import com.olivierpicard.crachit.Graphics.*;
-import com.olivierpicard.crachit.R;
 
 public class GActivity extends AppCompatActivity implements IGActivitySwitchable {
     private GSceneViewController sceneViewController;
@@ -45,8 +42,31 @@ public class GActivity extends AppCompatActivity implements IGActivitySwitchable
         return super.onTouchEvent(event);
     }
 
+
     @Override
-    public void switchActivity(Class activity) {}
+    public void switchActivity(Class activity) {
+        Intent intent = new Intent(this, activity);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+
     @Override
     public void switchActivity(Class activity, String Message) {}
+
+
+    @Override
+    public void switchActivityWithResult(Class activity, int requestCode) {
+        Intent intent = new Intent(this, activity);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivityForResult(intent, requestCode);
+    }
+
+
+    @Override
+    public void switchActivityWithResult(Class activity, String Message, int requestCode){}
+
+    public GScene getScene() { return sceneViewController.getScene(); }
+
+
 }
