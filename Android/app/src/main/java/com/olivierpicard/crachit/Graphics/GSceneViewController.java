@@ -1,11 +1,16 @@
 package com.olivierpicard.crachit.Graphics;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import com.olivierpicard.crachit.Scores;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * Created by olivierpicard on 02/04/2018.

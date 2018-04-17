@@ -1,5 +1,6 @@
 package com.olivierpicard.crachit.Graphics;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
@@ -15,6 +16,7 @@ import java.util.List;
 public class GTools {
     public static DisplayMetrics screenMetrics = new DisplayMetrics();
     public static Resources resources;
+    public static IGActivitySwitchable activitySwitcher;
 
 
     public static GSize fromSceneToScreenSize(GSize screenSize, GSize sceneSize) {

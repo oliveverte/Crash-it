@@ -1,11 +1,14 @@
 package com.olivierpicard.crachit;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 
 import com.olivierpicard.crachit.Graphics.GLabel;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GTools;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * Created by olivierpicard on 06/04/2018.
@@ -61,7 +64,9 @@ public class WelcomeScreen {
         System.out.println(pos);
         if(this.play_button.isClicked(pos)) { hide(); this.scene.start(); }
         else if(this.resume_button.isClicked(pos)) { /* Change to Resume View*/ }
-        else if(this.score_button.isClicked(pos)) { /* Change to Resume Scores*/ }
+        else if(this.score_button.isClicked(pos)) {
+            GTools.activitySwitcher.switchActivity(Scores.class);
+        }
     }
 
 }

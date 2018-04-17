@@ -12,7 +12,7 @@ import com.olivierpicard.crachit.GameScene;
 import com.olivierpicard.crachit.Graphics.*;
 import com.olivierpicard.crachit.R;
 
-public class GActivity extends AppCompatActivity {
+public class GActivity extends AppCompatActivity implements IGActivitySwitchable {
     private GSceneViewController sceneViewController;
     private int sceneViewControllerID, contentView;
     private Class sceneClass;
@@ -30,6 +30,7 @@ public class GActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(this.contentView);
         GTools.resources = getResources();
+        GTools.activitySwitcher = this;
 
         // Récupération de la taille de l'écran et la stock dans GTools
         this.getWindowManager().getDefaultDisplay().getMetrics(GTools.screenMetrics);
@@ -44,4 +45,8 @@ public class GActivity extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
+    @Override
+    public void switchActivity(Class activity) {}
+    @Override
+    public void switchActivity(Class activity, String Message) {}
 }
