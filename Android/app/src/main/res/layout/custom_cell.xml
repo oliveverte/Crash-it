@@ -10,12 +10,12 @@
         android:id="@+id/line1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:text="TextView"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/deleteButton"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/playButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,18 +23,19 @@
         android:id="@+id/line2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="7dp"
         android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/deleteButton"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/playButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line1" />
 
     <ImageButton
         android:id="@+id/deleteButton"
-        android:layout_width="55dp"
-        android:layout_height="53dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/transparent"
@@ -43,5 +44,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_delete" />
+
+    <ImageButton
+        android:id="@+id/playButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:tint="@android:color/holo_green_dark"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/deleteButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_media_play" />
 
 </android.support.constraint.ConstraintLayout>

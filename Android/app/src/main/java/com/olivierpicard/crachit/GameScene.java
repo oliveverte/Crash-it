@@ -1,7 +1,6 @@
 package com.olivierpicard.crachit;
 
 import android.graphics.Color;
-import android.util.Log;
 
 import com.olivierpicard.crachit.Graphics.GInterval;
 import com.olivierpicard.crachit.Graphics.GLabel;
@@ -24,9 +23,10 @@ import java.util.List;
 
 public class GameScene extends GScene {
     public enum GameState {
-        play,
-        gameOver,
-        welcome
+        PLAY,
+        GAME_OVER,
+        WELCOME,
+        RESUME
     }
 
     private final float PLAYER_MOVING_SPEED = 3f;
@@ -39,6 +39,8 @@ public class GameScene extends GScene {
     private ShuttlePlayer player;
     private WelcomeScreen welcomeScreen;
     private GameOverScreen gameOver_screen;
+    public static int scoreToResumeFrom = 0;
+    public volatile static GameState flag_stateToSwitchTo = null;
 
 
     public int getScore() {
@@ -75,27 +77,30 @@ public class GameScene extends GScene {
 
         this.gameOver_screen = new GameOverScreen(this);
         this.welcomeScreen = new WelcomeScreen(this);
-        this.welcomeScreen.show();
-        this.state = GameState.welcome;
+        if(this.flag_stateToSwitchTo != GameState.RESUME)
+            flag_stateToSwitchTo = GameState.WELCOME;
 
     }
 
 
     public void start() {
-        setScore(0);
+        if(this.flag_stateToSwitchTo != GameState.RESUME)
+            setScore(0);
+        else
+            setScore(scoreToResumeFrom);
 //        this.view_Controller.initWithScore = nil
         // TODO : Tuto image
 //        this.tutoImage = TutoImage(this)
+        this.welcomeScreen.hide();
+        this.gameOver_screen.hide();
         this.addChild(player);
-        this.state = GameState.play;
+        this.state = GameState.PLAY;
         this.score_label.setHidden(false);
         this.player.direction = GVector.zero();
         this.asteroids_generator.enable = true;
         this.shuttle_enemy_generator.enable = true;
         this.player.lifeBar.setValue(this.player.stats.defense);
         this.player.setPosition(GTools.fromSceneToScreenPos(this.getSize(), new GPoint(0.5f, 0.2f)));
-        this.welcomeScreen.hide();
-        this.gameOver_screen.hide();
     }
 
 
@@ -103,8 +108,7 @@ public class GameScene extends GScene {
         this.shuttle_enemy_generator.enable = false;
         this.asteroids_generator.enable = false;
         this.score_label.setHidden(true);
-        this.state = GameState.gameOver;
-        this.gameOver_screen.show();
+        flag_stateToSwitchTo = GameState.GAME_OVER;
 //        TODO : tutoImage
 //        this.tutoImage = nil;
     }
@@ -112,6 +116,7 @@ public class GameScene extends GScene {
 
     @Override
     public void update(long currentTime) {
+        checkFlagGameStateChangeRequest();
         this.starsGenerator_topLayer.generate();
         this.starsGenerator_bottomLayer.generate();
         this.shuttle_enemy_generator.generate(currentTime);
@@ -149,10 +154,13 @@ public class GameScene extends GScene {
 
 
 
+
+
     @Override
     public void touchDown(GPoint pos) {
         super.touchDown(pos);
-        if(this.state == GameState.play) {
+        System.out.println("touch GameScene");
+        if(this.state == GameState.PLAY) {
             if(pos.x < this.getSize().width/2){
                 player.direction.dx = -PLAYER_MOVING_SPEED;
             } else if(pos.x > this.getSize().width/2) {
@@ -164,17 +172,41 @@ public class GameScene extends GScene {
     @Override
     public void touchUp(GPoint pos) {
         super.touchUp(pos);
-        if(this.state == GameState.play) player.direction.dx = 0;
-        else if(this.state == GameState.welcome) this.welcomeScreen.touchUp(pos);
+        if(this.state == GameState.PLAY) player.direction.dx = 0;
+        else if(this.state == GameState.WELCOME) this.welcomeScreen.touchUp(pos);
         else gameOver_screen.touchUp(pos);
     }
 
 
-    public void switchScreen(GameState state) {
-        this.state = state;
-        if(state == GameState.gameOver) this.gameOver_screen.show();
-        else if(state == GameState.welcome) this.welcomeScreen.show();
+    private void checkFlagGameStateChangeRequest() {
+        if(this.flag_stateToSwitchTo == null) return;
+
+        switch (this.flag_stateToSwitchTo) {
+            case PLAY:
+            case RESUME:
+                start();
+                break;
+            case WELCOME:
+                gameOver_screen.hide();
+                welcomeScreen.show();
+                break;
+            case GAME_OVER:
+                welcomeScreen.hide();
+                gameOver_screen.show();
+                break;
+        }
+        if(this.flag_stateToSwitchTo == GameState.RESUME)
+            this.flag_stateToSwitchTo = GameState.PLAY;
+        this.state = flag_stateToSwitchTo;
+        flag_stateToSwitchTo = null;
     }
+
+
+//    public void switchScreen(GameState state) {
+//        this.state = state;
+//        if(state == GameState.GAME_OVER) this.gameOver_screen.show();
+//        else if(state == GameState.WELCOME) this.welcomeScreen.show();
+//    }
 
 
 

@@ -2,6 +2,7 @@ package com.olivierpicard.crachit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 import com.olivierpicard.crachit.Graphics.*;
 
@@ -22,10 +23,8 @@ public class MainActivity extends GActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == RESUME_ACTIVITY_CODE && resultCode == RESULT_OK) {
-            GameScene gameScene = (GameScene) getScene();
-            gameScene.start();
+            GameScene.scoreToResumeFrom = data.getExtras().getInt("score");
+            GameScene.flag_stateToSwitchTo = GameScene.GameState.RESUME;
         }
     }
-
-
 }

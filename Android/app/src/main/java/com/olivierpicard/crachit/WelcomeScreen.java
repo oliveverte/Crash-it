@@ -1,14 +1,11 @@
 package com.olivierpicard.crachit;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 
 import com.olivierpicard.crachit.Graphics.GLabel;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GTools;
-
-import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * Created by olivierpicard on 06/04/2018.
@@ -20,9 +17,11 @@ public class WelcomeScreen {
     private final Button play_button;
     private final Button resume_button;
     private final Button score_button;
+    private boolean isHidden;
 
     public WelcomeScreen(GameScene scene) {
         this.scene = scene;
+        this.isHidden = true;
         this.title_label = new GLabel("Crash it");
         this.title_label.setAlpha(128);
         this.title_label.setFontType(Typeface.create("Helvetica", Typeface.NORMAL));
@@ -46,6 +45,8 @@ public class WelcomeScreen {
 
 
     public void show() {
+        if(!isHidden) return;
+        this.isHidden = false;
         this.scene.addChild(this.title_label);
         this.scene.addChild(this.play_button);
         this.scene.addChild(this.resume_button);
@@ -53,17 +54,19 @@ public class WelcomeScreen {
     }
 
     public void hide() {
+        if(isHidden) return;
+        this.isHidden = true;
         this.scene.removeChild(this.title_label);
         this.scene.removeChild(this.play_button);
         this.scene.removeChild(this.resume_button);
         this.scene.removeChild(this.score_button);
-
     }
 
     public void touchUp(GPoint pos) {
-        if(this.play_button.isClicked(pos)) { hide(); this.scene.start(); }
+        if(this.play_button.isClicked(pos))
+            GameScene.flag_stateToSwitchTo = GameScene.GameState.PLAY;
         else if(this.resume_button.isClicked(pos))
-            GTools.activitySwitcher.switchActivity(Resume.class);
+            GTools.activitySwitcher.switchActivityWithResult(Resume.class, MainActivity.RESUME_ACTIVITY_CODE);
         else if(this.score_button.isClicked(pos))
             GTools.activitySwitcher.switchActivity(Scores.class);
     }

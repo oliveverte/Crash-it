@@ -18,6 +18,14 @@ import java.util.TreeSet;
  * et gérer les items de la scene
  */
 public abstract class GScene extends GNode implements Runnable {
+    public enum TouchType {DOWN, UP, MOVE}
+    public class TouchEvent {
+        public boolean isEdited = false;
+        private TouchType touchType = null;
+        private GPoint position = GPoint.zero();
+        public void edit(TouchType t, GPoint pos) {isEdited = true; touchType = t; position = pos; }
+    }
+
     protected int backgroundColor = Color.BLACK;
     private List<GNode> elementsToAdd;
     private List<GNode> elementsToRemove;
@@ -27,17 +35,20 @@ public abstract class GScene extends GNode implements Runnable {
     public volatile boolean enable = false;
     private GSize size;
     private long time_from_lastFrame = 0;
+    public TouchEvent touchEvent;
 
 
     abstract public void didInitialized();
+    abstract public void start();
     abstract public void update(long currentTime);
 
-    public void touchDown(GPoint pos) { }
-    public void touchUp(GPoint pos) { }
-    public void touchMove(GPoint pos) { }
+    protected void touchDown(GPoint pos) { }
+    protected void touchUp(GPoint pos) { }
+    protected void touchMove(GPoint pos) { }
 
 
     public void init(GSize baseSceneSize) {
+        touchEvent = new TouchEvent();
         elementsToAdd = new ArrayList<>();
         elementsToRemove = new ArrayList<>();
         this.baseSize = baseSceneSize;
@@ -54,7 +65,7 @@ public abstract class GScene extends GNode implements Runnable {
         while(this.enable) {
             update(System.currentTimeMillis());
             refreshSceneNodes();
-
+            processTouch();
             Canvas canvas = GSceneViewController.surfaceHolder.lockCanvas();
             if (canvas != null) {
                 synchronized (GSceneViewController.surfaceHolder) {
@@ -96,9 +107,8 @@ public abstract class GScene extends GNode implements Runnable {
         p.setColor(Color.WHITE);
         p.setAntiAlias(true);
         p.setTextAlign(Paint.Align.LEFT);
-
-        canvas.drawText("FPS : " + (System.currentTimeMillis() - this.time_from_lastFrame),
-                0, (int)this.size.height - 20, p);
+            canvas.drawText("FPS : " + (int)(1 / ((float)(System.currentTimeMillis() - this.time_from_lastFrame) / 1000)),
+                    0, (int) this.size.height - 20, p);
         canvas.drawText("Nodes : " + children.size(),
                 0, (int)this.size.height - 5, p);
         this.time_from_lastFrame = System.currentTimeMillis();
@@ -117,6 +127,24 @@ public abstract class GScene extends GNode implements Runnable {
         // que clear()
         elementsToAdd = new ArrayList<>();
         elementsToRemove = new ArrayList<>();
+    }
+
+    private void processTouch() {
+        if(!this.touchEvent.isEdited) return;
+        System.out.println("touch GScene");
+        this.touchEvent.isEdited = false;
+        final GPoint pos = this.touchEvent.position;
+        switch (this.touchEvent.touchType) {
+            case DOWN:
+                touchDown(pos);
+                break;
+            case UP:
+                touchUp(pos);
+                break;
+            case MOVE:
+                touchMove(pos);
+                break;
+        }
     }
 
     /**

@@ -26,13 +26,17 @@ public class GameOverScreen {
     private Button menu_button;
     private Button saveScore_button;
     private long timer;
+    private boolean isHidden;
     private volatile boolean enable_userInteraction;
+
+
 
 
     public GameOverScreen(GameScene scene) {
         this.scene = scene;
+        this.isHidden = true;
         BUTTON_INTER_SPACE = (int)this.scene.getSize().height / 15;
-        this.enable_userInteraction = true;
+        this.enable_userInteraction = false;
 
         this.score_label = new GLabel(String.valueOf(scene.getScore()));
         this.score_label.setFontSize(48);
@@ -79,6 +83,8 @@ public class GameOverScreen {
 
 
     public void hide() {
+        if(isHidden) return;
+        this.isHidden = true;
         this.enable_userInteraction = false;
         this.scene.removeChild(this.scoreText_label);
         this.scene.removeChild(this.score_label);
@@ -92,6 +98,8 @@ public class GameOverScreen {
 
 
     public void show() {
+        if(!isHidden) return;
+        this.isHidden = false;
         this.score_label.setText(String.valueOf(this.scene.getScore()));
         this.scene.addChild(this.scoreText_label);
         this.scene.addChild(this.score_label);
@@ -111,16 +119,16 @@ public class GameOverScreen {
             DataBaseHandler.reference.add_game(new CellStruct(this.scene.getScore()));
             this.scene.removeChild(this.save_button);
             this.scene.addChild(this.saved_label);
-//            final encodedDatas = GTools.addEncodedSaveDatas(GTools.KEY_DEFAULT_GAMEINFOS, self.scene.score)
-//            UserDefaults.standard.set_score(encodedDatas, forKey: GTools.KEY_DEFAULT_GAMEINFOS)
         }
         else if(saveScore_button.isClicked(pos)) {
             DataBaseHandler.reference.add_score(new CellStruct(this.scene.getScore()));
             this.scene.removeChild(this.saveScore_button);
             this.scene.addChild(this.savedScore_label);
         }
-        else if(retry_button.isClicked(pos)) { hide(); scene.start(); }
-        else if(menu_button.isClicked(pos)) { hide(); this.scene.switchScreen(GameScene.GameState.welcome); }
+        else if(retry_button.isClicked(pos))
+            GameScene.flag_stateToSwitchTo = GameScene.GameState.PLAY;
+        else if(menu_button.isClicked(pos))
+            GameScene.flag_stateToSwitchTo = GameScene.GameState.WELCOME;
     }
 
 }

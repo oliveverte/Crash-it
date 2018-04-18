@@ -38,6 +38,7 @@ public class GActivity extends AppCompatActivity implements IGActivitySwitchable
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        System.out.println("touch GActivity");
         sceneViewController.onTouch(event);
         return super.onTouchEvent(event);
     }

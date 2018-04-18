@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Resume extends AppCompatActivity {
+    public static Resume reference;
     private ListView listView;
     private MyArrayAdapter arrayAdapter;
     private List<CellStruct> tasks;
@@ -20,19 +21,17 @@ public class Resume extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resume);
         setTitle(R.string.reprendre);
+        Resume.reference = this;
         tasks = DataBaseHandler.reference.getAll_game();
         listView = findViewById(R.id.listView_resume);
         arrayAdapter = new MyArrayAdapter(this, (ArrayList<CellStruct>) tasks, MyArrayAdapter.TypeOfData.GameSave);
-
         listView.setAdapter(arrayAdapter);
+    }
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent();
-                intent.putExtra("score", String.valueOf(arrayAdapter.getItem(i).score));
-                setResult(RESULT_OK, intent);
-            }
-        });
+    public void returnResult(int score) {
+        Intent intent = new Intent();
+        intent.putExtra("score", score);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

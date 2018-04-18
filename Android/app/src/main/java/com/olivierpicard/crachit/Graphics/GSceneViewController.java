@@ -52,16 +52,16 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
                 (ev.getY()*100)/GTools.screenMetrics.heightPixels);
         final GPoint realPos = new GPoint((this.scene.getSize().width*percent.x)/100,
                 (this.scene.getSize().height * percent.y)/100);
-
+        System.out.println("touch Controller");
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN :
-                this.scene.touchDown(realPos);
+                this.scene.touchEvent.edit(GScene.TouchType.DOWN, realPos);
                 break;
             case MotionEvent.ACTION_UP :
-                this.scene.touchUp(realPos);
+                this.scene.touchEvent.edit(GScene.TouchType.UP, realPos);
                 break;
             case MotionEvent.ACTION_MOVE :
-                this.scene.touchMove(realPos);
+                this.scene.touchEvent.edit(GScene.TouchType.MOVE, realPos);
                 break;
         }
     }
@@ -80,7 +80,7 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
             this.scene.init(new GSize(360, 600));
             this.scene.enable = true;
         } catch (Exception e) {e.printStackTrace();}
-        this.sceneThread = new Thread(this.scene);
+        this.sceneThread = new Thread(this.scene, "gameLoop");
         this.sceneThread.setDaemon(false);
         this.sceneThread.start();
     }

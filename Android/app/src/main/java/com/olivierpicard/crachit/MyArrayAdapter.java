@@ -40,20 +40,38 @@ public class MyArrayAdapter extends ArrayAdapter<CellStruct> {
         TextView line1 = cellView.findViewById(R.id.line1);
         TextView line2 = cellView.findViewById(R.id.line2);
         ImageButton delete = cellView.findViewById(R.id.deleteButton);
+        ImageButton play = cellView.findViewById(R.id.playButton);
+
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(typeOfData == TypeOfData.Score)
                     DataBaseHandler.reference.remove_score(getItem(position).id);
                 else
-                    DataBaseHandler.reference.remove_score(getItem(position).id);
+                    DataBaseHandler.reference.remove_game(getItem(position).id);
                 remove(getItem(position));
             }
         });
 
+        if(typeOfData == TypeOfData.GameSave) {
+            play.setVisibility(View.VISIBLE);
+            play.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Resume.reference.returnResult(getItem(position).score);
+                }
+            });
+        }
+
+
         CellStruct sd = getItem(position);
-        line1.setText("Score : " + sd.score);
-        line2.setText(sd.date);
+        if(typeOfData == TypeOfData.Score) {
+            line1.setText("Score : " + sd.score);
+            line2.setText(sd.date);
+        } else {
+            line1.setText("Sauvegarde n°" + (position+1));
+            line2.setText(sd.date + "  --  score : " + sd.score);
+        }
 
         return cellView;
     }
