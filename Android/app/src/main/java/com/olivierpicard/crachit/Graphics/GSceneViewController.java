@@ -20,6 +20,7 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
     private Class sceneType;
     private GScene scene;
     public static SurfaceHolder surfaceHolder;
+    public final GSize resolution = new GSize(360, 600);
     private Thread sceneThread;
 
     public GSceneViewController(Context context) {
@@ -74,10 +75,11 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
         destroyCurrentScene();
         this.surfaceHolder = getHolder();
+
         try {
 //            this.scene = (GScene)sceneType.getDeclaredConstructor(GSize.class).newInstance(new GSize(480, 800));
             this.scene = (GScene)sceneType.newInstance();
-            this.scene.init(new GSize(360, 600));
+            this.scene.init(new GSize(this.resolution.width, this.resolution.height));
             this.scene.enable = true;
         } catch (Exception e) {e.printStackTrace();}
         this.sceneThread = new Thread(this.scene, "gameLoop");

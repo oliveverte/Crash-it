@@ -57,6 +57,11 @@ public abstract class GScene extends GNode implements Runnable {
         this.scale = new GSize(xScale, yScale);
         this.size = new GSize(GTools.screenMetrics.widthPixels / this.scale.width,
                 GTools.screenMetrics.heightPixels/ this.scale.height);
+
+        GSceneViewController.surfaceHolder.setFixedSize(
+                (int)this.size.width,
+                (int)this.size.height
+        );
     }
 
 
@@ -83,10 +88,10 @@ public abstract class GScene extends GNode implements Runnable {
 
 
     private void render(Canvas canvas) {
-        canvas.scale(this.scale.width, this.scale.height, GTools.screenMetrics.widthPixels,
-                GTools.screenMetrics.heightPixels);
-        canvas.translate(GTools.screenMetrics.widthPixels - this.size.width,
-                GTools.screenMetrics.heightPixels - this.size.height);
+//        canvas.scale(this.scale.width, this.scale.height, GTools.screenMetrics.widthPixels,
+//                GTools.screenMetrics.heightPixels);
+//        canvas.translate(GTools.screenMetrics.widthPixels - this.size.width,
+//                GTools.screenMetrics.heightPixels - this.size.height);
 
         Map<Integer, List<GNode>> renderElements = new LinkedHashMap<>();
         processRenderOrder(renderElements);

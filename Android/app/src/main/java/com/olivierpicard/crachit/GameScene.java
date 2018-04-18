@@ -91,12 +91,10 @@ public class GameScene extends GScene {
         else
             setScore(scoreToResumeFrom);
         reset();
-//        this.view_Controller.initWithScore = nil
         // TODO : Tuto image
 //        this.tutoImage = TutoImage(this)
         this.welcomeScreen.hide();
         this.gameOver_screen.hide();
-        this.addChild(player);
         this.state = GameState.PLAY;
         this.score_label.setHidden(false);
         this.player.direction = GVector.zero();
@@ -104,6 +102,7 @@ public class GameScene extends GScene {
         this.shuttle_enemy_generator.enable = true;
         this.player.lifeBar.setValue(this.player.stats.defense);
         this.player.setPosition(GTools.fromSceneToScreenPos(this.getSize(), new GPoint(0.5f, 0.2f)));
+        this.addChild(player);
     }
 
 
