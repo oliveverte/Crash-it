@@ -2,6 +2,7 @@ package com.olivierpicard.crachit;
 
 import android.graphics.Color;
 
+import com.olivierpicard.crachit.AnimatedItem.Asteroid;
 import com.olivierpicard.crachit.Graphics.GInterval;
 import com.olivierpicard.crachit.Graphics.GLabel;
 import com.olivierpicard.crachit.Graphics.GNode;
@@ -10,6 +11,7 @@ import com.olivierpicard.crachit.Graphics.GScene;
 import com.olivierpicard.crachit.Graphics.GSize;
 import com.olivierpicard.crachit.Graphics.GTools;
 import com.olivierpicard.crachit.Graphics.GVector;
+import com.olivierpicard.crachit.Shuttle.Shuttle;
 import com.olivierpicard.crachit.Shuttle.ShuttleEnemiesGenerator;
 import com.olivierpicard.crachit.Shuttle.ShuttlePlayer;
 
@@ -88,6 +90,7 @@ public class GameScene extends GScene {
             setScore(0);
         else
             setScore(scoreToResumeFrom);
+        reset();
 //        this.view_Controller.initWithScore = nil
         // TODO : Tuto image
 //        this.tutoImage = TutoImage(this)
@@ -202,11 +205,14 @@ public class GameScene extends GScene {
     }
 
 
-//    public void switchScreen(GameState state) {
-//        this.state = state;
-//        if(state == GameState.GAME_OVER) this.gameOver_screen.show();
-//        else if(state == GameState.WELCOME) this.welcomeScreen.show();
-//    }
+    private void reset() {
+        List<GNode> itemToDelete = new ArrayList<>();
+        for(GNode node : this.children)
+            if(node instanceof ICollisionable)
+                itemToDelete.add(node);
+        removeChildren(itemToDelete);
+    }
+
 
 
 
