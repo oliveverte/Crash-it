@@ -84,6 +84,8 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
         this.sceneThread = new Thread(this.scene, "gameLoop");
         this.sceneThread.setDaemon(false);
         this.sceneThread.start();
+        this.scene.showFPS = true;
+        this.scene.showNodeCounter = true;
     }
 
     @Override

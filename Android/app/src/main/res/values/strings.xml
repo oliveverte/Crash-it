@@ -10,4 +10,6 @@
     <string name="enregister_score">Enregistrer le score</string>
     <string name="recommencer">Recommencer</string>
     <string name="accueil">Accueil</string>
+    <string name="guide_phrase">Cliquez à droite ou à gauche de l\'écran</string>
+    <string name="guide_phrase2">Pour déplacer le vaisseau</string>
 </resources>

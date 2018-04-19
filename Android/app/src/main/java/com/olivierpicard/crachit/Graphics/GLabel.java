@@ -16,7 +16,7 @@ public class GLabel extends GNode implements IGDrawable {
      * Défini un alignement pour masquer à l'utilisateur celui de Paint.Align
      * (Plus conviviale et plus indépendant)
      */
-    enum TextAlign {
+    public enum TextAlign {
         LEFT,
         CENTER,
         RIGHT
@@ -93,7 +93,6 @@ public class GLabel extends GNode implements IGDrawable {
         p.setColor(this.color);
         p.setAntiAlias(true);
         p.setTextAlign(this.textAlign);
-
         canvas.drawText(this.text, bounds.exactCenterX(), bounds.exactCenterY(), p);
 
         canvas.restore();

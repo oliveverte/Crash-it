@@ -36,9 +36,11 @@ public abstract class GScene extends GNode implements Runnable {
     private GSize scale;
 
     public volatile boolean enable = false;
+    public TouchEvent touchEvent;
     private GSize size;
     private long time_from_lastFrame = 0;
-    public TouchEvent touchEvent;
+    public boolean showFPS = true;
+    public boolean showNodeCounter = true;
 
 
     abstract public void didInitialized();
@@ -91,19 +93,9 @@ public abstract class GScene extends GNode implements Runnable {
 
 
     private void render(Canvas canvas) {
-//        canvas.scale(this.scale.width, this.scale.height, GTools.screenMetrics.widthPixels,
-//                GTools.screenMetrics.heightPixels);
-//        canvas.translate(GTools.screenMetrics.widthPixels - this.size.width,
-//                GTools.screenMetrics.heightPixels - this.size.height);
-
         Map<Integer, List<GNode>> renderElements = new LinkedHashMap<>();
         processRenderOrder(renderElements);
         SortedSet<Integer> orderedRenderElement = new TreeSet<>(renderElements.keySet());
-        Paint p = new Paint();
-        p.setColor(Color.RED);
-        canvas.drawRect(new Rect(0, 0, 40, 40), p);
-        p.setColor(Color.BLUE);
-        canvas.drawRect(new Rect((int)this.size.width-40, (int)this.size.height-40, (int)this.size.width, (int)this.size.height), p);
         for(Integer id : orderedRenderElement) {
             for(GNode node : renderElements.get(id)) {
                 if (!(node instanceof IGDrawable)) continue;
@@ -111,14 +103,18 @@ public abstract class GScene extends GNode implements Runnable {
             }
         }
 
+        Paint p = new Paint();
         p.setTextSize(12);
         p.setColor(Color.WHITE);
         p.setAntiAlias(true);
         p.setTextAlign(Paint.Align.LEFT);
+        if(this.showFPS)
             canvas.drawText("FPS : " + (int)(1 / ((float)(System.currentTimeMillis() - this.time_from_lastFrame) / 1000)),
                     0, (int) this.size.height - 20, p);
-        canvas.drawText("Nodes : " + children.size(),
-                0, (int)this.size.height - 5, p);
+        if(this.showNodeCounter)
+            canvas.drawText("Nodes : " + children.size(),
+                    0, (int)this.size.height - 5, p);
+
         this.time_from_lastFrame = System.currentTimeMillis();
     }
 

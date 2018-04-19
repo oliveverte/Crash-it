@@ -41,6 +41,7 @@ public class GameScene extends GScene {
     private ShuttlePlayer player;
     private WelcomeScreen welcomeScreen;
     private GameOverScreen gameOver_screen;
+    private TutoImage tutoImage;
     public static int scoreToResumeFrom = 0;
     public volatile static GameState flag_stateToSwitchTo = null;
 
@@ -91,8 +92,8 @@ public class GameScene extends GScene {
         else
             setScore(scoreToResumeFrom);
         reset();
-        // TODO : Tuto image
-//        this.tutoImage = TutoImage(this)
+
+        this.tutoImage = new TutoImage(this);
         this.welcomeScreen.hide();
         this.gameOver_screen.hide();
         this.state = GameState.PLAY;
@@ -111,14 +112,20 @@ public class GameScene extends GScene {
         this.asteroids_generator.enable = false;
         this.score_label.setHidden(true);
         flag_stateToSwitchTo = GameState.GAME_OVER;
-//        TODO : tutoImage
-//        this.tutoImage = nil;
+        if(this.tutoImage != null) {
+            this.tutoImage.delete();
+            this.tutoImage = null;
+        }
     }
 
 
     @Override
     public void update(long currentTime) {
         checkFlagGameStateChangeRequest();
+        if(this.tutoImage == null) {
+            this.shuttle_enemy_generator.generate(currentTime);
+            this.asteroids_generator.generate(currentTime);
+        }
         this.starsGenerator_topLayer.generate();
         this.starsGenerator_bottomLayer.generate();
         this.shuttle_enemy_generator.generate(currentTime);
@@ -160,7 +167,10 @@ public class GameScene extends GScene {
 
     @Override
     public void touchDown(GPoint pos) {
-        super.touchDown(pos);
+        if(tutoImage != null) {
+            this.tutoImage.delete();
+            this.tutoImage = null;
+        }
         if(this.state == GameState.PLAY) {
             if(pos.x < this.getSize().width/2){
                 player.direction.dx = -PLAYER_MOVING_SPEED;
@@ -172,7 +182,6 @@ public class GameScene extends GScene {
 
     @Override
     public void touchUp(GPoint pos) {
-        super.touchUp(pos);
         if(this.state == GameState.PLAY) player.direction.dx = 0;
         else if(this.state == GameState.WELCOME) this.welcomeScreen.touchUp(pos);
         else gameOver_screen.touchUp(pos);

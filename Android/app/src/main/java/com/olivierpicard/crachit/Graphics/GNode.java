@@ -96,8 +96,7 @@ public abstract class GNode{
 
     public List<GNode> getDeepChildren() {
         final List<GNode> children = new ArrayList<>(this.children);
-        for(GNode node : this.children)
-            children.addAll(node.getDeepChildren());
+        for(GNode node : this.children) children.addAll(node.getDeepChildren());
         return children;
     }
 }
