@@ -8,6 +8,10 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 
+import com.olivierpicard.crachit.GameScene;
+import com.olivierpicard.crachit.ProgressBar;
+import com.olivierpicard.crachit.Shuttle.ShuttlePlayer;
+
 /**
  * Représente une image(sprite) sur la scene
  */

@@ -6,6 +6,9 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 
+import com.olivierpicard.crachit.ProgressBar;
+import com.olivierpicard.crachit.Shuttle.ShuttlePlayer;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -136,7 +139,6 @@ public abstract class GScene extends GNode implements Runnable {
 
     private void processTouch() {
         if(!this.touchEvent.isEdited) return;
-        System.out.println("touch GScene");
         this.touchEvent.isEdited = false;
         final GPoint pos = this.touchEvent.position;
         switch (this.touchEvent.touchType) {
@@ -158,10 +160,12 @@ public abstract class GScene extends GNode implements Runnable {
      */
     private void processRenderOrder(Map<Integer, List<GNode>> map) {
         for(GNode node : this.children) {
-            List<GNode> list = map.get(node.getZPosition());
+            if(!(node instanceof IGDrawable)) continue;
+            IGDrawable drawable = (IGDrawable)node;
+            List<GNode> list = map.get(drawable.getRelativeRender().zPosition);
             if(list == null) list = new ArrayList<>();
             list.add(node);
-            map.put(node.getZPosition(), list);
+            map.put(drawable.getRelativeRender().zPosition, list);
         }
     }
 
@@ -174,12 +178,15 @@ public abstract class GScene extends GNode implements Runnable {
      */
     @Override
     public final void addChild(GNode node) {
-        node.setScene(this);
-        this.elementsToAdd.add(node);
-        for(GNode child : node.children) {
-            child.setScene(this);
-            this.elementsToAdd.add(child);
+        if(node.getScene() != this) {
+            node.setScene(this);
+            if(node.parent == null) return;
         }
+        this.elementsToAdd.add(node);
+//        for(GNode child : node.children) {
+//            child.setScene(this);
+//            this.elementsToAdd.add(child);
+//        }
     }
 
     /**

@@ -12,6 +12,11 @@ public class GSize {
         this.height = h;
     }
 
+    public GSize(GSize size) {
+        this.width = size.width;
+        this.height = size.height;
+    }
+
     public GSize setWidth(float w) {
         this.width = w;
         return this;

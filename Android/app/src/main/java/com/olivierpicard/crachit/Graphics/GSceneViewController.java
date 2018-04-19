@@ -53,7 +53,6 @@ public class GSceneViewController extends SurfaceView implements SurfaceHolder.C
                 (ev.getY()*100)/GTools.screenMetrics.heightPixels);
         final GPoint realPos = new GPoint((this.scene.getSize().width*percent.x)/100,
                 (this.scene.getSize().height * percent.y)/100);
-        System.out.println("touch Controller");
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN :
                 this.scene.touchEvent.edit(GScene.TouchType.DOWN, realPos);

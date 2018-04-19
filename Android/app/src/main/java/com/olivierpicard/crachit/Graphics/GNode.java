@@ -39,12 +39,12 @@ public abstract class GNode{
     public void addChild(GNode node) {
         node.parent = this;
         children.add(node);
-        node.scene = this.scene;
-        // Si le parent est déjà dans une scène
-        if(this.scene != null) {
-            // On ajoute le nouveau noeud à la scène
-            this.scene.addChild(node);
-        }
+        node.setScene(this.scene);
+////          Si le parent est déjà dans une scène
+//        if(this.scene != null) {
+//            // On ajoute le nouveau noeud à la scène
+//            this.scene.addChild(node);
+//        }
     }
 
     /**
@@ -80,11 +80,12 @@ public abstract class GNode{
 
 
 
-    public GScene getScene() { return scene; }
 
+    public GScene getScene() { return this.scene; }
     public void setScene(GScene scene) {
+        for(GNode node : this.children) node.setScene(scene);
         this.scene = scene;
-        for(GNode node : this.children) node.scene = scene;
+        if(this.scene != null) this.scene.addChild(this);
     }
 
     public int getZPosition() { return zPosition; }

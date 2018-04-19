@@ -16,6 +16,7 @@ public class GRelativeRender {
     public GPoint position;
     public int zPosition;
 
+
     public GRelativeRender() {
         this.zRotation = 0;
         this.position = GPoint.zero();

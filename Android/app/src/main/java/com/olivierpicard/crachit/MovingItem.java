@@ -51,11 +51,12 @@ public class MovingItem extends GSprite implements IGUpdatable {
 
 
     public boolean isOutOfScreen() {
+
         // Anchor point 0.5 par défaut donc on divise la taille par 2
-        if(getPosition().y + getSize().height/2 < -MARGIN_OUT_OF_SCREEN_TO_DELETE
-                || getPosition().y - getSize().height/2 > this.getScene().getSize().height + MARGIN_OUT_OF_SCREEN_TO_DELETE
-                || getPosition().x - getSize().width/2 > this.getScene().getSize().width + MARGIN_OUT_OF_SCREEN_TO_DELETE
-                || getPosition().x + getSize().width/2 < -MARGIN_OUT_OF_SCREEN_TO_DELETE) {
+        if (getPosition().y + getSize().height / 2 < -MARGIN_OUT_OF_SCREEN_TO_DELETE
+                || getPosition().y - getSize().height / 2 > this.getScene().getSize().height + MARGIN_OUT_OF_SCREEN_TO_DELETE
+                || getPosition().x - getSize().width / 2 > this.getScene().getSize().width + MARGIN_OUT_OF_SCREEN_TO_DELETE
+                || getPosition().x + getSize().width / 2 < -MARGIN_OUT_OF_SCREEN_TO_DELETE) {
             return true;
         }
         return false;

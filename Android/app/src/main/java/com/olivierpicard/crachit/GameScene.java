@@ -161,7 +161,6 @@ public class GameScene extends GScene {
     @Override
     public void touchDown(GPoint pos) {
         super.touchDown(pos);
-        System.out.println("touch GameScene");
         if(this.state == GameState.PLAY) {
             if(pos.x < this.getSize().width/2){
                 player.direction.dx = -PLAYER_MOVING_SPEED;
