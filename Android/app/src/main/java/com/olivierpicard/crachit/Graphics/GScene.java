@@ -125,6 +125,7 @@ public abstract class GScene extends GNode implements Runnable {
 
     private void refreshSceneNodes() {
         for(GNode node : elementsToRemove) {
+
             this.children.remove(node);
             node.setScene(null);
         }
@@ -183,10 +184,6 @@ public abstract class GScene extends GNode implements Runnable {
             if(node.parent == null) return;
         }
         this.elementsToAdd.add(node);
-//        for(GNode child : node.children) {
-//            child.setScene(this);
-//            this.elementsToAdd.add(child);
-//        }
     }
 
     /**
@@ -197,9 +194,7 @@ public abstract class GScene extends GNode implements Runnable {
     @Override
     public final void removeChild(GNode node) {
         this.elementsToRemove.add(node);
-        // Supprime l'élément ainsi que tous ses enfants
-        for(GNode child : node.children)
-            this.elementsToRemove.add(child);
+        this.elementsToRemove.addAll(node.getDeepChildren());
     }
 
     /**
@@ -211,9 +206,7 @@ public abstract class GScene extends GNode implements Runnable {
     public final void removeChildren(List<GNode> nodes) {
         for (GNode node: nodes) {
             this.elementsToRemove.add(node);
-            // Supprime l'élément ainsi que tous ses enfants
-            for(GNode child : node.children)
-                this.elementsToRemove.add(child);
+            this.elementsToRemove.addAll(node.getDeepChildren());
         }
     }
 

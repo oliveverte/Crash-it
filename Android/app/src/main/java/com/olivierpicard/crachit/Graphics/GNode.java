@@ -39,12 +39,7 @@ public abstract class GNode{
     public void addChild(GNode node) {
         node.parent = this;
         children.add(node);
-        node.setScene(this.scene);
-////          Si le parent est déjà dans une scène
-//        if(this.scene != null) {
-//            // On ajoute le nouveau noeud à la scène
-//            this.scene.addChild(node);
-//        }
+        if(this.scene != null) node.setScene(this.scene);
     }
 
     /**
@@ -56,7 +51,6 @@ public abstract class GNode{
     public void removeChild(GNode node) {
         node.parent = null;
         this.children.remove(node);
-        // Si le parent (this) est contenu dans une scène
         if(this.scene != null)
             this.scene.removeChild(node);
     }
@@ -72,7 +66,7 @@ public abstract class GNode{
         for (GNode node: nodes) {
             node.parent = null;
             this.children.remove(node);
-            // Si le parent (this) est contenu dans une scène
+            node.setScene(null);
             if(this.scene != null)
                 this.scene.removeChild(node);
         }
@@ -99,4 +93,37 @@ public abstract class GNode{
     public void setHidden(boolean hidden) {
         this.hidden = hidden;
     }
+
+    public List<GNode> getDeepChildren() {
+        final List<GNode> children = new ArrayList<>(this.children);
+        for(GNode node : this.children)
+            children.addAll(node.getDeepChildren());
+        return children;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
