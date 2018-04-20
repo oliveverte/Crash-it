@@ -73,6 +73,7 @@ public class ShuttleEnemy extends Shuttle {
         if(increaseScore > 0) {
             final GameScene scene = (GameScene)getScene();
             scene.addChild(new Explosion(this.getPosition()));
+            scene.setScore(scene.getScore() + 2);
             this.getScene().removeChild(this);
         }
     }

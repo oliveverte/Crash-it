@@ -73,9 +73,9 @@ public abstract class GScene extends GNode implements Runnable {
     public void run() {
         didInitialized();
         while(this.enable) {
-            update(System.currentTimeMillis());
             refreshSceneNodes();
             processTouch();
+            update(System.currentTimeMillis());
             Canvas canvas = GSceneViewController.surfaceHolder.lockCanvas();
             if (canvas != null) {
                 synchronized (GSceneViewController.surfaceHolder) {
