@@ -44,22 +44,7 @@ public class ProgressBar extends GSprite {
         final float percent = this._value * 100 / this.maxValue;
         final float updatedWidth = this.background.getSize().width * percent / 100;
         this.setSize(this.getSize().setWidth(updatedWidth));
-        if(this.parent instanceof ShuttlePlayer) {
-            background.getRelativeRender().processChildRelativity(this.background);
-            System.out.println("----size--- " + this.getSize()
-//                    + " ---percent--- " + percent
-//                    + " ----updateWi---- " + updatedWidth
-//                    + " --value-- " + this._value
-//                    + " --maxValue-- " + this.maxValue
-//                    + "----backgroundSize----" + background.getSize()
-//                    + "---backgroundPos---" + background.getRelativeRender().position
-////                    + "---Pos---" + this.getRelativeRender().position
-//                    + "---BackgroundScene---" + this.background.getScene()
-//                            + "---Scene---" + this.getScene()
-                    + " ---BackZ--- " + this.background.getRelativeRender().zPosition
-                    + " ---Z--- " + this.getRelativeRender().zPosition
-            );
-        }
+
         // remet le fond en position initial
         this.background.setPosition(this.background.getPosition().setX(0));
         // remet la barre de progression en position par default
