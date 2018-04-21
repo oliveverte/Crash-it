@@ -12,6 +12,11 @@ public class GPoint {
         this.y = y;
     }
 
+    public GPoint(GPoint p) {
+        this.x = p.x;
+        this.y = p.y;
+    }
+
     public void add(GPoint p) {
         this.x += p.x;
         this.y += p.y;
