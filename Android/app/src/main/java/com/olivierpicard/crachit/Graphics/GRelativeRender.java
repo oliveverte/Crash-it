@@ -12,6 +12,10 @@ import android.support.annotation.NonNull;
  * en prenant en compte les informations du parents.
  */
 public class GRelativeRender {
+    public enum RotationPivot {
+        SELF,
+        ROOT
+    }
     public float zRotation;
     public GPoint position;
     public int zPosition;

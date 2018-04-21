@@ -23,6 +23,7 @@ public class GSprite extends GNode implements IGDrawable {
     private int color;
     private Bitmap bitmap;
     private GRelativeRender relativeRender;
+    public GRelativeRender.RotationPivot rotationPivot;
 
 
     private void init() {
@@ -32,6 +33,7 @@ public class GSprite extends GNode implements IGDrawable {
         this.color = Color.GRAY;
         this.bitmap = null;
         this.relativeRender = new GRelativeRender();
+        rotationPivot = GRelativeRender.RotationPivot.ROOT;
     }
 
 
@@ -54,7 +56,17 @@ public class GSprite extends GNode implements IGDrawable {
         // On défini le rectangle accueillant le dessin
         this.relativeRender.processChildRelativity(this);
         final Rect bounds = GTools.getRectFromSizeAndPos(this.relativeRender.position, this.getSize());
-        canvas.rotate(this.relativeRender.zRotation, this.relativeRender.position.x, this.relativeRender.position.y);
+
+        GPoint pivotPosition = this.relativeRender.position;
+
+        if(rotationPivot == GRelativeRender.RotationPivot.ROOT) {
+            GNode rootPosition = this.getRootParent();
+            if(rootPosition instanceof IGDrawable)
+                pivotPosition = ((IGDrawable) rootPosition).getPosition();
+        }
+
+        canvas.rotate(this.relativeRender.zRotation, pivotPosition.x, pivotPosition.y);
+
         if(this.bitmap == null) {
             // Signifie qu'on doit déssiner un rectangle de couleur
             Paint p = new Paint();

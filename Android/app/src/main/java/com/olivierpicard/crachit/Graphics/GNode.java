@@ -99,6 +99,12 @@ public abstract class GNode{
         for(GNode node : this.children) children.addAll(node.getDeepChildren());
         return children;
     }
+
+    public GNode getRootParent() {
+        GNode current = this;
+        while(current.parent != null) current = current.parent;
+        return current;
+    }
 }
 
 
