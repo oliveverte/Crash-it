@@ -108,8 +108,8 @@ public class GameOverScreen {
         this.scene.addChild(this.menu_button);
         this.scene.addChild(this.saveScore_button);
         new Timer().schedule(new TimerTask() {
-            public void run() { enable_userInteraction = true; }
-        }, 0, (long)(0.7*1000));
+            public void run() {enable_userInteraction = true; }
+        }, (long)(0.7*1000));
     }
 
 

@@ -40,13 +40,15 @@ public class Asteroid  extends AnimatedItem implements ICollisionable {
     public void inCollisionWith(ICollisionable item) {
         boolean isDestroy = false;
         if(item instanceof LaserShot
-                && ((LaserShot) item).shooter instanceof ShuttlePlayer)
+                && ((LaserShot) item).shooter instanceof ShuttlePlayer
+                || item instanceof ShuttlePlayer) {
             isDestroy = true;
-        else if(item instanceof ShuttlePlayer) isDestroy = true;
+        }
 
         if(isDestroy && getScene() != null) {
             if(this.getScene() instanceof GameScene) {
                 final GameScene gameScene = (GameScene) this.getScene();
+                this.enable_collision = false;
                 gameScene.setScore(gameScene.getScore() + 1);
             }
             final GPoint pos = this.getPosition();
