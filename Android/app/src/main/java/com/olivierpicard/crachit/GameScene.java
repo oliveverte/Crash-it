@@ -11,12 +11,16 @@ import com.olivierpicard.crachit.Graphics.GScene;
 import com.olivierpicard.crachit.Graphics.GSize;
 import com.olivierpicard.crachit.Graphics.GTools;
 import com.olivierpicard.crachit.Graphics.GVector;
+import com.olivierpicard.crachit.Graphics.IGDrawable;
 import com.olivierpicard.crachit.Shuttle.Shuttle;
 import com.olivierpicard.crachit.Shuttle.ShuttleEnemiesGenerator;
+import com.olivierpicard.crachit.Shuttle.ShuttleEnemy;
 import com.olivierpicard.crachit.Shuttle.ShuttlePlayer;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.olivierpicard.crachit.DataBaseHandler.*;
 
 /**
  * Scène(vue) dans lequel le jeu prend vie
@@ -43,6 +47,7 @@ public class GameScene extends GScene {
     private GameOverScreen gameOver_screen;
     private TutoImage tutoImage;
     public static int scoreToResumeFrom = 0;
+    public static List<DataBaseHandler.ItemRestaurationTable> itemsToResumeFrom = null;
     public volatile static GameState flag_stateToSwitchTo = null;
 
 
@@ -87,10 +92,6 @@ public class GameScene extends GScene {
 
 
     public void start() {
-        if(this.flag_stateToSwitchTo != GameState.RESUME)
-            setScore(0);
-        else
-            setScore(scoreToResumeFrom);
         reset();
 
         this.tutoImage = new TutoImage(this);
@@ -104,6 +105,18 @@ public class GameScene extends GScene {
         this.player.lifeBar.setValue(this.player.stats.defense);
         this.player.setPosition(GTools.fromSceneToScreenPos(this.getSize(), new GPoint(0.5f, 0.2f)));
         this.addChild(player);
+
+        if(this.flag_stateToSwitchTo != GameState.RESUME) { setScore(0); return; }
+        setScore(scoreToResumeFrom);
+        if(itemsToResumeFrom == null) return;
+        for(DataBaseHandler.ItemRestaurationTable item : itemsToResumeFrom) {
+            if(item.classType.equals(ShuttleEnemy.class.getSimpleName()))
+                this.shuttle_enemy_generator.restaure(item);
+            else if(item.classType.equals(Asteroid.class.getSimpleName()))
+                this.asteroids_generator.restaure(item);
+            else if(item.classType.equals(ShuttlePlayer.class.getSimpleName()))
+                this.player.setPosition(new GPoint(item.xPos, item.yPos));
+        }
     }
 
 
@@ -218,6 +231,31 @@ public class GameScene extends GScene {
         removeChildren(itemToDelete);
     }
 
+
+    public List<DataBaseHandler.ItemRestaurationTable> saveItem() {
+        List<DataBaseHandler.ItemRestaurationTable> items = new ArrayList<>();
+        for(GNode node : this.children) {
+            if(!(node instanceof Asteroid) && !(node instanceof Shuttle)) continue;
+            MovingItem mv = (MovingItem)node;
+            DataBaseHandler.ItemRestaurationTable item = DataBaseHandler.reference.new ItemRestaurationTable();
+            item.xPos = mv.getPosition().x;
+            item.yPos = mv.getPosition().y;
+            item.dx = mv.direction.dx;
+            item.dy = mv.direction.dy;
+            item.zPosition = mv.getZPosition();
+            item.zRotation = mv.getZRotation();
+            if(node instanceof ShuttleEnemy) {
+                item.option1 = ((ShuttleEnemy) node).bitmapName;
+                item.classType = ShuttleEnemy.class.getSimpleName();
+            } else if(node instanceof Asteroid)
+                item.classType = Asteroid.class.getSimpleName();
+            else if(node instanceof ShuttlePlayer)
+                item.classType = ShuttlePlayer.class.getSimpleName();
+
+            items.add(item);
+        }
+        return items;
+    }
 
 
 

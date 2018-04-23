@@ -58,7 +58,8 @@ public class MyArrayAdapter extends ArrayAdapter<CellStruct> {
             play.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Resume.reference.returnResult(getItem(position).score);
+                    Resume.reference.returnResult(getItem(position).score,
+                            DataBaseHandler.reference.getItemsToRestaure(getItem(position).id));
                 }
             });
         }

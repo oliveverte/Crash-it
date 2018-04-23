@@ -17,11 +17,13 @@ public class ShuttleEnemy extends Shuttle {
     final ShuttlePlayer target;
     double deltaTime_check_targetPosition;
     private double previous_time_updatedDirection;
+    public final String bitmapName;
 
 
-    ShuttleEnemy(int bitmapRessourceID, int color, Stats stats, ShuttlePlayer target) {
+    ShuttleEnemy(int bitmapRessourceID, int color, Stats stats, String bitmapName, ShuttlePlayer target) {
         super(bitmapRessourceID, color, stats);
         this.target = target;
+        this.bitmapName = bitmapName;
         this.deltaTime_check_targetPosition = 2;
         this.previous_time_updatedDirection = 0;
         this.speed_factor = 2f;

@@ -24,7 +24,9 @@ public class MainActivity extends GActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == RESUME_ACTIVITY_CODE && resultCode == RESULT_OK) {
             GameScene.scoreToResumeFrom = data.getExtras().getInt("score");
+            GameScene.itemsToResumeFrom = Resume.reference.lastSavedItems;
             GameScene.flag_stateToSwitchTo = GameScene.GameState.RESUME;
+            System.out.println();
         }
     }
 }

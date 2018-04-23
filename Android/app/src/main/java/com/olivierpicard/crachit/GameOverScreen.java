@@ -6,6 +6,7 @@ import com.olivierpicard.crachit.Graphics.GLabel;
 import com.olivierpicard.crachit.Graphics.GPoint;
 import com.olivierpicard.crachit.Graphics.GTools;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,6 +28,7 @@ public class GameOverScreen {
     private Button saveScore_button;
     private long timer;
     private boolean isHidden;
+    private List<DataBaseHandler.ItemRestaurationTable> savedItems;
     private volatile boolean enable_userInteraction;
 
 
@@ -107,6 +109,7 @@ public class GameOverScreen {
         this.scene.addChild(this.retry_button);
         this.scene.addChild(this.menu_button);
         this.scene.addChild(this.saveScore_button);
+        this.savedItems = this.scene.saveItem();
         new Timer().schedule(new TimerTask() {
             public void run() {enable_userInteraction = true; }
         }, (long)(0.7*1000));
@@ -116,7 +119,7 @@ public class GameOverScreen {
     public void touchUp(GPoint pos){
         if(!this.enable_userInteraction) return;
         if(save_button.isClicked(pos)) {
-            DataBaseHandler.reference.add_game(new CellStruct(this.scene.getScore()));
+            DataBaseHandler.reference.add_game(new CellStruct(this.scene.getScore()), this.savedItems);
             this.scene.removeChild(this.save_button);
             this.scene.addChild(this.saved_label);
         }
