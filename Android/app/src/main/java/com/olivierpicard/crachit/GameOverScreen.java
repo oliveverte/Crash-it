@@ -28,7 +28,7 @@ public class GameOverScreen {
     private Button saveScore_button;
     private long timer;
     private boolean isHidden;
-    private List<DataBaseHandler.ItemRestaurationTable> savedItems;
+    public List<DataBaseHandler.ItemRestaurationTable> savedItems;
     private volatile boolean enable_userInteraction;
 
 
@@ -109,7 +109,6 @@ public class GameOverScreen {
         this.scene.addChild(this.retry_button);
         this.scene.addChild(this.menu_button);
         this.scene.addChild(this.saveScore_button);
-        this.savedItems = this.scene.saveItem();
         new Timer().schedule(new TimerTask() {
             public void run() {enable_userInteraction = true; }
         }, (long)(0.7*1000));

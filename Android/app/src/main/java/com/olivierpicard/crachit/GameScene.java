@@ -107,6 +107,7 @@ public class GameScene extends GScene {
         this.addChild(player);
 
         if(this.flag_stateToSwitchTo != GameState.RESUME) { setScore(0); return; }
+
         setScore(scoreToResumeFrom);
         if(itemsToResumeFrom == null) return;
         for(DataBaseHandler.ItemRestaurationTable item : itemsToResumeFrom) {
@@ -124,6 +125,7 @@ public class GameScene extends GScene {
         this.shuttle_enemy_generator.enable = false;
         this.asteroids_generator.enable = false;
         this.score_label.setHidden(true);
+        this.gameOver_screen.savedItems = saveItem();
         flag_stateToSwitchTo = GameState.GAME_OVER;
         if(this.tutoImage != null) {
             this.tutoImage.delete();
@@ -170,9 +172,6 @@ public class GameScene extends GScene {
         }
         return list;
     }
-
-
-
 
 
 
