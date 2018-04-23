@@ -127,6 +127,7 @@ public class ShuttleEnemiesGenerator implements IRestaurable {
         shuttle.setZPosition(item.zPosition);
         shuttle.setZRotation(item.zRotation);
         shuttle.direction = new GVector(item.dx, item.dy);
+        shuttle.lifeBar.setValue(item.life);
         this.scene.addChild(shuttle);
     }
 }

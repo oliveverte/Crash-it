@@ -19,7 +19,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
     public class ItemRestaurationTable implements Serializable {
         public String classType;
-        public int gameID, zPosition;
+        public int gameID, zPosition, life;
         public float xPos, yPos, zRotation, dx, dy;
         public String option1;
     }
@@ -33,6 +33,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     private static final String KEY_SCORE = "score";
     private static final String KEY_DATE = "date";
     private static final String KEY_GAMEID = "gameID";
+    private static final String KEY_LIFE = "life";
     private static final String KEY_XPOS = "xPos";
     private static final String KEY_YPOS = "yPos";
     private static final String KEY_DXPOS = "dxPos";
@@ -70,6 +71,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 + KEY_ID + "  integer primary key autoincrement, "
                 + KEY_GAMEID + " integer, "
                 + KEY_CLASSTYPE + " text, "
+                + KEY_LIFE + " integer, "
                 + KEY_XPOS + " float, "
                 + KEY_YPOS + " float, "
                 + KEY_DXPOS + " float, "
@@ -150,9 +152,9 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
 
 
-
-
     //------------------------ GameSaved ------------------------------
+
+
 
 
 
@@ -230,6 +232,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             values = new ContentValues();
             values.put(KEY_GAMEID, lastID);
             values.put(KEY_CLASSTYPE, item.classType);
+            values.put(KEY_LIFE, item.life);
             values.put(KEY_XPOS, item.xPos);
             values.put(KEY_YPOS, item.yPos);
             values.put(KEY_DXPOS, item.dx);
@@ -262,13 +265,14 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 item = new ItemRestaurationTable();
                 item.gameID = cursor.getInt(1);
                 item.classType = cursor.getString(2);
-                item.xPos = cursor.getFloat(3);
-                item.yPos = cursor.getFloat(4);
-                item.dx = cursor.getFloat(5);
-                item.dy = cursor.getFloat(6);
-                item.zPosition = cursor.getInt(7);
-                item.zRotation = cursor.getFloat(8);
-                item.option1 = cursor.getString(9);
+                item.life = cursor.getInt(3);
+                item.xPos = cursor.getFloat(4);
+                item.yPos = cursor.getFloat(5);
+                item.dx = cursor.getFloat(6);
+                item.dy = cursor.getFloat(7);
+                item.zPosition = cursor.getInt(8);
+                item.zRotation = cursor.getFloat(9);
+                item.option1 = cursor.getString(10);
                 items.add(item);
             } while (cursor.moveToNext());
         }

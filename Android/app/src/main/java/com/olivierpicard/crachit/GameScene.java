@@ -245,8 +245,10 @@ public class GameScene extends GScene {
             item.zPosition = mv.getZPosition();
             item.zRotation = mv.getZRotation();
             if(node instanceof ShuttleEnemy) {
-                item.option1 = ((ShuttleEnemy) node).bitmapName;
+                ShuttleEnemy se = (ShuttleEnemy)node;
+                item.option1 = se.bitmapName;
                 item.classType = ShuttleEnemy.class.getSimpleName();
+                item.life = se.lifeBar.getValue();
             } else if(node instanceof Asteroid)
                 item.classType = Asteroid.class.getSimpleName();
             else if(node instanceof ShuttlePlayer)
