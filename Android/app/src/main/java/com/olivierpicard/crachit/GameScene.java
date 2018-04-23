@@ -94,7 +94,7 @@ public class GameScene extends GScene {
     public void start() {
         reset();
 
-        this.tutoImage = new TutoImage(this);
+
         this.welcomeScreen.hide();
         this.gameOver_screen.hide();
         this.state = GameState.PLAY;
@@ -106,7 +106,12 @@ public class GameScene extends GScene {
         this.player.setPosition(GTools.fromSceneToScreenPos(this.getSize(), new GPoint(0.5f, 0.2f)));
         this.addChild(player);
 
-        if(this.flag_stateToSwitchTo != GameState.RESUME) { setScore(0); return; }
+        if(this.flag_stateToSwitchTo != GameState.RESUME) {
+            setScore(0);
+            this.tutoImage = new TutoImage(this);
+            return;
+        }
+
 
         setScore(scoreToResumeFrom);
         if(itemsToResumeFrom == null) return;
