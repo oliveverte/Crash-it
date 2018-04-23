@@ -101,7 +101,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
     public List<CellStruct> getAll_score() {
         List<CellStruct> cells = new ArrayList<>();
-        String query = "SELECT  * FROM " + TABLE_NAME_SCORES;
+        String query = "SELECT  * FROM " + TABLE_NAME_SCORES + " ORDER BY " + KEY_SCORE + " DESC";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = null;
         try{
