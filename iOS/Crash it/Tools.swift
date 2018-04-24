@@ -24,33 +24,104 @@ class Tools {
         }
     }
     
+    @objc(Tools_ItemConf)class ItemConf: NSObject, NSCoding {
+        var id: String?
+        var type: Any?
+        var position: CGPoint?
+        var image: UIImage?
+        var zPosition: CGFloat?
+        var zRotation: CGFloat?
+        var life: Int?
+        var dx: CGFloat?
+        var dy: CGFloat?
+        
+        init(_ id: String?, _ type: Any?, _ position: CGPoint? , _ image: UIImage?, _ zPosition: CGFloat?, _ zRotation: CGFloat?, _ life: Int?, _ direction: CGVector?) {
+            self.id = id
+            self.type = type
+            self.position = position
+            self.image = image
+            self.zPosition = zPosition
+            self.zRotation = zRotation
+            self.life = life
+            self.dx = direction?.dx
+            self.dy = direction?.dy
+        }
+        
+        required convenience init?(coder aDecoder: NSCoder) {
+            let id = aDecoder.decodeObject(forKey: "id") as? String
+            let type = aDecoder.decodeObject(forKey: "type")
+            let position = aDecoder.decodeObject(forKey: "position") as? CGPoint
+            let image = aDecoder.decodeObject(forKey: "image") as? UIImage
+            let zPosition = aDecoder.decodeObject(forKey: "zPosition") as? CGFloat
+            let zRotation = aDecoder.decodeObject(forKey: "zRotation") as? CGFloat
+            let life = aDecoder.decodeObject(forKey: "life") as? Int
+            let dx = aDecoder.decodeObject(forKey: "dx") as? CGFloat
+            let dy = aDecoder.decodeObject(forKey: "dy") as? CGFloat
+//            self.init(id, type, position, image, zPosition, zRotation, life, direction)
+            self.init(id, type, position, image, zPosition, zRotation, life, CGVector(dx: dx!, dy: dy!))
+        }
+        
+        func encode(with aCoder: NSCoder) {
+            aCoder.encode(id, forKey: "id")
+            aCoder.encode(type, forKey: "type")
+            aCoder.encode(position, forKey: "position")
+            aCoder.encode(image, forKey: "image")
+            aCoder.encode(zPosition, forKey: "zPosition")
+            aCoder.encode(zRotation, forKey: "zRotation")
+            aCoder.encode(life, forKey: "life")
+            aCoder.encode(dx, forKey: "dx")
+            aCoder.encode(dy, forKey: "dy")
+        }
+    }
     
-    @objc(_TtCC8Crash_it5Tools8SaveData)class SaveData: NSObject, NSCoding {
+    @objc(Tools_SaveData)class SaveData: NSObject, NSCoding {
         var date: Date?
         var score: Int?
+        var items: [ItemConf]?
         
-        init(_ date: Date?, _ score: Int?) {
+        init(_ date: Date?, _ score: Int?, _ items: [ItemConf]?) {
             self.date = date
             self.score = score
+            self.items = items
         }
         
         required convenience init?(coder aDecoder: NSCoder) {
             let date = aDecoder.decodeObject(forKey: "date") as? Date
             let score = aDecoder.decodeObject(forKey: "score") as? Int
-            self.init(date, score)
+            let items = aDecoder.decodeObject(forKey: "items") as? [ItemConf]
+            self.init(date, score, items)
         }
         
         func encode(with aCoder: NSCoder) {
             aCoder.encode(date, forKey: "date")
             aCoder.encode(score, forKey: "score")
+            aCoder.encode(items, forKey: "items")
         }
         
-        
     }
+    
+    private static func generateID(_ size: Int) -> String {
+        var s = ""
+        let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890&é(§è!çà)-_<>+=/:.;?,$*€%ù£æÂê®†Úºîœπô‡Ò∂ƒﬁÌÏÈ¬µ‹≈©◊ß~∞…÷≠";
+        for _ in 0...size {
+            s.append(Array(alphabet)[Int(arc4random_uniform(UInt32(alphabet.count)))])
+        }
+        return s
+    }
+    
+    
+    
+    //----------------- CLASS TOOLS -------------------
+    
+    
+    
+    
+    
     
     static var scene_size: CGSize?
     static let KEY_DEFAULT_SCORES = "scores"
     static let KEY_DEFAULT_GAMEINFOS = "gameInfos"
+    static let KEY_DEFAULT_GAME_ITEMS = "GameItems"
     
     
     /**
@@ -87,15 +158,37 @@ class Tools {
     /**
      Sauvegarde le score actuel.
     */
-    static func addEncodedSaveDatas(_ key: String, _ score: Int) -> Data {
+    static func addEncodedSaveDatas(_ key: String, _ score: Int, _ data: [ItemConf]?) -> Data {
         var listSavedData: [Tools.SaveData] = []
         if let encoded = UserDefaults.standard.object(forKey: key) {
             listSavedData = NSKeyedUnarchiver.unarchiveObject(with: encoded as! Data) as! [Tools.SaveData]
         }
-        let saveData = Tools.SaveData.init(Date(), score)
+        let saveData = Tools.SaveData.init(Date(), score, data)
         listSavedData.append(saveData)
         return NSKeyedArchiver.archivedData(withRootObject: listSavedData)
     }
+    
+    
+//    private static func saveItem(_ id: String, _ data: [ItemConf]?) {
+//        if data == nil {return}
+//        print(4.1)
+//        var listSavedData: [ItemConf] = []
+//        if let encoded = UserDefaults.standard.object(forKey: KEY_DEFAULT_GAME_ITEMS) {
+//            listSavedData = NSKeyedUnarchiver.unarchiveObject(with: encoded as! Data) as! [ItemConf]
+//        }
+//        print(4.2)
+//        for item in data! {
+//            item.id = id
+//            print(4.21)
+//            listSavedData.append(item)
+//            print(4.22)
+//        }
+//        print(4.3)
+//        let archived = NSKeyedArchiver.archivedData(withRootObject: listSavedData)
+//        print(4.4)
+//        UserDefaults.standard.set(archived, forKey: Tools.KEY_DEFAULT_GAMEINFOS)
+//
+//    }
     
     
     

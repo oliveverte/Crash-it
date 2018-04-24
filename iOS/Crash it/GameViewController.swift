@@ -12,6 +12,7 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     var initWithScore: Int?
+    var initWithItems: [Tools.ItemConf]?
     
     override func viewDidLoad() {
         super.viewDidLoad()

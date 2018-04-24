@@ -12,11 +12,13 @@ import SpriteKit
 class ShuttleEnemy: Shuttle {
     let target: ShuttlePlayer
     var deltaTime_check_targetPosition: TimeInterval
+    let image: UIImage!
     private var previous_time_updatedDirection: TimeInterval
     
     
     init(image: UIImage, color: UIColor, stats: Shuttle.Stats, target: ShuttlePlayer) {
         self.target = target
+        self.image = image
         self.deltaTime_check_targetPosition = 2
         self.previous_time_updatedDirection = 0
         super.init(image: image, color: color, stats: stats)
@@ -30,6 +32,7 @@ class ShuttleEnemy: Shuttle {
         self.target = ShuttlePlayer(coder: aDecoder)!
         self.previous_time_updatedDirection = 0
         self.deltaTime_check_targetPosition = 2
+        self.image = UIImage()
         super.init(coder: aDecoder)
     }
     

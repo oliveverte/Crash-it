@@ -25,7 +25,7 @@ class GameScene: SKScene {
 
         
         init(_ scene: SKScene) {
-            
+           
             self.scene = scene
             self.middle_line = SKSpriteNode(color: UIColor.white, size: CGSize(width: 2, height: scene.size.height))
             self.middle_line.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.5))
@@ -88,6 +88,8 @@ class GameScene: SKScene {
     
     
     override func didMove(to view: SKView) {
+        UserDefaults.standard.removeObject(forKey: Tools.KEY_DEFAULT_GAME_ITEMS)
+        UserDefaults.standard.removeObject(forKey: Tools.KEY_DEFAULT_GAMEINFOS)
         Tools.scene_size = self.size
         self.score_label = SKLabelNode.init(text: "0")
         self.score_label.alpha = 0.5
@@ -126,8 +128,6 @@ class GameScene: SKScene {
         self.welcome_screen.show()
         self.state = GameState.welcome
         
-//        self.gameOver_screen.show()
-//        self.state = GameState.gameOver
     }
     
     func start() {
@@ -143,6 +143,17 @@ class GameScene: SKScene {
         self.player.lifeBar.value = self.player.stats.defense
         self.player.position = Tools.fromSceneToWorldPosition(
             screenSpacePos: CGPoint(x: 0.5, y: 0.2))
+        
+        guard let itemsToRestaure = self.view_Controller.initWithItems else {return}
+//        for itemToRestaure in itemsToRestaure {
+//            if itemToRestaure.type is Asteroid {
+//                self.asteroids_generator.restaure(item: itemToRestaure)
+//            } else if itemToRestaure.type is ShuttleEnemy {
+//                self.shuttle_enemy_generator.restaure(item: itemToRestaure)
+//            } else if let item = itemToRestaure.type as? ShuttlePlayer {
+//                self.player.position = item.position
+//            }
+//        }
     }
     
     
@@ -233,6 +244,34 @@ class GameScene: SKScene {
         self.state = GameState.gameOver
         self.gameOver_screen.show()
         self.tutoImage = nil
+    }
+    
+    
+    func saveItems() -> [Tools.ItemConf] {
+        var items: [Tools.ItemConf] = []
+        for child in self.children {
+            if !(child is Shuttle) && !(child is Asteroid) {continue}
+            
+            let position = child.position
+            let zPosition = child.zPosition
+            let zRotation = child.zRotation
+            let direction = (child as! MovingItem).direction
+            var image: UIImage?
+            var type: Any?
+            var life: Int?
+            if let se = child as? ShuttleEnemy {
+                image = se.image
+                type = se.self
+                life = se.lifeBar.value
+            } else if let ast = child as? Asteroid {
+                type = ast.self
+            } else if let play = child as? ShuttlePlayer {
+                type = play.self
+            }
+//            items.append(Tools.ItemConf.init(nil, type, position, image, zPosition, zRotation, life, direction))
+            items.append(Tools.ItemConf.init(nil, type, position, image, zPosition, zRotation, life, direction))
+        }
+        return items
     }
     
     

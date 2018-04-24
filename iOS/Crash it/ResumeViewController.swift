@@ -64,7 +64,9 @@ class ResumeViewController: UITableViewController {
             let encoded = UserDefaults.standard.object(forKey: Tools.KEY_DEFAULT_GAMEINFOS)
             var scores = NSKeyedUnarchiver.unarchiveObject(with: encoded as! Data) as! [Tools.SaveData]
             let data = scores[self.clickedIndexPath!]
-            (segue.destination as! GameViewController).initWithScore = data.score!
+            let gameViewController = segue.destination as! GameViewController
+            gameViewController.initWithScore = data.score!
+//            gameViewController.initWithItems = data.items as! [Tools.ItemConf]
         }
     }
 }

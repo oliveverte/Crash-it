@@ -93,8 +93,21 @@ class ShuttleEnemyGenerator {
         
         return (stats, color)
     }
-
     
+    
+    func restaure(item: Tools.ItemConf) {
+//        let shuttle_infos = determineShuttleGlobalInformation(img: item.image!)
+//        let shuttle = ShuttleEnemy(image: item.image!,
+//                                   color: shuttle_infos.color,
+//                                   stats: shuttle_infos.stats,
+//                                   target: self.target)
+//
+//        shuttle.position = item.position!
+//        shuttle.lifeBar.value = item.life!
+//        self.scene.addChild(shuttle)
+    }
+
+
 }
 
 
