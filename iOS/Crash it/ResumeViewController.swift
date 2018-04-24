@@ -66,7 +66,7 @@ class ResumeViewController: UITableViewController {
             let data = scores[self.clickedIndexPath!]
             let gameViewController = segue.destination as! GameViewController
             gameViewController.initWithScore = data.score!
-//            gameViewController.initWithItems = data.items as! [Tools.ItemConf]
+            gameViewController.initWithItems = data.items
         }
     }
 }

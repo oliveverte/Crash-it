@@ -115,7 +115,7 @@ class Shuttle : MovingItem, Collisionable {
     func shoot(direction: CGVector, rotation: CGFloat) {
         let laser = LaserShot(shooter: self, color: self.color, direction: direction, rotation: rotation)
         laser.position = self.position
-        self.scene!.addChild(laser)
+        self.scene?.addChild(laser)
     }
     
     

@@ -156,10 +156,15 @@ class Tools {
     static func addEncodedSaveDatas(_ key: String, _ score: Int, _ data: [ItemConf]?) -> Data {
         var listSavedData: [Tools.SaveData] = []
         if let encoded = UserDefaults.standard.object(forKey: key) {
+            print(0)
             listSavedData = NSKeyedUnarchiver.unarchiveObject(with: encoded as! Data) as! [Tools.SaveData]
+            print(0.1)
         }
+        print(1)
         let saveData = Tools.SaveData.init(Date(), score, data)
+        print(2)
         listSavedData.append(saveData)
+        print(3)
         return NSKeyedArchiver.archivedData(withRootObject: listSavedData)
     }
     
