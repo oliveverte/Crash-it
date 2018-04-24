@@ -25,7 +25,6 @@ class Tools {
     }
     
     @objc(Tools_ItemConf)class ItemConf: NSObject, NSCoding {
-        var id: String?
         var type: Any?
         var position: CGPoint?
         var image: UIImage?
@@ -35,8 +34,7 @@ class Tools {
         var dx: CGFloat?
         var dy: CGFloat?
         
-        init(_ id: String?, _ type: Any?, _ position: CGPoint? , _ image: UIImage?, _ zPosition: CGFloat?, _ zRotation: CGFloat?, _ life: Int?, _ direction: CGVector?) {
-            self.id = id
+        init(_ type: Any?, _ position: CGPoint? , _ image: UIImage?, _ zPosition: CGFloat?, _ zRotation: CGFloat?, _ life: Int?, _ direction: CGVector?) {
             self.type = type
             self.position = position
             self.image = image
@@ -48,7 +46,6 @@ class Tools {
         }
         
         required convenience init?(coder aDecoder: NSCoder) {
-            let id = aDecoder.decodeObject(forKey: "id") as? String
             let type = aDecoder.decodeObject(forKey: "type")
             let position = aDecoder.decodeObject(forKey: "position") as? CGPoint
             let image = aDecoder.decodeObject(forKey: "image") as? UIImage
@@ -57,12 +54,10 @@ class Tools {
             let life = aDecoder.decodeObject(forKey: "life") as? Int
             let dx = aDecoder.decodeObject(forKey: "dx") as? CGFloat
             let dy = aDecoder.decodeObject(forKey: "dy") as? CGFloat
-//            self.init(id, type, position, image, zPosition, zRotation, life, direction)
-            self.init(id, type, position, image, zPosition, zRotation, life, CGVector(dx: dx!, dy: dy!))
+            self.init(type, position, image, zPosition, zRotation, life, CGVector(dx: dx!, dy: dy!))
         }
         
         func encode(with aCoder: NSCoder) {
-            aCoder.encode(id, forKey: "id")
             aCoder.encode(type, forKey: "type")
             aCoder.encode(position, forKey: "position")
             aCoder.encode(image, forKey: "image")
@@ -100,14 +95,14 @@ class Tools {
         
     }
     
-    private static func generateID(_ size: Int) -> String {
-        var s = ""
-        let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890&é(§è!çà)-_<>+=/:.;?,$*€%ù£æÂê®†Úºîœπô‡Ò∂ƒﬁÌÏÈ¬µ‹≈©◊ß~∞…÷≠";
-        for _ in 0...size {
-            s.append(Array(alphabet)[Int(arc4random_uniform(UInt32(alphabet.count)))])
-        }
-        return s
-    }
+//    private static func generateID(_ size: Int) -> String {
+//        var s = ""
+//        let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890&é(§è!çà)-_<>+=/:.;?,$*€%ù£æÂê®†Úºîœπô‡Ò∂ƒﬁÌÏÈ¬µ‹≈©◊ß~∞…÷≠";
+//        for _ in 0...size {
+//            s.append(Array(alphabet)[Int(arc4random_uniform(UInt32(alphabet.count)))])
+//        }
+//        return s
+//    }
     
     
     

@@ -269,7 +269,7 @@ class GameScene: SKScene {
                 type = play.self
             }
 //            items.append(Tools.ItemConf.init(nil, type, position, image, zPosition, zRotation, life, direction))
-            items.append(Tools.ItemConf.init(nil, type, position, image, zPosition, zRotation, life, direction))
+            items.append(Tools.ItemConf.init(type, position, image, zPosition, zRotation, life, direction))
         }
         return items
     }
