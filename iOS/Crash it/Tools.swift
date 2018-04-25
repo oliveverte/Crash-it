@@ -95,16 +95,6 @@ class Tools {
         
     }
     
-//    private static func generateID(_ size: Int) -> String {
-//        var s = ""
-//        let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890&é(§è!çà)-_<>+=/:.;?,$*€%ù£æÂê®†Úºîœπô‡Ò∂ƒﬁÌÏÈ¬µ‹≈©◊ß~∞…÷≠";
-//        for _ in 0...size {
-//            s.append(Array(alphabet)[Int(arc4random_uniform(UInt32(alphabet.count)))])
-//        }
-//        return s
-//    }
-    
-    
     
     //----------------- CLASS TOOLS -------------------
     
@@ -156,39 +146,14 @@ class Tools {
     static func addEncodedSaveDatas(_ key: String, _ score: Int, _ data: [ItemConf]?) -> Data {
         var listSavedData: [Tools.SaveData] = []
         if let encoded = UserDefaults.standard.object(forKey: key) {
-            print(0)
             listSavedData = NSKeyedUnarchiver.unarchiveObject(with: encoded as! Data) as! [Tools.SaveData]
-            print(0.1)
         }
-        print(1)
         let saveData = Tools.SaveData.init(Date(), score, data)
-        print(2)
         listSavedData.append(saveData)
-        print(3)
         return NSKeyedArchiver.archivedData(withRootObject: listSavedData)
     }
     
-    
-//    private static func saveItem(_ id: String, _ data: [ItemConf]?) {
-//        if data == nil {return}
-//        print(4.1)
-//        var listSavedData: [ItemConf] = []
-//        if let encoded = UserDefaults.standard.object(forKey: KEY_DEFAULT_GAME_ITEMS) {
-//            listSavedData = NSKeyedUnarchiver.unarchiveObject(with: encoded as! Data) as! [ItemConf]
-//        }
-//        print(4.2)
-//        for item in data! {
-//            item.id = id
-//            print(4.21)
-//            listSavedData.append(item)
-//            print(4.22)
-//        }
-//        print(4.3)
-//        let archived = NSKeyedArchiver.archivedData(withRootObject: listSavedData)
-//        print(4.4)
-//        UserDefaults.standard.set(archived, forKey: Tools.KEY_DEFAULT_GAMEINFOS)
-//
-//    }
+
     
     
     

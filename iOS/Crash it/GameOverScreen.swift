@@ -109,9 +109,7 @@ class GameOverScreen {
             self.scene.removeChildren(in: [self.save_button])
             self.scene.addChild(self.saved_label)
             let encodedDatas = Tools.addEncodedSaveDatas(Tools.KEY_DEFAULT_GAMEINFOS, self.scene.score, self.savedItems)
-            print(4)
             UserDefaults.standard.set(encodedDatas, forKey: Tools.KEY_DEFAULT_GAMEINFOS)
-            print(5)
         }
         else if (saveScore_button.isClicked(pos)) {
             self.scene.removeChildren(in: [self.saveScore_button])

@@ -53,7 +53,6 @@ class GameScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
-        print("didMove")
         Tools.scene_size = self.size
         self.score_label = SKLabelNode.init(text: "0")
         self.score_label.alpha = 0.5
@@ -122,6 +121,9 @@ class GameScene: SKScene {
                 self.player.position = itemToRestaure.position!
             }
         }
+        // On supprime le tableau pour que quand
+        // on recommence ça recommence à zéro
+        self.view_Controller.initWithItems = nil
     }
     
     
