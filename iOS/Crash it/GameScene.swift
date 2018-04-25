@@ -15,53 +15,7 @@ class GameScene: SKScene {
         case gameOver
         case welcome
     }
-    
-    class TutoImage {
-        var click_left: SKSpriteNode
-        var click_right: SKSpriteNode
-        var middle_line: SKSpriteNode
-        var explain_text: SKLabelNode
-        let scene: SKScene
 
-        
-        init(_ scene: SKScene) {
-           
-            self.scene = scene
-            self.middle_line = SKSpriteNode(color: UIColor.white, size: CGSize(width: 2, height: scene.size.height))
-            self.middle_line.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.5))
-            
-            self.click_left = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "pointer")), color: UIColor.white, size: CGSize(width: 60, height: 60))
-            self.click_left.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.25, y: 0.3))
-            
-            self.click_right = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "pointer")), color: UIColor.white, size: CGSize(width: 70, height: 70))
-            self.click_right.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.75, y: 0.4))
-            
-            self.explain_text = SKLabelNode(text: "Cliquez à droite ou à gauche de l'écran\nPour déplacer le vaisseau")
-            self.explain_text.numberOfLines = 0
-            self.explain_text.horizontalAlignmentMode = .center
-            self.explain_text.preferredMaxLayoutWidth = scene.size.width - 40
-            self.explain_text.alpha = 0.7
-            self.explain_text.fontName = "HelveticaNeue-Light"
-            self.explain_text.fontSize = 15
-            self.explain_text.fontColor = UIColor.white
-            self.explain_text.position = Tools.fromSceneToWorldPosition(screenSpacePos: CGPoint(x: 0.5, y: 0.6))
-            
-            click_left.alpha = 0.5
-            click_right.alpha = 0.5
-            middle_line.alpha = 0.35
-            
-            self.scene.addChild(self.click_left)
-            self.scene.addChild(self.click_right)
-            self.scene.addChild(self.middle_line)
-            self.scene.addChild(self.explain_text)
-        }
-        
-        deinit {
-            self.scene.removeChildren(in: [self.click_left, self.click_right, self.middle_line, self.explain_text])
-        }
-    }
-    
-    
     
     private let PLAYER_MOVING_SPEED:CGFloat = 3
     private var player: ShuttlePlayer!
@@ -87,10 +41,19 @@ class GameScene: SKScene {
     }
     
     
+    override func willMove(from view: SKView) {
+        self.score_label = nil
+        self.player = nil
+        self.starsGenerator_topLayer = nil
+        self.starsGenerator_bottomLayer = nil
+        self.shuttle_enemy_generator = nil
+        self.asteroids_generator = nil
+        self.gameOver_screen = nil
+        self.welcome_screen = nil
+    }
+    
     override func didMove(to view: SKView) {
-//        UserDefaults.standard.removeObject(forKey: Tools.KEY_DEFAULT_GAME_ITEMS)
-//        UserDefaults.standard.removeObject(forKey: Tools.KEY_DEFAULT_GAMEINFOS)
-//        UserDefaults.standard.removeObject(forKey: Tools.KEY_DEFAULT_SCORES)
+        print("didMove")
         Tools.scene_size = self.size
         self.score_label = SKLabelNode.init(text: "0")
         self.score_label.alpha = 0.5
@@ -269,9 +232,9 @@ class GameScene: SKScene {
                 image = se.image.accessibilityIdentifier
                 type = "ShuttleEnemy"
                 life = Int(se.lifeBar.value)
-            } else if let ast = child as? Asteroid {
+            } else if let _ = child as? Asteroid {
                 type = "Asteroid"
-            } else if let play = child as? ShuttlePlayer {
+            } else if let _ = child as? ShuttlePlayer {
                 type = "ShuttlePlayer"
             }
             items.append(Tools.ItemConf.init(type, position, image, zPosition, zRotation, life, direction))
@@ -298,6 +261,10 @@ class GameScene: SKScene {
             nodesToDelete.append(child)
         }
         self.removeChildren(in: nodesToDelete)
+    }
+    
+    deinit {
+        print("deinit Scene")
     }
 }
 
