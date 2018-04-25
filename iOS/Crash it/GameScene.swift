@@ -109,7 +109,7 @@ class GameScene: SKScene {
             screenSpacePos: CGPoint(x: 0.5, y: 0.2))
         
         guard let itemsToRestaure = self.view_Controller.initWithItems else {return}
-        
+        self.tutoImage = nil
         for itemToRestaure in itemsToRestaure {
             if itemToRestaure.type == "Asteroid" {
                 self.asteroids_generator.restaure(item: itemToRestaure)
@@ -121,6 +121,7 @@ class GameScene: SKScene {
                 self.player.position = itemToRestaure.position!
             }
         }
+        
         // On supprime le tableau pour que quand
         // on recommence ça recommence à zéro
         self.view_Controller.initWithItems = nil
