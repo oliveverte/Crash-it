@@ -25,16 +25,16 @@ class Tools {
     }
     
     @objc(Tools_ItemConf)class ItemConf: NSObject, NSCoding {
-        var type: Any?
+        var type: String?
         var position: CGPoint?
-        var image: UIImage?
+        var image: String?
         var zPosition: CGFloat?
         var zRotation: CGFloat?
         var life: Int?
         var dx: CGFloat?
         var dy: CGFloat?
         
-        init(_ type: Any?, _ position: CGPoint? , _ image: UIImage?, _ zPosition: CGFloat?, _ zRotation: CGFloat?, _ life: Int?, _ direction: CGVector?) {
+        init(_ type: String?, _ position: CGPoint? , _ image: String?, _ zPosition: CGFloat?, _ zRotation: CGFloat?, _ life: Int?, _ direction: CGVector?) {
             self.type = type
             self.position = position
             self.image = image
@@ -46,9 +46,9 @@ class Tools {
         }
         
         required convenience init?(coder aDecoder: NSCoder) {
-            let type = aDecoder.decodeObject(forKey: "type")
+            let type = aDecoder.decodeObject(forKey: "type") as? String
             let position = aDecoder.decodeObject(forKey: "position") as? CGPoint
-            let image = aDecoder.decodeObject(forKey: "image") as? UIImage
+            let image = aDecoder.decodeObject(forKey: "image") as? String
             let zPosition = aDecoder.decodeObject(forKey: "zPosition") as? CGFloat
             let zRotation = aDecoder.decodeObject(forKey: "zRotation") as? CGFloat
             let life = aDecoder.decodeObject(forKey: "life") as? Int

@@ -90,6 +90,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
 //        UserDefaults.standard.removeObject(forKey: Tools.KEY_DEFAULT_GAME_ITEMS)
 //        UserDefaults.standard.removeObject(forKey: Tools.KEY_DEFAULT_GAMEINFOS)
+//        UserDefaults.standard.removeObject(forKey: Tools.KEY_DEFAULT_SCORES)
         Tools.scene_size = self.size
         self.score_label = SKLabelNode.init(text: "0")
         self.score_label.alpha = 0.5
@@ -145,13 +146,16 @@ class GameScene: SKScene {
             screenSpacePos: CGPoint(x: 0.5, y: 0.2))
         
         guard let itemsToRestaure = self.view_Controller.initWithItems else {return}
+        
         for itemToRestaure in itemsToRestaure {
-            if itemToRestaure.type is Asteroid {
+            if itemToRestaure.type == "Asteroid" {
                 self.asteroids_generator.restaure(item: itemToRestaure)
-            } else if itemToRestaure.type is ShuttleEnemy {
+            }
+            else if itemToRestaure.type == "ShuttleEnemy" {
                 self.shuttle_enemy_generator.restaure(item: itemToRestaure)
-            } else if let item = itemToRestaure.type as? ShuttlePlayer {
-                self.player.position = item.position
+            }
+            else if itemToRestaure.type == "ShuttlePlayer" {
+                self.player.position = itemToRestaure.position!
             }
         }
     }
@@ -257,11 +261,11 @@ class GameScene: SKScene {
             let zRotation = CGFloat(child.zRotation)
             let movingItem = (child as! MovingItem)
             let direction = CGVector(dx: movingItem.direction.dx, dy: movingItem.direction.dy)
-            var image: UIImage?
-            var type: Any?
+            var image: String?
+            var type: String?
             var life: Int?
             if let se = child as? ShuttleEnemy {
-                image = UIImage.init(cgImage: se.image.cgImage!)
+                image = se.image.accessibilityIdentifier
                 type = "ShuttleEnemy"
                 life = Int(se.lifeBar.value)
             } else if let ast = child as? Asteroid {

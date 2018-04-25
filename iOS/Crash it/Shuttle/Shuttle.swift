@@ -93,7 +93,6 @@ class Shuttle : MovingItem, Collisionable {
         super.init(texture: SKTexture.init(image: image),
                   color: color,
                   size: CGSize(width: 45, height: 40),
-//                  size: Tools.fromSceneToWorldSize(sceneSpaceSize: CGSize(width: 0.1, height: 0.05)),
                   speedFactor: 1.5,
                   direction: CGVector(dx: 0, dy: -1))
         

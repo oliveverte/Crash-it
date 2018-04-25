@@ -44,7 +44,7 @@ class AsteroidsGenerator {
 
     
     func restaure(item: Tools.ItemConf) {
-//        create(pos: item.position!)
+        create(pos: item.position!)
     }
     
     
