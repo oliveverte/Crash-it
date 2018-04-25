@@ -121,7 +121,7 @@ class GameScene: SKScene {
                 self.player.position = itemToRestaure.position!
             }
         }
-        
+        self.player.invinsibleMode()
         // On supprime le tableau pour que quand
         // on recommence ça recommence à zéro
         self.view_Controller.initWithItems = nil

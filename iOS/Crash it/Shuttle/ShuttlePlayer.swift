@@ -10,6 +10,8 @@ import Foundation
 import SpriteKit
 
 class ShuttlePlayer: Shuttle {
+    let LAST_OF_INVINSIBLE_MODE: TimeInterval = 2
+    
     
     init() {
         super.init(image: #imageLiteral(resourceName: "shuttle_1"),
@@ -29,6 +31,7 @@ class ShuttlePlayer: Shuttle {
     
     
     override func update(_ currentTime: TimeInterval) {
+        
         if(self.scene != nil
             && self.direction.dx < 0 && self.position.x > self.size.width/2
             || self.direction.dx > 0 && self.position.x < (self.scene?.size.width)! - self.size.width/2) {
@@ -41,6 +44,8 @@ class ShuttlePlayer: Shuttle {
     }
     
     override func inCollisionWith(item: Collisionable) {
+        if !self.enable_collision {return}
+        
         if let laser = item as? LaserShot {
             if(laser.shooter == self) { return }
             self.lifeBar.value -= laser.shooter.stats.attack
@@ -56,6 +61,15 @@ class ShuttlePlayer: Shuttle {
             self.scene?.removeChildren(in: [self])
             
         }
+    }
+    
+    func invinsibleMode() {
+        self.enable_collision = false
+        self.alpha = 0.5
+        Timer.scheduledTimer(withTimeInterval: LAST_OF_INVINSIBLE_MODE, repeats: false, block: { _ in
+            self.enable_collision = true
+            self.alpha = 1
+        })
     }
     
     
