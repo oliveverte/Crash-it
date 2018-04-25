@@ -33,7 +33,6 @@ class ShuttleEnemyGenerator {
         self.previous_generate_time = currentTime
         if arc4random_uniform(101) > self.enemies_percent { return }
         
-        
         let yPos = scene.size.height + 10
         let xPos = CGFloat(arc4random_uniform(UInt32(self.scene.size.width)))
         let image = randomEnemyShuttle(imageIdFrom: 1, imageIdTo: NUMBER_OF_IMAGE_SHUTTLE)
@@ -51,8 +50,9 @@ class ShuttleEnemyGenerator {
     func randomEnemyShuttle(imageIdFrom: UInt32, imageIdTo: UInt32) -> UIImage {
         let imageName = "ennemy_" +
             String(arc4random_uniform(imageIdTo + 1 - imageIdFrom) + imageIdFrom)
-        
-        return UIImage(named: imageName)!
+        let image = UIImage(named: imageName)!
+        image.accessibilityIdentifier = imageName
+        return image
     }
     
     
@@ -93,8 +93,22 @@ class ShuttleEnemyGenerator {
         
         return (stats, color)
     }
-
     
+    
+    func restaure(item: Tools.ItemConf) {
+        let image =  UIImage(named: item.image!)!
+        let shuttle_infos = determineShuttleGlobalInformation(img: image)
+        let shuttle = ShuttleEnemy(image: image,
+                                   color: shuttle_infos.color,
+                                   stats: shuttle_infos.stats,
+                                   target: self.target)
+
+        shuttle.position = item.position!
+        shuttle.lifeBar.value = item.life!
+        self.scene.addChild(shuttle)
+    }
+
+
 }
 
 

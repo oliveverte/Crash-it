@@ -21,6 +21,7 @@ class GameOverScreen {
     var saveScore_button:Button
     var timer:Timer!
     var enable_userInteraction: Bool
+    var savedItems: [Tools.ItemConf]!
     
     
     
@@ -95,6 +96,7 @@ class GameOverScreen {
         self.scene.addChild(self.retry_button)
         self.scene.addChild(self.menu_button)
         self.scene.addChild(self.saveScore_button)
+        self.savedItems = self.scene.saveItems()
         self.timer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false, block: { _ in
             self.enable_userInteraction = true
         })
@@ -106,13 +108,13 @@ class GameOverScreen {
         if(save_button.isClicked(pos)) {
             self.scene.removeChildren(in: [self.save_button])
             self.scene.addChild(self.saved_label)
-            let encodedDatas = Tools.addEncodedSaveDatas(Tools.KEY_DEFAULT_GAMEINFOS, self.scene.score)
+            let encodedDatas = Tools.addEncodedSaveDatas(Tools.KEY_DEFAULT_GAMEINFOS, self.scene.score, self.savedItems)
             UserDefaults.standard.set(encodedDatas, forKey: Tools.KEY_DEFAULT_GAMEINFOS)
         }
         else if (saveScore_button.isClicked(pos)) {
             self.scene.removeChildren(in: [self.saveScore_button])
             self.scene.addChild(self.savedScore_label)
-            let encodedDatas = Tools.addEncodedSaveDatas(Tools.KEY_DEFAULT_SCORES, self.scene.score)
+            let encodedDatas = Tools.addEncodedSaveDatas(Tools.KEY_DEFAULT_SCORES, self.scene.score, nil)
             UserDefaults.standard.set(encodedDatas, forKey: Tools.KEY_DEFAULT_SCORES)
         }
         else if(retry_button.isClicked(pos)) { hide(); scene.start() }
