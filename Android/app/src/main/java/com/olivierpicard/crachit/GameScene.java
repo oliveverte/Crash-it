@@ -123,6 +123,7 @@ public class GameScene extends GScene {
             else if(item.classType.equals(ShuttlePlayer.class.getSimpleName()))
                 this.player.setPosition(new GPoint(item.xPos, item.yPos));
         }
+        this.player.enableInvincibleMode();
     }
 
 
