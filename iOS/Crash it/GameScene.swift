@@ -132,6 +132,7 @@ class GameScene: SKScene {
     }
     
     func start() {
+        reset()
         self.score = self.view_Controller.initWithScore ?? 0
         self.view_Controller.initWithScore = nil
         self.tutoImage = TutoImage(self)
@@ -288,6 +289,15 @@ class GameScene: SKScene {
             self.state = state
             self.welcome_screen.show()
         }
+    }
+    
+    func reset() {
+        var nodesToDelete: [SKNode] = []
+        for child in self.children {
+            if !(child is Collisionable) {continue}
+            nodesToDelete.append(child)
+        }
+        self.removeChildren(in: nodesToDelete)
     }
 }
 
