@@ -12,13 +12,16 @@ import com.olivierpicard.crachit.ICollisionable;
 import com.olivierpicard.crachit.LaserShot;
 import com.olivierpicard.crachit.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Représente le vaisseau du joueur sur la scène
  * Created by olivierpicard on 06/04/2018.
  */
 
 public class ShuttlePlayer extends Shuttle {
-
+    private static final float LAST_OF_INVINCIBLE_MODE = 2.0f;
     public ShuttlePlayer() {
         super(R.drawable.shuttle_1, Color.RED,
                 new Stats(230, 35,
@@ -46,6 +49,8 @@ public class ShuttlePlayer extends Shuttle {
 
     @Override
     public void inCollisionWith(ICollisionable item) {
+        if(!this.enable_collision) return;
+
         if(item instanceof LaserShot) {
             final LaserShot laser = (LaserShot)item;
             if(laser.shooter == this) return;
@@ -64,5 +69,16 @@ public class ShuttlePlayer extends Shuttle {
             scene.addChild(new Explosion(getPosition()));
             scene.removeChild(this);
         }
+    }
+
+    public void enableInvincibleMode() {
+        enable_collision = false;
+        setAlpha(125);
+        new Timer().schedule(new TimerTask() {
+            public void run() {
+                enable_collision = true;
+                setAlpha(255);
+            }
+        }, (long)(LAST_OF_INVINCIBLE_MODE*1000));
     }
 }

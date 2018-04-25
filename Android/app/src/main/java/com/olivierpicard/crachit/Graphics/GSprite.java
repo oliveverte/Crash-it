@@ -73,7 +73,9 @@ public class GSprite extends GNode implements IGDrawable {
             p.setColor(this.color);
             canvas.drawRect(bounds, p);
         } else {
-            canvas.drawBitmap(bitmap, null, bounds, null);
+            Paint p = new Paint();
+            p.setAlpha(this.getAlpha());
+            canvas.drawBitmap(bitmap, null, bounds, p);
         }
         canvas.restore();
     }
